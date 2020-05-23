@@ -26,11 +26,11 @@
 		<div class="bar"></div>
 		<div class="row row-cols-2 mt-2 sub">
 			<div class="col-3 pt-5 pr-4 text-right bar-ri">
-				<div><a href="#">
+				<div><a href="http://localhost/YummyMap/admin/main.mmy">
 						<h5>회원 관리</h5>
 					</a></div>
 				<div class="mt-3">
-					<a href="#">
+					<a href="http://localhost/YummyMap/admin/boardList.mmy">
 						<h5>게시글 관리</h5>
 					</a>
 				</div>
@@ -39,7 +39,7 @@
 			<div class="col-9 d-flex flex-column bd-highlight mt-2 hi40" style="height: 540px;">
 				<div class="mb-auto p-2 ">
 					<div class="d-flex justify-content-around text-center">
-						<div class="col-2"><input type="checkbox" class="mr-2" id="allno">번호</div>
+						<div class="col-2">번호</div>
 						<div class="col-4">제목</div>
 						<div class="col-2">작성자</div>
 						<div class="col-3">작성일</div>
@@ -47,7 +47,7 @@
 					</div>
 					<div class="row bar py-1"></div>
 					<div class="d-flex mt-3 justify-content-around text-center">
-						<div class="col-2"><input type="checkbox" class="mr-2" id="no" name="no">1</div>
+						<div class="col-2"><input type="checkbox" class="mr-2" name="no">1</div>
 						<div class="col-4">sa</div>
 						<div class="col-2">강사님</div>
 						<div class="col-3">2020/05/01 11:21</div>

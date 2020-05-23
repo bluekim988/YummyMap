@@ -39,7 +39,7 @@
 						<h5>회원 관리</h5>
 					</a></div>
 				<div class="mt-3">
-					<a href="#">
+					<a href="http://localhost/YummyMap/admin/boardList.mmy">
 						<h5>게시글 관리</h5>
 					</a>
 				</div>

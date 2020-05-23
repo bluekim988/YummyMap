@@ -346,4 +346,41 @@ public class AdminDAO {
 		return cnt;
 	}
 	
+	//게시판 리스트 출력 전담 함수
+	public ArrayList<BoardInfoVO> boardList(){
+		ArrayList<BoardInfoVO> list = new ArrayList<BoardInfoVO>();
+		
+		con = db.getConnection();
+		String sql = asql.getSQL(asql.ALL_BOARD_LIST);
+		
+		stmt = db.getStatement(con);
+		
+		try {
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				BoardInfoVO bvo = new BoardInfoVO();
+				bvo.setTxtno(rs.getInt("txtno"));
+				bvo.setTitle(rs.getString("title"));
+				bvo.setMid(rs.getString("mid"));
+				bvo.setCdate(rs.getDate("cdate"));
+				bvo.setCtime(rs.getTime("cdate"));
+				bvo.setSdate();
+				bvo.setMtxt(rs.getString("mtxt"));
+				bvo.setMtxt();
+				
+				list.add(bvo);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(stmt);
+			db.close(con);
+		}
+		
+		return list;
+	}
+	
 }

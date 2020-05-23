@@ -7,6 +7,7 @@ public class AdminSQL {
  public final int SEL_ID_USER = 1004;
  public final int SEL_NAME_USER = 1005;
  public final int USER_INFO = 1006;
+ public final int ALL_BOARD_LIST = 1007;
  
  
  
@@ -143,6 +144,14 @@ public class AdminSQL {
 		 buff.append("   isshow='N' "); 
 		 buff.append("WHERE "); 
 		 buff.append("    mno= ? ");
+		 break;
+	 case ALL_BOARD_LIST:
+		 buff.append("SELECT  "); 
+		 buff.append("    txtno , title , mid , cdate , mtxt "); 
+		 buff.append("FROM "); 
+		 buff.append("    txt "); 
+		 buff.append("WHERE "); 
+		 buff.append("    isshow='Y' "); 
 		 break;
 	 }
 	 return buff.toString();

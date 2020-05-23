@@ -31,11 +31,11 @@
 		<div class="bar"></div>
 		<div class="row row-cols-2 sub">
 			<div class="col-3 pt-5 pr-4 text-right bar-ri">
-				<div><a href="#">
+				<div><a href="http://localhost/YummyMap/admin/main.mmy">
 						<h5>회원 관리</h5>
 					</a></div>
 				<div class="mt-3">
-					<a href="#">
+					<a href="http://localhost/YummyMap/admin/boardList.mmy">
 						<h5>게시글 관리</h5>
 					</a>
 				</div>
