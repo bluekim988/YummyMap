@@ -1,0 +1,12 @@
+
+  .por{position: relative;}
+  .h90{height:150px;}
+  .bor-bottom{border-bottom :1px solid grey;}
+  .bor-right{border-right : 2px solid rgb(255, 128, 89);}
+  .bor-bottom-or{border-bottom :2px solid rgb(255, 128, 89);}
+  .bor-bottom-top{border-top :2px solid rgb(255, 128, 89);}
+  .mar-top{margin-top: 350px;}
+  .padd-right{padding-right: 0px;}
+  .padd-text{padding-right: 15px;}
+  .por-button{position: relative; left: 145px; top: 50px;}
+  .pd-left-500{padding-left: 500px;}
