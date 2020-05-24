@@ -16,6 +16,7 @@ public class LoginProc implements MmyController {
 		String userPw = req.getParameter("pw");
 		int cnt = new JoinDAO().checkLogin(userId, userPw);
 		String view = "";
+		
 		if(cnt != 1) {
 			view = "/YummyMap/join/login.mmy?r=x";
 			try {

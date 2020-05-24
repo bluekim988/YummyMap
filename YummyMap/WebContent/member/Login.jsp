@@ -104,18 +104,6 @@ $(document).ready(function () {
 		$('#msg1').show();
 	}
 	
- 	$('#kakao').click(function(){
- 		loginWithKakao();
- 		getToken();
-	}); 
-	Kakao.init('e457f7b2d3393084fafd19c71b0c5bed');
- 	function loginWithKakao() {
-	    Kakao.Auth.authorize({
-	      redirectUri: 'http://localhost/YummyMap/main.mmy'
-	    })
- 	}
-
-	
 });
 </script>
 </html>

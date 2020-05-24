@@ -6,6 +6,7 @@ public class MainSQL {
 	public final int SEL_RES_IMG = 1003;
 	public final int SEL_RES_AVG = 1004;
 	public final int SEL_RES_REVIEW = 1005;
+	public final int ADD_REVIEW = 1006;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -38,7 +39,7 @@ public class MainSQL {
 			break;
 		case SEL_RES_AVG:
 			buff.append("SELECT ");
-			buff.append(" AVG(starnum) avg ");
+			buff.append(" TRUNC(AVG(starnum),1) avg ");
 			buff.append("FROM ");
 			buff.append("review ");
 			buff.append("WHERE ");
@@ -46,12 +47,17 @@ public class MainSQL {
 			break;
 		case SEL_RES_REVIEW:
 			buff.append("SELECT ");
-			buff.append("mid, revtxt, starnum, crdate ");
+			buff.append("revno, mid, revtxt, starnum, crdate ");
 			buff.append("FROM ");
 			buff.append("review ");
 			buff.append("WHERE ");
 			buff.append("resno = ? ");
 			buff.append("AND isshow = 'Y' ");
+			buff.append("ORDER BY ");
+			buff.append("crdate desc");
+			break;
+		case ADD_REVIEW:
+			buff.append("INSERT INTO review VALUES (getRevno.nextval, ?, ?, ?, ? , sysdate, 'Y') ");
 			break;
 		}
 		return buff.toString();

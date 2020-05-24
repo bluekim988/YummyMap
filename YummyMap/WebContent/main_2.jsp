@@ -254,24 +254,24 @@
                         </div>
                     </div>
                     <div class="rv_tt"> RIVIEW </div>
-                    <div class="">
                     	<a class="pr-2">별점선택</a>
-                    	<a class="fas fa-star tcolor"></a>
-                    	<a class="fas fa-star tcolor"></a>
-                    	<a class="fas fa-star tcolor"></a>
-                    	<a class="fas fa-star tcolor"></a>
-                    	<a class="fas fa-star tcolor"></a>
+                    <div id="star_grade">
+                    	<a class="fas fa-star " id="1"></a>
+                    	<a class="fas fa-star " id="2"></a>
+                    	<a class="fas fa-star " id="3"></a>
+                    	<a class="fas fa-star " id="4"></a>
+                    	<a class="fas fa-star " id="5"></a>
                     </div>
                     <div class="d-flex">
                     	<input class="form-control form-control-sm r-input border-top-0 border-left-0 border-right-0" type="text" placeholder="한줄 리뷰 달기" id="r-txt">
-                    	<button type="button" class="btn btn-primary btn-sm ml-1" id="r-btn" style="width: 70px">작성</button>
+                    	<button type="button" class="btn btn-primary btn-sm ml-1 r-btn" id="${vo.resno}" style="width: 70px">작성</button>
                     </div>
                     <c:forEach var="rdata" items="${list}">
 				    <div class="d-flex mt-3">
 				        <div class="r-sdate">
 				            ${rdata.sdate}
 				        </div>
-				        <div class="r-id pr-3 text-right">
+				        <div class="r-id pr-3 text-left">
 				            ${rdata.id}
 				        </div>
 				        <div class="r-txt">
@@ -280,7 +280,9 @@
 				        <div class="r-avg ">
 				            ${rdata.starnum}점
 				        </div>
-				        <div class="pl-3"><a href="#" class="badge badge-danger">삭제</a></div>
+				        <c:if test="${sid == rdata.id}">
+				        <div class="pl-3 "><a href="/YummyMap/main/removeReview.mmy" class="badge badge-danger">삭제</a></div>
+				        </c:if>
 				    </div>
 				    </c:forEach>
                 </div>
@@ -315,12 +317,29 @@ $(document).ready(function () {
 	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
 	 }
 	 
-	 //리뷰 작성 이벤트처리입니다.
-	 $('#r-btn').click(function(){
-		 let rtxt = $('#r-txt').val();
-		 let starnum = 3;
-		 $(location).attr('href', '/YummyMap/main/reviewProc.mmy?s='+starnum+'&txt='+rtxt);
+	//별 이벤트처리
+	var star_num;
+	 $('#star_grade a').click(function(){
+	        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+	        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+	        star_num = $(this).attr('id');
+	        return false;
 	 });
+	 $('.r-btn').click(function(){
+		 if(!userid) {
+			 alert('로그인을 진행해주세요');
+			 return;
+		 }
+		console.log(star_num); 
+		 let rtxt = $('#r-txt').val();
+		 let res_no = $(this).attr('id');
+		 $(location).attr('href', '/YummyMap/main/reviewProc.mmy?s='+star_num+'&t='+rtxt+'&r='+res_no);
+	 });
+	 
+	 //리뷰글 삭제버튼 이벤트처리
+	 
+
+
 });
 </script>
 

@@ -166,13 +166,13 @@
         </div>
         <div id="sideitem">
         <!-- 사이드 리스트 아이템 시작 -->
-        	<c:forEach var="data" items="${list}">
+			<c:forEach var="data" items="${list}"> 
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
                     <div class="list-item-title t2color">${data.resname}</div>
                     <div class="list-item-sub t2color">${data.addr}</div>
                     <c:forEach var="menu" items="${data.menuList}">
-                    <div class="list-item-sub t2color">${menu}</div>
+                    <a class="list-item-sub t2color">${menu}</a>
                     </c:forEach>
                 </div>
                 <div class="list-item-like">
@@ -181,11 +181,15 @@
             </div>
          	</c:forEach>
 		<!-- 사이드 리스트 아이템 끝 -->
+        <!-- 사이드 리스트 아이템 시작 -->
+
+
+		<!-- 사이드 리스트 아이템 끝 -->
         </div>
     </div>
     <!--side nav 마지막입니다-->
     <div class=" line2 list2-ml">
-        <div class="row">
+        <div class="row" id="line2">
         <!-- 이미지리스트 아이템 시작 -->
         	<c:forEach var="data2" items="${list}">
             <div class="orange-line res-item" id="${data2.resno}">
@@ -213,13 +217,60 @@
             </div>
             </c:forEach>
             <!-- 이미지리스트 아이템 끝 -->
-
         </div>
     </div>
 </body>
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function () {
+	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+
+	// 장소 검색 객체를 생성합니다
+	var ps = new kakao.maps.services.Places(); 
+  	navigator.geolocation.getCurrentPosition(function(position) {
+		console.log(position);
+		var latitude = position.coords.latitude;
+		var longitude = position.coords.longitude;
+		
+		var latlng = new kakao.maps.LatLng(latitude, longitude);
+		var options = {
+			location : latlng,
+			radius : 1000,
+			page : 10
+		};
+		ps.keywordSearch('치킨', placesSearchCB, options); 
+    }, function(error) {
+         
+         // 위치를 가져오는데 실패한 경우
+         consol.log(error.message);
+    });
+	// 키워드로 장소를 검색합니다
+	
+
+	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+	function placesSearchCB (data, status, pagination) {
+	    if (status === kakao.maps.services.Status.OK) {
+			/* address_name: "경기 안양시 동안구 비산동 1101-2"
+				category_group_code: "FD6"
+				category_group_name: "음식점"
+				category_name: "음식점 > 치킨 > 60계"
+				distance: "567"
+				id: "1360555804"
+				phone: "031-388-5959"
+				place_name: "60계 안양샛별한양점"
+				place_url: "http://place.map.kakao.com/1360555804"
+				road_address_name: "경기 안양시 동안구 동안로 194"
+				x: "126.949369837888"
+				y: "37.3959425465037" */
+			for(let i=0; i<data.length; i++){
+				let res_name = data[i].place_name;
+				let res_addr = data[i].address_name;
+			}
+	    } 
+	}
+	
 	//하트 이벤트입니다.
     $(".heart").click(function () {
         if ($(this).hasClass("liked")) {

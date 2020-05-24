@@ -488,8 +488,11 @@
             font-weight: 700;
             
         }
-        
+        .dnone{display: none;}
         .r-id{width: 100px;}
         .r-txt{width: 500px;}
-        .r-sdate{font-size: 8pt; width: 10px;  color: rgba(255, 128, 89, 0.8) !important;}
+        .r-sdate{font-size: 8pt; width: 70px;  color: rgba(255, 128, 89, 0.8) !important;}
+        
+        #star_grade a{ text-decoration: none; color: rgb(196, 179, 179); }
+        #star_grade a.on{ color: rgb(255, 128, 89);}
         
