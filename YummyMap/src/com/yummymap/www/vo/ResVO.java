@@ -5,8 +5,10 @@ import java.util.StringTokenizer;
 
 public class ResVO {
 	private int resno, catno, subno;
+	private double avg;
 	private String resname, addr, tel, menu;
 	private List<String> menuList;
+	private List<String> imgList;
 	public int getResno() {
 		return resno;
 	}
@@ -24,6 +26,13 @@ public class ResVO {
 	}
 	public void setSubno(int subno) {
 		this.subno = subno;
+	}
+	
+	public double getAvg() {
+		return avg;
+	}
+	public void setAvg(double avg) {
+		this.avg = avg;
 	}
 	public String getResname() {
 		return resname;
@@ -61,5 +70,12 @@ public class ResVO {
 		while (token.hasMoreElements()) {
 			menuList.add(token.nextToken());			
 		}
-	}	
+	}
+	public List<String> getImgList() {
+		return imgList;
+	}
+	public void setImgList(List<String> imgList) {
+		this.imgList = imgList;
+	}
+	
 }

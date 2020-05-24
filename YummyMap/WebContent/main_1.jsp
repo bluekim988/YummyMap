@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -165,16 +166,20 @@
         </div>
         <div id="sideitem">
         <!-- 사이드 리스트 아이템 시작 -->
+        	<c:forEach var="data" items="${list}">
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
-                    <div class="list-item-title t2color">맥도날드</div>
-                    <div class="list-item-sub t2color">주소</div>
-                    <div class="list-item-sub t2color">메뉴</div>
+                    <div class="list-item-title t2color">${data.resname}</div>
+                    <div class="list-item-sub t2color">${data.addr}</div>
+                    <c:forEach var="menu" items="${data.menuList}">
+                    <div class="list-item-sub t2color">${menu}</div>
+                    </c:forEach>
                 </div>
                 <div class="list-item-like">
                     <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
                 </div>
             </div>
+         	</c:forEach>
 		<!-- 사이드 리스트 아이템 끝 -->
         </div>
     </div>
@@ -182,12 +187,13 @@
     <div class=" line2 list2-ml">
         <div class="row">
         <!-- 이미지리스트 아이템 시작 -->
-            <div class="orange-line res-item">
+        	<c:forEach var="data2" items="${list}">
+            <div class="orange-line res-item" id="${data2.resno}">
                 <div class="text-right">
                     <div class="imgdiv">
-                        <img src="/YummyMap/img/img0.png" alt="">
+                        <img src="/YummyMap/resimg/${data2.imgList.get(0)}" >
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
+                            ${data2.resname}[${data2.avg}]
                         </div>
                     </div>
                     <div class="list-item-like mt-1 mr-2">
@@ -196,14 +202,13 @@
                 </div>
                 <div class="text-left ml-2">
                     <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
+                    	<c:forEach var="star" begin="1" end="${data2.avg}">
+                        <a class="fas fa-star tcolor"></a>
+                        </c:forEach>
                     </p>
                 </div>
             </div>
+            </c:forEach>
             <!-- 이미지리스트 아이템 끝 -->
 
         </div>
@@ -239,27 +244,15 @@ $(document).ready(function () {
 	  $("#searchTag").keydown(function(key) {
          if (key.keyCode == 13) {
         	let str = $('#searchTag').val();
-     		$.ajax({
-     			url:'/YummyMap/main/searchList.mmy',
-     			type:'post',
-     			dataType:'json',
-     			data:{
-     				'str':str
-     			},
-     			success:function(data){
-     				let obj = data.list;
-     				for(let i=0; i<obj.length; i++){
-	     				$('#sideitem').append('<div class="ml-3 mt-3 list-item"><div class="list-item-info">'+
-	     						'<div class="list-item-title t2color">'+obj[i].name+'</div>'+
-	     						'<div class="list-item-sub t2color">'+obj[i].addr+'</div>'+
-	     						'<div class="list-item-sub t2color">'+obj[i].menu+'</div> </div>'+
-	     						'<div class="list-item-like">'+
-	     						'<span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span></div></div>');     					
-     				}
-				}
-     		});
+			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+str);
          }
       });
+	
+	//상세보기 전환 이벤트입니다.
+	$('.res-item').click(function(){
+		let resno = $(this).attr('id');
+		$(location).attr('href', '/YummyMap/main/detail.mmy?r='+resno);
+	});
 
 });
     
