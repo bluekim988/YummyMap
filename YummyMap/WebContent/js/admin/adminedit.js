@@ -41,7 +41,7 @@ $(function(){
 	//정규식 함수
 	
 	function pwchk(pw) {
-		let patt = /^([a-z0-9!@#$%^&*-+_]){1}(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*-=])[a-zA-Z0-9!@#$%^&*-+_]{7,15}$/i;
+		let patt = /(?=.*\d{1})(?=.*[~`!@#$%\^&*()-+=]{1})(?=.*[a-zA-Z]{2}).{8,15}$/;
 		let pwok = patt.test(pw);
 		return pwok;
 	}
@@ -150,8 +150,8 @@ $(function(){
 			return;
 		}
 		
-//		$('#frm').attr('action','/YummyMap/admin/rememberProc.mmy');
-//		$('#frm').submit();
+		$('#frm').attr('action','/YummyMap/admin/admineditProc.mmy');
+		$('#frm').submit();
 		
 		
 	});

@@ -31,7 +31,7 @@
 					</div>
 				</div>
 			</div>
-			<a class="navbar-brand tcolor logo ml-1" href="#" id=""> YUMMY MAP </a>
+			<a class="navbar-brand tcolor logo ml-1" href="http://localhost/YummyMap/admin/main.mmy" id=""> YUMMY MAP </a>
 		</div>
 		<div class="bar"></div>
 		<div class="row row-cols-2 sub ml-1">

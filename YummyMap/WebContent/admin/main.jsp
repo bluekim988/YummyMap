@@ -33,11 +33,11 @@
 						<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
 						<div class="badge badge-light nav-item">${SID}</div>
 						<a href="http://localhost/YummyMap/admin/adminedit.mmy" class="badge badge-light nav-item">정보수정</a>
-						<a href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
+						<a href="http://localhost/YummyMap/admin/logoutProc.mmy" class="badge badge-light nav-item" id="logout">LOGOUT</a>
 					</div>
 				</div>
 			</div>
-			<a class="navbar-brand tcolor logo ml-1" href="#" id=""> YUMMY MAP </a>
+			<a class="navbar-brand tcolor logo ml-1" href="http://localhost/YummyMap/admin/main.mmy"> YUMMY MAP </a>
 		</div>
 		<div class="bar"></div>
 		<div class="row row-cols-2 mt-2 sub">

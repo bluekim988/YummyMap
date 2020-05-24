@@ -99,6 +99,13 @@
 	파라미터 : id, pw, name,tel ,mail
 	컨트롤러 : /com.yummymap.www.controller.admin.AdminEditProc
 	뷰		 : /admin/adminreview.jsp
+	------------------------------------------------------------------------------
+	
+12. 게시글 상세 보기 요청
+	요청내용 : /admin/boardDetail.mmy
+	파라미터 : txtno
+	컨트롤러 : /com.yummymap.www.controller.admin.BoardDetail
+	뷰		 : /admin/boardDetail.jsp
 
 	
 	

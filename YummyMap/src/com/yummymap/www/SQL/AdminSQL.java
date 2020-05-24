@@ -13,6 +13,7 @@ public class AdminSQL {
  public final int BOARD_NAME_SEL = 1009;
  public final int BOARD_DEL = 1010;
  public final int ADMIN_INFO = 1011;
+ public final int BOARD_DETAIL = 1012;
  
  
  public final int USER_CNT = 2001;
@@ -174,7 +175,7 @@ public class AdminSQL {
 		 buff.append("    mname = ? , mtel= ? , memail= ? "); 
 		 buff.append("WHERE "); 
 		 buff.append("	grade = 'A'   "); 
-		 buff.append("  AND  mid= ? ");
+		 buff.append("  AND mid= ? ");
 		 break;
 	 case DEL_UESR:
 		 buff.append("UPDATE  "); 
@@ -268,6 +269,14 @@ public class AdminSQL {
 		 buff.append("    isshow='N' "); 
 		 buff.append("WHERE "); 
 		 buff.append("    txtno = ?  ");
+		 break;
+	 case BOARD_DETAIL:
+		 buff.append("SELECT  "); 
+		 buff.append("    title , mtxt "); 
+		 buff.append("FROM  "); 
+		 buff.append("    txt "); 
+		 buff.append("WHERE "); 
+		 buff.append("    txtno = ? ");
 		 break;
 	 }
 	 return buff.toString();

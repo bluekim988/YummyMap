@@ -75,4 +75,16 @@ $(function(){
 		$('#frm').attr('action','/YummyMap/admin/checkDel.mmy');
 		$('#frm').submit();
 	});
+	
+	$('.title').click(function(){
+		tno = $(this).parent().prevAll('.ckd').attr('id');
+		let inid = $('#search-input').val();
+		let opt = $('#opt').val();
+		$('#searchs').val(inid);
+		$('#opts').val(opt);
+		$('#txtno').val(tno); 
+		$('#frm').attr('action','/YummyMap/admin/boardDetail.mmy');
+		$('#frm').submit();
+		
+	});
 });

@@ -366,9 +366,7 @@ public class AdminDAO {
 			pstmt.setString(2, mvo.getPass());
 			pstmt.setString(3, mvo.getMtel());
 			pstmt.setString(4, mvo.getMemail());
-			pstmt.setString(5, mvo.getIssue());
-			pstmt.setString(6, mvo.getIsshow());
-			pstmt.setString(7, mvo.getMid());
+			pstmt.setString(5, mvo.getMid());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -391,9 +389,7 @@ public class AdminDAO {
 			pstmt.setString(1, mvo.getMname());
 			pstmt.setString(2, mvo.getMtel());
 			pstmt.setString(3, mvo.getMemail());
-			pstmt.setString(4, mvo.getIssue());
-			pstmt.setString(5, mvo.getIsshow());
-			pstmt.setString(6, mvo.getMid());
+			pstmt.setString(4, mvo.getMid());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -631,5 +627,32 @@ public class AdminDAO {
 			db.close(pstmt);
 			db.close(con);
 		}
+	}
+	
+	//게시판 상세보기 전담 함수 
+	public BoardInfoVO boardDetail(int txtno) {
+		BoardInfoVO bvo = new BoardInfoVO();
+		con = db.getConnection();
+		
+		String sql = asql.getSQL(asql.BOARD_DETAIL);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setInt(1, txtno);
+			rs = pstmt.executeQuery();
+			rs.next();
+			bvo.setTitle(rs.getString("title"));
+			bvo.setMtxt(rs.getString("mtxt"));
+			bvo.setMtxt();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return bvo;
 	}
 }
