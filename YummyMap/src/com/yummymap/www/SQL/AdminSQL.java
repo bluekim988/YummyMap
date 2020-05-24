@@ -7,13 +7,19 @@ public class AdminSQL {
  public final int SEL_ID_USER = 1004;
  public final int SEL_NAME_USER = 1005;
  public final int USER_INFO = 1006;
- public final int ALL_BOARD_LIST = 1007;
  
+ public final int PAGE_BOARD_LIST = 1007;
+ public final int BOARD_TITL_SEL = 1008;
+ public final int BOARD_NAME_SEL = 1009;
  
  
  public final int USER_CNT = 2001;
  public final int USER_ID_CNT = 2002;
  public final int USER_NAME_CNT = 2003;
+ 
+ public final int ALL_BOARD_CNT = 2004;
+ public final int TITLE_BOARD_CNT = 2005;
+ public final int NAME_BOARD_CNT = 2006;
  
  public final int USER_RE = 3001;
  public final int USER_RE_NOPASS = 3002;
@@ -66,10 +72,10 @@ public class AdminSQL {
 		 buff.append("        member "); 
 		 buff.append("    WHERE "); 
 		 buff.append("        grade = 'M' "); 
+		 buff.append("    	  and mid = ?  ");
 		 buff.append("  )  "); 
 		 buff.append("WHERE "); 
 		 buff.append("    rno BETWEEN ? and ? ");
-		 buff.append("    and mid = ?  ");
 		 break;
 	 case SEL_NAME_USER : 
 		 buff.append("select "); 
@@ -81,10 +87,10 @@ public class AdminSQL {
 		 buff.append("        member "); 
 		 buff.append("    WHERE "); 
 		 buff.append("        grade = 'M' "); 
+		 buff.append("        AND mname = ? "); 
 		 buff.append("  )  "); 
 		 buff.append("WHERE "); 
 		 buff.append("    rno BETWEEN ? and ? ");
-		 buff.append("    and mname = ? ");
 		 break;
 	 case USER_CNT: 
 		 buff.append("SELECT  "); 
@@ -145,13 +151,81 @@ public class AdminSQL {
 		 buff.append("WHERE "); 
 		 buff.append("    mno= ? ");
 		 break;
-	 case ALL_BOARD_LIST:
-		 buff.append("SELECT  "); 
-		 buff.append("    txtno , title , mid , cdate , mtxt "); 
+	 case PAGE_BOARD_LIST:
+		 buff.append("select  "); 
+		 buff.append("    rno ,txtno , title , mid , cdate , mtxt "); 
+		 buff.append("from  "); 
+		 buff.append("    (SELECT   "); 
+		 buff.append("        rownum rno ,txtno , title , mid , cdate , mtxt "); 
+		 buff.append("	   FROM   "); 
+		 buff.append("		   txt "); 
+		 buff.append("     WHERE  "); 
+		 buff.append("        isshow = 'Y' "); 
+		 buff.append("	   ORDER BY  "); 
+		 buff.append("	      txtno DESC  "); 
+		 buff.append("     )  "); 
+		 buff.append("WHERE  "); 
+		 buff.append("	rno BETWEEN ? and ? ");
+		 break;
+	 case ALL_BOARD_CNT:
+		 buff.append("SELECT "); 
+		 buff.append("    count(*) cnt  "); 
 		 buff.append("FROM "); 
 		 buff.append("    txt "); 
 		 buff.append("WHERE "); 
-		 buff.append("    isshow='Y' "); 
+		 buff.append("    isshow = 'Y' ");
+		 break;
+	 case TITLE_BOARD_CNT:
+		 buff.append("SELECT "); 
+		 buff.append("    count(*) cnt  "); 
+		 buff.append("FROM "); 
+		 buff.append("    txt "); 
+		 buff.append("WHERE "); 
+		 buff.append("    isshow = 'Y' ");
+		 buff.append("    AND title LIKE ? ");
+		 break;
+	 case NAME_BOARD_CNT:
+		 buff.append("SELECT "); 
+		 buff.append("    count(*) cnt  "); 
+		 buff.append("FROM "); 
+		 buff.append("    txt "); 
+		 buff.append("WHERE "); 
+		 buff.append("    isshow = 'Y' ");
+		 buff.append("    AND mid =  ? ");
+		 break;
+	 case BOARD_TITL_SEL:
+		 buff.append("select  "); 
+		 buff.append("    rno ,txtno , title , mid , cdate , mtxt "); 
+		 buff.append("from  "); 
+		 buff.append("    (SELECT   "); 
+		 buff.append("        rownum rno ,txtno , title , mid , cdate , mtxt "); 
+		 buff.append("	   FROM   "); 
+		 buff.append("		   txt "); 
+		 buff.append("     WHERE  "); 
+		 buff.append("        isshow = 'Y' "); 
+		 buff.append("  	  AND title LIKE ? ");
+		 buff.append("	   ORDER BY  "); 
+		 buff.append("	      txtno DESC  "); 
+		 buff.append("     )  "); 
+		 buff.append("WHERE  "); 
+		 buff.append("	rno BETWEEN ? and ? ");
+		 break;
+	 case BOARD_NAME_SEL:
+		 buff.append("select  "); 
+		 buff.append("    rno ,txtno , title , mid , cdate , mtxt "); 
+		 buff.append("from  "); 
+		 buff.append("    (SELECT   "); 
+		 buff.append("        rownum rno ,txtno , title , mid , cdate , mtxt "); 
+		 buff.append("	   FROM   "); 
+		 buff.append("		   txt "); 
+		 buff.append("     WHERE  "); 
+		 buff.append("        isshow = 'Y' "); 
+		 buff.append("  	  AND mid = ? ");
+		 buff.append("	   ORDER BY  "); 
+		 buff.append("	      txtno DESC  "); 
+		 buff.append("     )  "); 
+		 buff.append("WHERE  "); 
+		 buff.append("	rno BETWEEN ? and ? ");
 		 break;
 	 }
 	 return buff.toString();

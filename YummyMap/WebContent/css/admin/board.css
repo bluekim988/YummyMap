@@ -13,8 +13,11 @@
 .bar-top{
 	border-top: 3px solid rgb(255, 165, 69);
 }
+.sub{
+	margin: 0px !important; height: 600px !important;
+} 
 
-.sub-box{
+ .sub-box{
 	height: 540px;
 }
 .tcolor{color: rgb(255, 128, 89) !important;}

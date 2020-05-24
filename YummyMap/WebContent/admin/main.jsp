@@ -92,7 +92,7 @@
 					</div>
 						<button type="button" class="btn btn-secondary" id="sbtn">검색</button>
 				</div>
-				<div class="d-flex justify-content-around mb-1 mt-2" id="${data.nowPage}">
+				<div class="d-flex justify-content-around mb-1 mt-2" id="${PAGE.nowPage}">
 					<div class="btn-group mr-2" role="group" aria-label="First group">
 						<c:forEach var="page" begin="${PAGE.startPage}" end="${PAGE.endPage}">
 							<button type="button" class="btn btn-secondary pbtn">${page}</button>

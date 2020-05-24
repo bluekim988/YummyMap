@@ -183,9 +183,9 @@ public class AdminDAO {
 		String sql = asql.getSQL(asql.SEL_ID_USER);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			pstmt.setString(3, id);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				MemberInfoVO mvo = new MemberInfoVO();
@@ -214,9 +214,9 @@ public class AdminDAO {
 		String sql = asql.getSQL(asql.SEL_NAME_USER);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			pstmt.setString(3, name);
+			pstmt.setString(1, name);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				MemberInfoVO mvo = new MemberInfoVO();
@@ -346,17 +346,96 @@ public class AdminDAO {
 		return cnt;
 	}
 	
-	//게시판 리스트 출력 전담 함수
-	public ArrayList<BoardInfoVO> boardList(){
-		ArrayList<BoardInfoVO> list = new ArrayList<BoardInfoVO>();
+	//모든 게시글 카운트 함수
+	public int boardCnt() {
+		int cnt = 0;
 		
 		con = db.getConnection();
-		String sql = asql.getSQL(asql.ALL_BOARD_LIST);
+		
+		String sql = asql.getSQL(asql.ALL_BOARD_CNT);
 		
 		stmt = db.getStatement(con);
 		
 		try {
 			rs = stmt.executeQuery(sql);
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(stmt);
+			db.close(con);
+		}
+		
+		return cnt;
+	}
+	
+	//제목검색 카운트 전담 함수 
+	public int titlCnt(String titl)
+	{
+		int cnt =0;
+		
+		String title = "%"+titl+"%";
+		con = db.getConnection();
+		
+		String sql = asql.getSQL(asql.TITLE_BOARD_CNT);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, title);
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return cnt;
+		
+	}
+	
+	//작성자 검색 결과 카운터 함수 
+	public int boardNameCnt(String name) {
+		int cnt = 0;
+		con = db.getConnection();
+		
+		String sql = asql.getSQL(asql.NAME_BOARD_CNT);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	
+	//게시판 리스트 출력 전담 함수
+	public ArrayList<BoardInfoVO> boardList(int start , int end){
+		ArrayList<BoardInfoVO> list = new ArrayList<BoardInfoVO>();
+		
+		con = db.getConnection();
+		String sql = asql.getSQL(asql.PAGE_BOARD_LIST);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				BoardInfoVO bvo = new BoardInfoVO();
@@ -366,8 +445,6 @@ public class AdminDAO {
 				bvo.setCdate(rs.getDate("cdate"));
 				bvo.setCtime(rs.getTime("cdate"));
 				bvo.setSdate();
-				bvo.setMtxt(rs.getString("mtxt"));
-				bvo.setMtxt();
 				
 				list.add(bvo);
 				
@@ -376,7 +453,83 @@ public class AdminDAO {
 			e.printStackTrace();
 		}finally {
 			db.close(rs);
-			db.close(stmt);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return list;
+	}
+	
+	//게시판 제목으로 검색 전담 함수
+	public ArrayList<BoardInfoVO> boardTitl(String titl , int start , int end){
+		ArrayList<BoardInfoVO> list = new ArrayList<BoardInfoVO>();
+		String title = "%"+titl+"%";
+		con = db.getConnection();
+		String sql = asql.getSQL(asql.BOARD_TITL_SEL);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, title);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardInfoVO bvo = new BoardInfoVO();
+				bvo.setTxtno(rs.getInt("txtno"));
+				bvo.setTitle(rs.getString("title"));
+				bvo.setMid(rs.getString("mid"));
+				bvo.setCdate(rs.getDate("cdate"));
+				bvo.setCtime(rs.getTime("cdate"));
+				bvo.setSdate();
+				
+				list.add(bvo);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return list;
+	}
+	//게시판 작성자으로 검색 전담 함수
+	public ArrayList<BoardInfoVO> boardId(String name , int start , int end){
+		ArrayList<BoardInfoVO> list = new ArrayList<BoardInfoVO>();
+		con = db.getConnection();
+		String sql = asql.getSQL(asql.BOARD_NAME_SEL);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, name);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardInfoVO bvo = new BoardInfoVO();
+				bvo.setTxtno(rs.getInt("txtno"));
+				bvo.setTitle(rs.getString("title"));
+				bvo.setMid(rs.getString("mid"));
+				bvo.setCdate(rs.getDate("cdate"));
+				bvo.setCtime(rs.getTime("cdate"));
+				bvo.setSdate();
+				
+				list.add(bvo);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
 			db.close(con);
 		}
 		
