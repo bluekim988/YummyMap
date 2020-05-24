@@ -20,7 +20,7 @@
 <body>
 	<form method="post" action="" id="frm">
 		<input type="hidden" name="mno" id="no" >
-		<input type="hidden" name="nowpage" id="nowpage" value="${PAGE.nowPage }">
+		<input type="hidden" name="nowpage" id="nowpage" value="${PAGE.nowPage}">
 		<input type="hidden" name="searchs" id="searchs" >
 		<input type="hidden" name="opts" id="opts">
 		<input type="hidden" name="nos" id="txtno">
@@ -70,7 +70,7 @@
 							<div class="col-2 ckd" id="${data.txtno}">
 								<input type="checkbox" class="mr-2" name="no" value="${data.txtno }">${data.txtno}
 							</div>
-							<div class="col-4"><a class="">${data.title }</a></div>
+							<div class="col-4"><a class="title">${data.title }</a></div>
 							<div class="col-2">${data.mid }</div>
 							<div class="col-3">${data.sdate }</div>
 							<div class="col-2">

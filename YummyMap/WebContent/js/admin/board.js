@@ -77,6 +77,7 @@ $(function(){
 	});
 	
 	$('.title').click(function(){
+		
 		tno = $(this).parent().prevAll('.ckd').attr('id');
 		let inid = $('#search-input').val();
 		let opt = $('#opt').val();
