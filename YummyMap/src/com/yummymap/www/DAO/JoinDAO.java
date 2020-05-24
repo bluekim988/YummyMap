@@ -18,12 +18,12 @@ import com.yummymap.www.vo.MemberVO;
  */
 
 public class JoinDAO {
-WebDBCP db;
-JoinSQL jsql;
-Connection con;
-Statement stmt;
-PreparedStatement pstmt;
-ResultSet rs;
+	WebDBCP db;
+	JoinSQL jsql;
+	Connection con;
+	Statement stmt;
+	PreparedStatement pstmt;
+	ResultSet rs;
 	
 	public JoinDAO() {
 		db = new WebDBCP();

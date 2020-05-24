@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <link rel="stylesheet" href="/YummyMap/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 <!-- nav 영역입니다-->
@@ -77,7 +78,7 @@
           <button type="button" class="btn btn-success naverbtn">네이버 계정으로 로그인</button>
         </div>
         <div class="mt-1">
-          <button type="button" class="btn btn-warning kakaobtn">카카오 계정으로 로그인</button>
+          <button type="button" class="btn btn-warning kakaobtn" id="kakao">카카오 계정으로 로그인</button>
         </div>
       </div>
     </div>
@@ -102,6 +103,18 @@ $(document).ready(function () {
 	if(result == 'x'){
 		$('#msg1').show();
 	}
+	
+ 	$('#kakao').click(function(){
+ 		loginWithKakao();
+ 		getToken();
+	}); 
+	Kakao.init('e457f7b2d3393084fafd19c71b0c5bed');
+ 	function loginWithKakao() {
+	    Kakao.Auth.authorize({
+	      redirectUri: 'http://localhost/YummyMap/main.mmy'
+	    })
+ 	}
+
 	
 });
 </script>
