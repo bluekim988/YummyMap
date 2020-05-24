@@ -3,9 +3,7 @@ $(function(){
 	$('.obtn').click(function(){
 		let no = $(this).parents().parents().attr('id');
 		let sel =	$('#opt').val();
-		alert(sel);
 		let scname = $('#search-input').val();
-		alert(scname);
 		$('#searchs').val(scname);
 		$('#opts').val(sel);
 		$('#no').val(no);
@@ -51,5 +49,10 @@ $(function(){
 		$('#no').val(mno);
 		$('#frm').attr('action', '/YummyMap/admin/delmemberProc.mmy');
 		$('#frm').submit();
+	});
+	$('#sid').hover(function(){
+		$('#idinfo').attr('display','');
+	},function(){
+		$('#idinfo').attr('display','none');
 	});
 });

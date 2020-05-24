@@ -50,10 +50,8 @@ public class RememberProc implements MmyController {
 		mvo.setIsshow(isshow);
 		
 		AdminDAO adao = new AdminDAO();
-		int cnt = adao.reMember(mvo);
-		if(cnt ==1 ) {
-			System.out.println("정상 수정 완료");
-		}
+		adao.reMember(mvo);
+
 	 }else {
 			MemberInfoVO mvo = new MemberInfoVO();
 			mvo.setMno(mno);
@@ -64,10 +62,8 @@ public class RememberProc implements MmyController {
 			mvo.setIsshow(isshow);
 			
 			AdminDAO adao = new AdminDAO();
-			int cnt = adao.reMemberNopass(mvo);
-			if(cnt ==1 ) {
-				System.out.println("정상 수정 완료");
-			}
+			adao.reMemberNopass(mvo);
+
 		 }
 	 
 		try {

@@ -79,11 +79,20 @@
 	뷰		 : /admin/main.mmy (리다이렉트)
 	------------------------------------------------------------------------------
 	
-7. 게시판 선택 삭제 요청
+8. 게시판 선택 삭제 및 삭제 요청
 	요청내용 : /admin/checkDel.mmy
 	파라미터 : txtno
 	컨트롤러 : /com.yummymap.www.controller.admin.CheckDel
 	뷰		 : /admin/boardList.mmy (리다이렉트)
+	
+	------------------------------------------------------------------------------
+	
+9. 관리자 정보 변경 뷰 요청
+	요청내용 : /admin/adminedit.mmy
+	파라미터 : txtno
+	컨트롤러 : /com.yummymap.www.controller.admin.AdminEdit
+	뷰		 : /admin/adminreview.jsp
+
 	
 	
 	

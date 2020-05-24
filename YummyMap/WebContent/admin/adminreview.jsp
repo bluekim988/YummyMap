@@ -20,21 +20,28 @@
 
 
 	<div class="container mt-1 mb-5">
-		<nav class="d-flex justify-content-between navbar navbar-light">
-			<a class="navbar-brand tcolor logo mt-5" href="#">
-				YUMMY MAP
-			</a>
-			<div>
-				로그인 이미지
+<div class="bg-white nav-body">
+			<div class=" mt-2 nav-btn">
+				<div class="member_nav text-right mt-3">
+					<div class="ctQZg">
+						<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
+						<div class="badge badge-light nav-item">${SID}</div>
+						<a href="" class="badge badge-light nav-item">정보수정</a>
+						<a href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
+					</div>
+				</div>
 			</div>
-		</nav>
+			<a class="navbar-brand tcolor logo ml-1" href="#" id=""> YUMMY MAP </a>
+		</div>
 		<div class="bar"></div>
-		<div class="row row-cols-2 sub">
+		<div class="row row-cols-2 mt-2 sub">
 			<div class="col-3 pt-5 pr-4 text-right bar-ri">
-				<div><a href="http://localhost/YummyMap/admin/main.mmy">
+				<div class="text-left mt-3">
+					<a href="http://localhost/YummyMap/admin/main.mmy">
 						<h5>회원 관리</h5>
-					</a></div>
-				<div class="mt-3">
+					</a>
+				</div>
+				<div class="mt-4 text-left">
 					<a href="http://localhost/YummyMap/admin/boardList.mmy">
 						<h5>게시글 관리</h5>
 					</a>

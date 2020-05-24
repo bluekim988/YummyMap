@@ -23,7 +23,6 @@ public class AdminDAO {
 	//관리자 계정 조회 전담 함수
 	public int selAdmin(String id , String pw) {
 		int cnt = 0;
-		
 		con = db.getConnection();
 		
 		String sql = asql.getSQL(asql.SEL_AD);
@@ -35,7 +34,7 @@ public class AdminDAO {
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
 			rs.next();
-			cnt = rs.getInt("cnt");
+			rs.getInt("cnt");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -43,8 +42,6 @@ public class AdminDAO {
 			db.close(pstmt);
 			db.close(con);
 		}
-		
-		
 		return cnt;
 	}
 	
@@ -176,6 +173,7 @@ public class AdminDAO {
 		}	
 		return list;
 	}
+	
 	//아이디 검색 유저 목록 전담 함수 
 	public  ArrayList<MemberInfoVO> idUser(int start , int end , String id){
 		ArrayList<MemberInfoVO> list = new ArrayList<MemberInfoVO>();
@@ -207,6 +205,7 @@ public class AdminDAO {
 		}	
 		return list;
 	}
+	
 	//이름 검색 유저 목록 전담 함수 
 	public  ArrayList<MemberInfoVO> nameUser(int start , int end , String name){
 		ArrayList<MemberInfoVO> list = new ArrayList<MemberInfoVO>();
@@ -270,8 +269,7 @@ public class AdminDAO {
 	}
 	
 	//회원 수정 전담 함수(패스워드 포함)
-	public int reMember(MemberInfoVO mvo) {
-		int cnt = 0;
+	public void reMember(MemberInfoVO mvo) {
 		con = db.getConnection();
 		
 		String sql = asql.getSQL(asql.USER_RE);
@@ -286,7 +284,7 @@ public class AdminDAO {
 			pstmt.setString(5, mvo.getIssue());
 			pstmt.setString(6, mvo.getIsshow());
 			pstmt.setInt(7, mvo.getMno());
-			cnt = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -295,11 +293,9 @@ public class AdminDAO {
 			db.close(con);
 		}
 		
-		return cnt;
 	}
 	//회원 수정 전담 함수(패스워드 미 수정)
-	public int reMemberNopass(MemberInfoVO mvo) {
-		int cnt = 0;
+	public void reMemberNopass(MemberInfoVO mvo) {
 		con = db.getConnection();
 		
 		String sql = asql.getSQL(asql.USER_RE_NOPASS);
@@ -313,7 +309,7 @@ public class AdminDAO {
 			pstmt.setString(4, mvo.getIssue());
 			pstmt.setString(5, mvo.getIsshow());
 			pstmt.setInt(6, mvo.getMno());
-			cnt = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -322,12 +318,10 @@ public class AdminDAO {
 			db.close(con);
 		}
 		
-		return cnt;
 	}
 	
 	//계정 삭제 전담 함수 
-	public int delUser(int mno) {
-		int cnt = 0;
+	public void delUser(int mno) {
 		con = db.getConnection();
 		
 		String sql = asql.getSQL(asql.DEL_UESR);
@@ -336,14 +330,13 @@ public class AdminDAO {
 		
 		try {
 			pstmt.setInt(1, mno);
-			cnt = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			db.close(pstmt);
 			db.close(con);
 		}
-		return cnt;
 	}
 	
 	//모든 게시글 카운트 함수
@@ -498,6 +491,7 @@ public class AdminDAO {
 		
 		return list;
 	}
+	
 	//게시판 작성자으로 검색 전담 함수
 	public ArrayList<BoardInfoVO> boardId(String name , int start , int end){
 		ArrayList<BoardInfoVO> list = new ArrayList<BoardInfoVO>();
@@ -535,5 +529,22 @@ public class AdminDAO {
 		
 		return list;
 	}
-	
+	//게시판 삭제 전담 함수
+	public void delBoard(int txtno) {
+		con = db.getConnection();
+		
+		String sql = asql.getSQL(asql.BOARD_DEL);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setInt(1, txtno);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+	}
 }

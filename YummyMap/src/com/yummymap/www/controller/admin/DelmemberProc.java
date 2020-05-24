@@ -21,14 +21,9 @@ public class DelmemberProc implements MmyController {
 		System.out.println("mno" + mno);
 		AdminDAO adao = new AdminDAO();
 		
-		int cnt = adao.delUser(mno);
+			adao.delUser(mno);
 		
-		if(cnt == 1) {
-			System.out.println("정상 삭제 완료");
-		}else {
-			System.out.println("정상 삭제 실패");
-			
-		}
+
 		
 		try {
 			resp.sendRedirect("/YummyMap/admin/main.mmy?nowpage=" + nowpage);

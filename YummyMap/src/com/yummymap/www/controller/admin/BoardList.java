@@ -2,9 +2,7 @@ package com.yummymap.www.controller.admin;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import com.yummymap.www.DAO.AdminDAO;
 import com.yummymap.www.controller.MmyController;

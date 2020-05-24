@@ -11,6 +11,7 @@ public class AdminSQL {
  public final int PAGE_BOARD_LIST = 1007;
  public final int BOARD_TITL_SEL = 1008;
  public final int BOARD_NAME_SEL = 1009;
+ public final int BOARD_DEL = 1010;
  
  
  public final int USER_CNT = 2001;
@@ -226,6 +227,14 @@ public class AdminSQL {
 		 buff.append("     )  "); 
 		 buff.append("WHERE  "); 
 		 buff.append("	rno BETWEEN ? and ? ");
+		 break;
+	 case BOARD_DEL:
+		 buff.append("UPDATE "); 
+		 buff.append("    txt "); 
+		 buff.append("SET "); 
+		 buff.append("    isshow='N' "); 
+		 buff.append("WHERE "); 
+		 buff.append("    txtno = ?  ");
 		 break;
 	 }
 	 return buff.toString();
