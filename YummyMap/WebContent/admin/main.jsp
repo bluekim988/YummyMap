@@ -32,7 +32,7 @@
 					<div class="ctQZg">
 						<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
 						<div class="badge badge-light nav-item">${SID}</div>
-						<a href="" class="badge badge-light nav-item">정보수정</a>
+						<a href="http://localhost/YummyMap/admin/adminedit.mmy" class="badge badge-light nav-item">정보수정</a>
 						<a href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
 					</div>
 				</div>

@@ -34,7 +34,7 @@ public class AdminDAO {
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
 			rs.next();
-			rs.getInt("cnt");
+			cnt = rs.getInt("cnt");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -43,6 +43,40 @@ public class AdminDAO {
 			db.close(con);
 		}
 		return cnt;
+	}
+	
+	//관리자 정보 조회 전담 함수
+	public MemberInfoVO adminInfo(String id) {
+		MemberInfoVO mvo = new MemberInfoVO();
+		
+		con = db.getConnection();
+		
+		String sql = asql.getSQL(asql.ADMIN_INFO);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			mvo.setMname(rs.getString("mname"));
+			mvo.setMid(rs.getString("mid"));
+			mvo.setMtel(rs.getString("mtel"));
+			String mail = rs.getString("memail");
+			String idMail = mail.substring(0,mail.indexOf("@"));
+			String domin = mail.substring(mail.indexOf("@")+1);
+			mvo.setMemail(idMail);
+			mvo.setMdomain(domin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		
+		return mvo;
 	}
 	
 	//사용중인 유저 검색 전담 함수 
@@ -309,6 +343,57 @@ public class AdminDAO {
 			pstmt.setString(4, mvo.getIssue());
 			pstmt.setString(5, mvo.getIsshow());
 			pstmt.setInt(6, mvo.getMno());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+	}
+	//회원 수정 전담 함수(패스워드 포함)
+	public void reAdmin(MemberInfoVO mvo) {
+		con = db.getConnection();
+		
+		String sql = asql.getSQL(asql.ADMIN_RE);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, mvo.getMname());
+			pstmt.setString(2, mvo.getPass());
+			pstmt.setString(3, mvo.getMtel());
+			pstmt.setString(4, mvo.getMemail());
+			pstmt.setString(5, mvo.getIssue());
+			pstmt.setString(6, mvo.getIsshow());
+			pstmt.setString(7, mvo.getMid());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+	}
+	//회원 수정 전담 함수(패스워드 미 수정)
+	public void reAdminNopass(MemberInfoVO mvo) {
+		con = db.getConnection();
+		
+		String sql = asql.getSQL(asql.ADMIN_RE_NOPASS);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, mvo.getMname());
+			pstmt.setString(2, mvo.getMtel());
+			pstmt.setString(3, mvo.getMemail());
+			pstmt.setString(4, mvo.getIssue());
+			pstmt.setString(5, mvo.getIsshow());
+			pstmt.setString(6, mvo.getMid());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {

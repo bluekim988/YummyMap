@@ -12,6 +12,7 @@ public class AdminSQL {
  public final int BOARD_TITL_SEL = 1008;
  public final int BOARD_NAME_SEL = 1009;
  public final int BOARD_DEL = 1010;
+ public final int ADMIN_INFO = 1011;
  
  
  public final int USER_CNT = 2001;
@@ -25,6 +26,8 @@ public class AdminSQL {
  public final int USER_RE = 3001;
  public final int USER_RE_NOPASS = 3002;
  public final int DEL_UESR = 3003;
+ public final int ADMIN_RE = 3004;
+ public final int ADMIN_RE_NOPASS = 3005;
  
  public String getSQL(int code) {
 	 StringBuffer buff = new StringBuffer();
@@ -128,21 +131,50 @@ public class AdminSQL {
 		 buff.append("    grade = 'M' "); 
 		 buff.append("    and mno = ? ");
 		 break;	 
+	 case ADMIN_INFO : 
+		 buff.append("SELECT  "); 
+		 buff.append("    mno , mname , mid, mtel ,memail "); 
+		 buff.append("FROM  "); 
+		 buff.append("    member "); 
+		 buff.append("WHERE "); 
+		 buff.append("    grade = 'A' "); 
+		 buff.append("    and mid = ? ");
+		 break;	 
 	 case USER_RE:
 		 buff.append("UPDATE  "); 
 		 buff.append("    member  "); 
 		 buff.append("SET "); 
 		 buff.append("    mname = ? , mpw= ? , mtel= ? , memail= ?, issue= ? ,isshow=? "); 
 		 buff.append("WHERE "); 
-		 buff.append("    mno= ? ");
+		 buff.append("	grade = 'M'   "); 
+		 buff.append("  AND  mno= ? ");
 		 break;
 	 case USER_RE_NOPASS:
 		 buff.append("UPDATE  "); 
 		 buff.append("    member  "); 
 		 buff.append("SET "); 
 		 buff.append("    mname = ? , mtel= ? , memail= ?, issue= ? ,isshow=? "); 
+		 buff.append("WHERE ");
+		 buff.append("	grade = 'M'   "); 
+		 buff.append("  AND  mno= ? ");
+		 break;
+	 case ADMIN_RE:
+		 buff.append("UPDATE  "); 
+		 buff.append("    member  "); 
+		 buff.append("SET "); 
+		 buff.append("    mname = ? , mpw= ? , mtel= ? , memail= ? "); 
 		 buff.append("WHERE "); 
-		 buff.append("    mno= ? ");
+		 buff.append("	grade = 'A'   "); 
+		 buff.append("  AND  mid= ? ");
+		 break;
+	 case ADMIN_RE_NOPASS:
+		 buff.append("UPDATE  "); 
+		 buff.append("    member  "); 
+		 buff.append("SET "); 
+		 buff.append("    mname = ? , mtel= ? , memail= ? "); 
+		 buff.append("WHERE "); 
+		 buff.append("	grade = 'A'   "); 
+		 buff.append("  AND  mid= ? ");
 		 break;
 	 case DEL_UESR:
 		 buff.append("UPDATE  "); 
@@ -150,7 +182,8 @@ public class AdminSQL {
 		 buff.append("SET "); 
 		 buff.append("   isshow='N' "); 
 		 buff.append("WHERE "); 
-		 buff.append("    mno= ? ");
+		 buff.append("	grade = 'A' "); 
+		 buff.append("  AND  mno= ? ");
 		 break;
 	 case PAGE_BOARD_LIST:
 		 buff.append("select  "); 
