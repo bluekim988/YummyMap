@@ -111,6 +111,13 @@
 	파라미터 : txtno
 	컨트롤러 : /com.yummymap.www.controller.admin.BoardDetail
 	뷰		 : /admin/boardDetail.jsp
+	------------------------------------------------------------------------------
+	
+12. 로그아웃 처리 요청
+	요청내용 : /admin/logoutProc.mmy
+	파라미터 : sid
+	컨트롤러 : /com.yummymap.www.controller.admin.LogoutProc
+	뷰		 : /admin/login.mmy
 
 	
 	
