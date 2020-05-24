@@ -10,6 +10,7 @@ import java.util.*;
 import com.yummymap.www.DB.WebDBCP;
 import com.yummymap.www.SQL.MainSQL;
 import com.yummymap.www.vo.ResVO;
+import com.yummymap.www.vo.ReviewVO;
 
 
 public class MainDAO {
@@ -57,6 +58,34 @@ public class MainDAO {
 		}
 		return list;
 	}
+	// 해당 식당의 상세정보를 가져오는 메소드입니다.
+	public ResVO getResInfo(int resno) {
+		ResVO vo = new ResVO();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_RES_INFO);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, resno);
+			rs = pstmt.executeQuery();
+			rs.next();
+			vo.setResno(resno);
+			vo.setResname(rs.getString("resname"));
+			vo.setAddr(rs.getString("address"));
+			vo.setTel(rs.getString("restel"));
+			vo.setSubno(rs.getInt("subno"));
+			vo.setMenu(rs.getString("menu"));
+			vo.setMenuList();
+			double avg = getResAVG(resno);
+			vo.setAvg(avg);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return vo;
+	}
 	// 해당 식당의 모든 이미지리스트를 가져오는 메소드입니다.
 	public List<String> getResImg(int resno) {
 		List<String> list = new ArrayList<String>();
@@ -99,6 +128,33 @@ public class MainDAO {
 		}
 		
 		return cnt;
+	}
+	// 해당 식당의 모든 리뷰 정보를 가져오는 메소드입니다.
+	public List<ReviewVO> getReviewList(int resno) {
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_RES_REVIEW);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, resno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ReviewVO vo = new ReviewVO();
+				vo.setId(rs.getString("mid"));
+				vo.setTxt(rs.getString("revtxt"));
+				vo.setStarnum(rs.getInt("starnum"));
+				vo.setCrdate(rs.getDate("crdate"));
+				vo.setSdate();
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return list;
 	}
 
 }

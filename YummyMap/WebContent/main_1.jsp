@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -205,6 +205,9 @@
                     	<c:forEach var="star" begin="1" end="${data2.avg}">
                         <a class="fas fa-star tcolor"></a>
                         </c:forEach>
+                        <c:if test="${vo.avg *10 % 10 != 0 }">
+	                        <a class="fas fa-star-half-alt tcolor"></a>
+                        </c:if>
                     </p>
                 </div>
             </div>
