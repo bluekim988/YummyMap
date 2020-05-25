@@ -160,11 +160,11 @@
     </div>
     <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
-    <div class="nav-side">
-        <div class="tcolor list_title text-left">
+    <div class="nav-side" style="overflow:auto; overflow-x:hidden;">
+        <div class="tcolor list_title text-left" >
             YUMMY LIST
         </div>
-        <div id="sideitem">
+        <div id="sideitem" >
         <!-- 사이드 리스트 아이템 시작 -->
 			<c:forEach var="data" items="${list}"> 
             <div class="ml-3 mt-3 list-item">
@@ -224,9 +224,10 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function () {
+	/*
 	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-
+	let options;
 	// 장소 검색 객체를 생성합니다
 	var ps = new kakao.maps.services.Places(); 
   	navigator.geolocation.getCurrentPosition(function(position) {
@@ -235,14 +236,12 @@ $(document).ready(function () {
 		var longitude = position.coords.longitude;
 		
 		var latlng = new kakao.maps.LatLng(latitude, longitude);
-		var options = {
+		options = {
 			location : latlng,
 			radius : 1000,
 			page : 10
 		};
-		ps.keywordSearch('치킨', placesSearchCB, options); 
     }, function(error) {
-         
          // 위치를 가져오는데 실패한 경우
          consol.log(error.message);
     });
@@ -251,6 +250,7 @@ $(document).ready(function () {
 	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	function placesSearchCB (data, status, pagination) {
 	    if (status === kakao.maps.services.Status.OK) {
+	    	*/
 			/* 
 				##넘어오는 데이터 샘플
 				address_name: "경기 안양시 동안구 비산동 1101-2"
@@ -265,13 +265,37 @@ $(document).ready(function () {
 				road_address_name: "경기 안양시 동안구 동안로 194"
 				x: "126.949369837888"
 				y: "37.3959425465037" */
-			for(let i=0; i<data.length; i++){
-				let res_name = data[i].place_name;
-				let res_addr = data[i].address_name;
+/*
+		console.log(data);
+		// 있으면 다음 페이지를 검색한다.
+		for(let i=0; i<data.length; i++){
+			let res_name = data[i].place_name;
+			let res_addr = data[i].address_name;
+			let res_cate = data[i].category_name;
+			let res_tel = data[i].phone;
+			console.log(i+'##########');
+			console.log(res_name);
+			console.log(res_addr);
+			console.log(res_cate);
+			console.log(res_tel);
+			console.log(i+'##########');
+		}
+			if(pagination.hasNextPage){
+				pagination.nextPage();
 			}
+			console.log(pagination.hasNextPage);
 	    } 
+
+
 	}
-    
+	
+	 $("#searchTag").keydown(function(key) {
+         if (key.keyCode == 13) {
+        	 let query_str = $('#searchTag').val();
+     		ps.keywordSearch(query_str, placesSearchCB, options); 
+         }
+	  });
+    */
   //로그인 여부를 확인합니다.
   let userid = '${sid}';
   if(!userid) {
@@ -283,15 +307,15 @@ $(document).ready(function () {
 	  $('#logout').show();
 	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
   }
-	
+
 	//검색기능 이벤트입니다.
 	  $("#searchTag").keydown(function(key) {
          if (key.keyCode == 13) {
         	let query_str = $('#searchTag').val();
 			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+query_str);
-			
          }
       });
+
 	  let que_str = '${param.q}';
 	//상세보기 전환 이벤트입니다.
 	$('.res-item').click(function(){

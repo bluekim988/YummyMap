@@ -56,14 +56,6 @@
           <i class="far fa-clipboard"></i>
       </a>
   </div>
-  <div class="linkbox">
-    <div>
-      <a href="#linkstr" type="button" class="linkbtn border-bottom text-success">네이버 계정 사용하기</a>
-    </div>
-    <div>
-      <a href="#linkstr" type="button" class="linkbtn border-bottom text-warning">카카오 계정 사용하기</a>
-    </div>
-  </div>
 </div>
 <!-- nav 마지막 입니다-->
 <!-- body 시작 입니다-->
@@ -135,16 +127,7 @@
         <div class="mt-5">
           <button type="button" class="btn btn-primary joinbtn" id="joinbtn">회원 가입 완료</button>
         </div>
-        <div class="optionbox d-flex mt-5" id="linkstr">
-          <p class="h5" >다른 계정으로 가입을 원하신다면</p>
-        </div>
-        <div class=" mt-1">
-          <button type="button" class="btn btn-success naverbtn">네이버 계정으로 가입하기</button>
-        </div>
-        <div class="mt-1">
-          <button type="button" class="btn btn-warning kakaobtn">카카오 계정으로 가입하기</button>
-        </div>
-        <div class="mt-1">
+        <div class="mt-2 pt-2">
           <a  href="/YummyMap/main.mmy" class="btn btn-secondary homebtn ">홈화면 가기</a>
         </div>
       </div>

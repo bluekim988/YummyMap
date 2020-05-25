@@ -155,7 +155,7 @@
     </div>
     <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
-    <div class="nav-side">
+    <div class="nav-side" style="overflow:auto; overflow-x:hidden;">
         <div class="tcolor list_title text-left">
             YUMMY LIST
         </div>
