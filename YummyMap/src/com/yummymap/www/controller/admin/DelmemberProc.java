@@ -1,5 +1,9 @@
 package com.yummymap.www.controller.admin;
-
+/**
+ * @author 유태희
+ * @since 2020.05.24
+ *  이 클래스는 사용자 삭제 컨트롤러 입니다
+ */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,18 +22,9 @@ public class DelmemberProc implements MmyController {
 			mno = Integer.parseInt(smno);
 		} catch (Exception e) {	}
 		
-		System.out.println("mno" + mno);
 		AdminDAO adao = new AdminDAO();
 		
-		int cnt = adao.delUser(mno);
-		
-		if(cnt == 1) {
-			System.out.println("정상 삭제 완료");
-		}else {
-			System.out.println("정상 삭제 실패");
-			
-		}
-		
+			adao.delUser(mno);
 		try {
 			resp.sendRedirect("/YummyMap/admin/main.mmy?nowpage=" + nowpage);
 		} catch (Exception e) {}

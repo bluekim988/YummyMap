@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -11,9 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
     <link rel="stylesheet" href="/YummyMap/css/main_1.css" />
     <link rel="stylesheet" href="/YummyMap/css/nav.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="/YummyMap/js/jquery-3.5.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <style>
 
     </style>
@@ -65,8 +67,8 @@
     <!--검색창 영역입니다-->
     <div class="sel-body bg-white">
         <div class="input-group-sm input-group-sm p-rel search-box">
-            <label for=""><i class="fas fa-search ml-4 mt-3"></i></label>
-            <input class="ml-1 border-top-0 border-left-0 border-right-0" placeholder="  SEARCH" type="text"
+            <label for="searchTag"><i class="fas fa-search ml-4 mt-3"></i></label>
+            <input id="searchTag" class="ml-1 border-top-0 border-left-0 border-right-0" placeholder="  SEARCH" type="text"
                 class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
         <div class="p-rel search-btn">
@@ -138,10 +140,10 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">강남역</th>
+                                            <th class="sub-item" scope="row">신림역</th>
                                         </tr>
                                         <tr>
-                                            <th scope="row">구로디지털단지역</th>
+                                            <th class="sub-item" scope="row">구로디지털단지역</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -162,303 +164,106 @@
         <div class="tcolor list_title text-left">
             YUMMY LIST
         </div>
-        <div>
+        <div id="sideitem">
+        <!-- 사이드 리스트 아이템 시작 -->
+			<c:forEach var="data" items="${list}"> 
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
-                    <div class="list-item-title t2color">맥도날드</div>
-                    <div class="list-item-sub t2color">주소</div>
-                    <div class="list-item-sub t2color">메뉴</div>
+                    <div class="list-item-title t2color">${data.resname}</div>
+                    <div class="list-item-sub t2color">${data.addr}</div>
+                    <c:forEach var="menu" items="${data.menuList}">
+                    <a class="list-item-sub t2color">${menu}</a>
+                    </c:forEach>
                 </div>
                 <div class="list-item-like">
-                    <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
+                    <a href="/YummyMap/main/pickMyRes.mmy" class="heart"><i class="far fa-heart " aria-hidden="true"></i> </a>
                 </div>
             </div>
-            <div class="ml-3 mt-3 list-item">
-                <div class="list-item-info">
-                    <div class="list-item-title t2color">맥도날드</div>
-                    <div class="list-item-sub t2color">주소</div>
-                    <div class="list-item-sub t2color">메뉴</div>
-                </div>
-                <div class="list-item-like">
-                    <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                </div>
-            </div>
-
+         	</c:forEach>
+		<!-- 사이드 리스트 아이템 끝 -->
         </div>
     </div>
     <!--side nav 마지막입니다-->
     <div class=" line2 list2-ml">
-        <div class="row">
-            <div class="orange-line res-item">
-                <div class="text-right">
+        <div class="row" id="line2">
+        <!-- 이미지리스트 아이템 시작 -->
+        	<c:forEach var="data2" items="${list}">
+            <div class="orange-line res-item" id="${data2.resno}">
+                <div class="text-right pb-1">
                     <div class="imgdiv">
-                        <img src="/YummyMap/img/img0.png" alt="">
+                        <img src="/YummyMap/resimg/${data2.imgList.get(0)}" >
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
+                            ${data2.resname}[${data2.avg}]
                         </div>
                     </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
                 </div>
-                <div class="text-left ml-2">
+                <div class="text-left ml-2 pt-4">
                     <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
+                    	<c:forEach var="star" begin="1" end="${data2.avg}">
+                        <a class="fas fa-star tcolor"></a>
+                        </c:forEach>
+                        <c:if test="${vo.avg *10 % 10 != 0 }">
+	                        <a class="fas fa-star-half-alt tcolor"></a>
+                        </c:if>
                     </p>
                 </div>
             </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="/YummyMap/img/img3.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="/YummyMap/img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img2.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img3.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="/YummyMap/img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
-            <div class="orange-line res-item">
-                <div class="text-right">
-                    <div class="imgdiv">
-                        <img src="../img/img1.jpg" alt="">
-                        <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
-                        </div>
-                    </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
-                </div>
-                <div class="text-left ml-2">
-                    <p id="star_grade">
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                        <a class="fas fa-star"></a>
-                    </p>
-                </div>
-            </div>
+            </c:forEach>
+            <!-- 이미지리스트 아이템 끝 -->
         </div>
     </div>
 </body>
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function () {
+	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+
+	// 장소 검색 객체를 생성합니다
+	var ps = new kakao.maps.services.Places(); 
+  	navigator.geolocation.getCurrentPosition(function(position) {
+		console.log(position);
+		var latitude = position.coords.latitude;
+		var longitude = position.coords.longitude;
+		
+		var latlng = new kakao.maps.LatLng(latitude, longitude);
+		var options = {
+			location : latlng,
+			radius : 1000,
+			page : 10
+		};
+		ps.keywordSearch('치킨', placesSearchCB, options); 
+    }, function(error) {
+         
+         // 위치를 가져오는데 실패한 경우
+         consol.log(error.message);
+    });
+	// 키워드로 장소를 검색합니다
+	
+
+	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+	function placesSearchCB (data, status, pagination) {
+	    if (status === kakao.maps.services.Status.OK) {
+			/* address_name: "경기 안양시 동안구 비산동 1101-2"
+				category_group_code: "FD6"
+				category_group_name: "음식점"
+				category_name: "음식점 > 치킨 > 60계"
+				distance: "567"
+				id: "1360555804"
+				phone: "031-388-5959"
+				place_name: "60계 안양샛별한양점"
+				place_url: "http://place.map.kakao.com/1360555804"
+				road_address_name: "경기 안양시 동안구 동안로 194"
+				x: "126.949369837888"
+				y: "37.3959425465037" */
+			for(let i=0; i<data.length; i++){
+				let res_name = data[i].place_name;
+				let res_addr = data[i].address_name;
+			}
+	    } 
+	}
+	
 	//하트 이벤트입니다.
     $(".heart").click(function () {
         if ($(this).hasClass("liked")) {
@@ -481,8 +286,23 @@ $(document).ready(function () {
 	  $('#logout').show();
 	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
   }
-    
-    
+	
+	//검색기능 이벤트입니다.
+	  $("#searchTag").keydown(function(key) {
+         if (key.keyCode == 13) {
+        	let query_str = $('#searchTag').val();
+			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+query_str);
+			
+         }
+      });
+	  let que_str = '${param.q}';
+	//상세보기 전환 이벤트입니다.
+	$('.res-item').click(function(){
+		let resno = $(this).attr('id');
+		console.log(que_str);
+		$(location).attr('href', '/YummyMap/main/detail.mmy?r='+resno+'&q='+que_str);
+	});
+
 });
     
 

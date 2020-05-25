@@ -1,3 +1,4 @@
+#### 메인페이지 ################################3	
 	------------------------------------------------------------------------------
 1. index 페이지 뷰 요청
 	요청내용 : /main.mmy
@@ -5,6 +6,38 @@
 	컨트롤러 : /com.yummymap.www.controller.main.Main
 	뷰		 : /main_1.jsp
 	------------------------------------------------------------------------------
+2. 메뉴이름으로 검색시 식당 리스트 비동기 처리
+	요청내용 : /main/searchList.mmy
+	파라미터 : menu
+	컨트롤러 : /com.yummymap.www.controller.main.SearchList
+	뷰		 : /main_1.jsp
+	------------------------------------------------------------------------------
+3. 식당 상세보기 뷰 요청
+	요청내용 : /main/detail.mmy
+	파라미터 : menu
+	컨트롤러 : /com.yummymap.www.controller.main.Detail
+	뷰		 : /main_2.jsp
+	------------------------------------------------------------------------------
+4. 리뷰달기 처리 요청
+	요청내용 : /main/reviewProc.mmy
+	파라미터 : resno, id, txt, starnum
+	컨트롤러 : /com.yummymap.www.controller.main.ReviewProc
+	뷰		 : /main_2.jsp
+	------------------------------------------------------------------------------
+4. 내가작성한 리뷰 삭제 처리 요청
+	요청내용 : /main/removeReview.mmy
+	파라미터 : revno
+	컨트롤러 : /com.yummymap.www.controller.main.RemoveReviewProc
+	뷰		 : /main_2.jsp
+	------------------------------------------------------------------------------
+5. 찜(하트) 처리 요청
+	요청내용 : /main/pickMyRes.mmy
+	파라미터 : resno
+	컨트롤러 : /com.yummymap.www.controller.main.PickMyRes
+	뷰		 : 비동기
+	------------------------------------------------------------------------------
+	
+	
 	
 ##### 관리자 ##########################################
 
@@ -39,25 +72,63 @@
 	뷰		 : /admin/remember.jsp
 	------------------------------------------------------------------------------
 	
-5. 회원 수정 처리 요청 
+6. 회원 수정 처리 요청 
 	요청내용 : /admin/rememberProc.mmy
 	파라미터 : name , pw, tel, mail , issue
 	컨트롤러 : /com.yummymap.www.controller.admin.RememberProc
 	뷰		 : /admin/main.mmy (리다이렉트)
 	------------------------------------------------------------------------------
 	
-6. 회원 삭제 처리 요청 
+7. 회원 삭제 처리 요청 
 	요청내용 : /admin/delmemberProc.mmy
 	파라미터 : mno
 	컨트롤러 : /com.yummymap.www.controller.admin.DelmemberProc
 	뷰		 : /admin/main.mmy (리다이렉트)
 	------------------------------------------------------------------------------
 	
-7. 게시판 관리 페이지 요청 
+8. 게시판 관리 페이지 요청 
 	요청내용 : /admin/borderList.mmy
 	파라미터 : 무
 	컨트롤러 : /com.yummymap.www.controller.admin.BoardList
 	뷰		 : /admin/main.mmy (리다이렉트)
+	------------------------------------------------------------------------------
+	
+9. 게시판 선택 삭제 및 삭제 요청
+	요청내용 : /admin/checkDel.mmy
+	파라미터 : txtno
+	컨트롤러 : /com.yummymap.www.controller.admin.CheckDel
+	뷰		 : /admin/boardList.mmy (리다이렉트)
+	
+	------------------------------------------------------------------------------
+	
+10. 관리자 정보 변경 뷰 요청
+	요청내용 : /admin/adminedit.mmy
+	파라미터 : id
+	컨트롤러 : /com.yummymap.www.controller.admin.AdminEdit
+	뷰		 : /admin/adminreview.jsp
+	------------------------------------------------------------------------------
+	
+11. 관리자 정보 변경 처리 요청
+	요청내용 : /admin/admineditProc.mmy
+	파라미터 : id, pw, name,tel ,mail
+	컨트롤러 : /com.yummymap.www.controller.admin.AdminEditProc
+	뷰		 : /admin/adminreview.jsp
+	------------------------------------------------------------------------------
+	
+12. 게시글 상세 보기 요청
+	요청내용 : /admin/boardDetail.mmy
+	파라미터 : txtno
+	컨트롤러 : /com.yummymap.www.controller.admin.BoardDetail
+	뷰		 : /admin/boardDetail.jsp
+	------------------------------------------------------------------------------
+	
+12. 로그아웃 처리 요청
+	요청내용 : /admin/logoutProc.mmy
+	파라미터 : sid
+	컨트롤러 : /com.yummymap.www.controller.admin.LogoutProc
+	뷰		 : /admin/login.mmy
+
+	
 	
 	
 	

@@ -1,5 +1,9 @@
 package com.yummymap.www.controller.admin;
-
+/**
+ * @author 유태희
+ * @since 2020.05.23
+ *  이 클래스는 사용자 수정 컨트롤러 입니다
+ */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -50,10 +54,8 @@ public class RememberProc implements MmyController {
 		mvo.setIsshow(isshow);
 		
 		AdminDAO adao = new AdminDAO();
-		int cnt = adao.reMember(mvo);
-		if(cnt ==1 ) {
-			System.out.println("정상 수정 완료");
-		}
+		adao.reMember(mvo);
+
 	 }else {
 			MemberInfoVO mvo = new MemberInfoVO();
 			mvo.setMno(mno);
@@ -64,10 +66,8 @@ public class RememberProc implements MmyController {
 			mvo.setIsshow(isshow);
 			
 			AdminDAO adao = new AdminDAO();
-			int cnt = adao.reMemberNopass(mvo);
-			if(cnt ==1 ) {
-				System.out.println("정상 수정 완료");
-			}
+			adao.reMemberNopass(mvo);
+
 		 }
 	 
 		try {

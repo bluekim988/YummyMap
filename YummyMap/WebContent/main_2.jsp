@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -13,10 +14,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <style>
-
-
-    </style>
 </head>
 
 <body>
@@ -66,7 +63,7 @@
     <div class="sel-body bg-white">
         <div class="input-group-sm input-group-sm p-rel search-box">
             <label for=""><i class="fas fa-search ml-4 mt-3"></i></label>
-            <input class="ml-1 border-top-0 border-left-0 border-right-0" placeholder="  SEARCH" type="text"
+            <input class="ml-1 border-top-0 border-left-0 border-right-0" id="searchTag" placeholder="  SEARCH" type="text"
                 class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
         <div class="p-rel search-btn">
@@ -163,49 +160,45 @@
             YUMMY LIST
         </div>
         <div>
+        	<c:forEach var="resData" items="${resList}">
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
-                    <div class="list-item-title t2color">맥도날드</div>
-                    <div class="list-item-sub t2color">주소</div>
-                    <div class="list-item-sub t2color">메뉴</div>
+                    <div class="list-item-title t2color">${resData.resname}</div>
+                    <div class="list-item-sub t2color">${resData.addr}</div>
+                    <c:forEach var="menu" items="${resData.menuList}">
+                    <a class="list-item-sub t2color">${menu}</a>
+                    </c:forEach>
                 </div>
                 <div class="list-item-like">
                     <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
                 </div>
             </div>
-            <div class="ml-3 mt-3 list-item">
-                <div class="list-item-info">
-                    <div class="list-item-title t2color">맥도날드</div>
-                    <div class="list-item-sub t2color">주소</div>
-                    <div class="list-item-sub t2color">메뉴</div>
-                </div>
-                <div class="list-item-like">
-                    <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                </div>
-            </div>
-
+            </c:forEach>
         </div>
     </div>
     <!--side nav 마지막입니다-->
-    <div class="line2 list2-ml">
+    <div class="line2 list2-ml mb-5">
         <div class="row">
             <div class="orange-line res-item content">
                 <div class="text-right md_ft1">
                     <div class="imgdiv">
                         <span class="imgspan">
-                            <img src="/YummyMap/img/img1.jpg" alt="">
-                            <img src="/YummyMap/img/img0.png" alt=""></span>
+                        	<c:forEach var="imgdata" items="${vo.imgList}">
+                            <img src="/YummyMap/resimg/${imgdata}" style="height: 260px;">
+                            </c:forEach>
+                        </span>
                         <div class="text-left ml-2">
                             <p id="star_grade">
-                                <a class="fas fa-star"></a>
-                                <a class="fas fa-star"></a>
-                                <a class="fas fa-star"></a>
-                                <a class="fas fa-star"></a>
-                                <a class="fas fa-star"></a>
+	                    	<c:forEach var="star" begin="1" end="${vo.avg}">
+	                        <a class="fas fa-star tcolor"></a>
+	                        </c:forEach>
+	                        <c:if test="${vo.avg *10 % 10 != 0 }">
+	                        <a class="fas fa-star-half-alt tcolor"></a>
+	                        </c:if>
                             </p>
                         </div>
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            맥도날드
+                            ${vo.resname}
                             <span class="heart"><i class="far fa-heart" aria-hidden="true"></i> </span>
                             <div class="list-item-like heart">
                             </div>
@@ -221,7 +214,7 @@
                                         d="M13.309,16.492l-0.314-0.062C6.572,15.15,1.596,10.172,0.316,3.745L0.254,3.431L3.682,0l5.095,5.09 L6.494,7.371c0.755,1.186,1.763,2.185,2.949,2.925l2.271-2.27l5.033,5.029L13.309,16.492z M1.559,3.822 c1.258,5.694,5.668,10.106,11.358,11.364l2.132-2.132l-3.336-3.332L9.655,11.78l-0.387-0.194c-1.712-0.962-3.098-2.341-4.052-4.01 L4.989,7.179L7.078,5.09L3.682,1.697L1.559,3.822z">
                                     </path>
                                 </svg></span>
-                            <div class="txt dt_ft1">02-878-7444</div>
+                            <div class="txt dt_ft1">${vo.tel}</div>
                         </div>
                         <div class="list_item list_item_address"><span class="tit" aria-label="주소" role="img"><svg
                                     class="icon" role="presentation" version="1.1" width="20" height="20"
@@ -232,31 +225,10 @@
                                 </svg></span>
                             <div class="txt dt_pd">
                                 <ul class="list_address">
-                                    <li><span class="addr dt_ft">서울 구로구</span><span class="btn"><a class="link"
+                                    <li><span class="addr dt_ft">${vo.addr}</span><span class="btn"><a class="link"
                                                 href="#">지도보기</a></span>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
-                        <div class="list_item list_item_biztime"><span class="tit" aria-label="영업시간" role="img"><svg
-                                    class="icon" role="presentation" version="1.1" width="20" height="20"
-                                    viewBox="0 0 25 25">
-                                    <path fill="#9E9E9E"
-                                        d="M11.114,12.118l-3.208-2.68V4.011h1.2v4.866l2.777,2.321L11.114,12.118z M17,8.5c0,4.694-3.806,8.5-8.5,8.5 	S0,13.194,0,8.5S3.806,0,8.5,0S17,3.806,17,8.5z M15.8,8.5c0-4.032-3.268-7.3-7.3-7.3c-4.032,0-7.3,3.269-7.3,7.3s3.268,7.3,7.3,7.3 	C12.532,15.8,15.8,12.532,15.8,8.5z">
-                                    </path>
-                                </svg></span>
-                            <div class="txt">
-                                <div class="biztime_area list_more_view" data-page="detailCommon" data-action="bizhour"
-                                    target="_self">
-                                    <div class="biztime_row dt_ft1">
-                                        <div class="biztime "><span class="time "><span>매일 11:30 -
-                                                    22:00</span></span><span class="desc ml-2"><span>화요일
-                                                    휴무</span></span></div>
-                                        <div class="biztime "><span class="time"><span>매일 15:00 -
-                                                    17:00</span></span><span class="desc ml-2"><span>휴식시간</span></span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="list_item list_item_menu mt-3"><span class="tit" aria-label="메뉴" role="img"><svg
@@ -266,55 +238,49 @@
                                         d="M4.5,0C2.567,0,1,1.567,1,3.5v3c0,1.762,1.306,3.205,3,3.45V17h1V9.95C6.694,9.705,8,8.262,8,6.5v-3 C8,1.567,6.433,0,4.5,0z M6.8,6.5c0,1.268-1.032,2.3-2.3,2.3S2.2,7.769,2.2,6.5v-3c0-1.268,1.032-2.3,2.3-2.3s2.3,1.032,2.3,2.3V6.5 z M14.8,0v6.5c0,1.096-0.772,2.012-1.8,2.242V0h-1v8.742c-1.028-0.23-1.8-1.146-1.8-2.242V0H9v6.5c0,1.762,1.306,3.205,3,3.45V17h1 V9.95c1.694-0.245,3-1.688,3-3.45V0H14.8z">
                                     </path>
                                 </svg></span>
-                            <div class="txt">
-                                <ul class="list_menu dt_ft">
-                                    <li>
-                                        <div class="list_menu_inner"><em class="price">10,000원</em>
-                                            <div class="menu_area"><span>
-                                                    <div class="menu">부타동
-                                                </span></div>
-                                        </div>
+                                  <div class="txt d-flex">
+                            	<c:forEach var="menudata" items="${vo.menuList}">
+								<div class="menu pr-3">${menudata}</div>
+								</c:forEach>
                             </div>
-                            </li>
-                            <li>
-                                <div class="list_menu_inner"><em class="price">16,000원</em>
-                                    <div class="menu_area">
-                                        <div class="menu">아부리동</span></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="list_menu_inner"><em class="price">11,000원</em>
-                                    <div class="menu_area">
-                                        <div class="menu"><span class="name">단뽀뽀오므라이스</span></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="list_menu_inner"><em class="price">11,000원</em>
-                                    <div class="menu_area">
-                                        <div class="menu"><span class="name">라후테</span></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="list_menu_inner"><em class="price">12,000원</em>
-                                    <div class="menu_area">
-                                        <div class="menu"><span class="name">쇼유사케동</span></div>
-                                    </div>
-                                </div>
-                            </li>
-                            </ul>
+
                         </div>
                     </div>
                     <div class="rv_tt"> RIVIEW </div>
+                    	<a class="pr-2">별점선택</a>
+                    <div id="star_grade">
+                    	<a class="fas fa-star " id="1"></a>
+                    	<a class="fas fa-star " id="2"></a>
+                    	<a class="fas fa-star " id="3"></a>
+                    	<a class="fas fa-star " id="4"></a>
+                    	<a class="fas fa-star " id="5"></a>
+                    </div>
+                    <div class="d-flex">
+                    	<input class="form-control form-control-sm r-input border-top-0 border-left-0 border-right-0" type="text" placeholder="한줄 리뷰 달기" id="r-txt">
+                    	<button type="button" class="btn btn-primary btn-sm ml-1 r-btn" id="${vo.resno}" style="width: 70px">작성</button>
+                    </div>
+                    <c:forEach var="rdata" items="${list}">
+				    <div class="d-flex mt-3">
+				        <div class="r-sdate">
+				            ${rdata.sdate}
+				        </div>
+				        <div class="r-id pr-3 text-left">
+				            ${rdata.id}
+				        </div>
+				        <div class="r-txt">
+				            ${rdata.txt}
+				        </div>
+				        <div class="r-avg ">
+				            ${rdata.starnum}점
+				        </div>
+				        <c:if test="${sid == rdata.id}">
+				        <div class="pl-3 "><a href="/YummyMap/main/removeReview.mmy?revno=${rdata.revno}&resno=${vo.resno}" class="badge badge-danger">삭제</a></div>
+				        </c:if>
+				    </div>
+				    </c:forEach>
                 </div>
             </div>
-            <div class="mt-5">&ensp;</div>
         </div>
-    </div>
-    </div>
-    </div>
     </div>
 
 </body>
@@ -343,6 +309,36 @@ $(document).ready(function () {
 	  $('#logout').show();
 	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
 	 }
+	 
+	//별 이벤트처리
+	var star_num;
+	 $('#star_grade a').click(function(){
+	        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+	        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+	        star_num = $(this).attr('id');
+	        return false;
+	 });
+	 $('.r-btn').click(function(){
+		 if(!userid) {
+			 alert('로그인을 진행해주세요');
+			 return;
+		 }
+		console.log(star_num); 
+		 let rtxt = $('#r-txt').val();
+		 let res_no = $(this).attr('id');
+		 $(location).attr('href', '/YummyMap/main/reviewProc.mmy?s='+star_num+'&t='+rtxt+'&r='+res_no);
+	 });
+	 
+		//검색기능 이벤트입니다.
+	  $("#searchTag").keydown(function(key) {
+        if (key.keyCode == 13) {
+       	let query_str = $('#searchTag').val();
+			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+query_str);
+			
+        }
+     });
+
+
 });
 </script>
 
