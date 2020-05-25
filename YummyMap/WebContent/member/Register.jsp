@@ -70,6 +70,7 @@
   <div class="main-body mb-5">
     <div class="m-box mt-4">
       <form id="frm" action="/YummyMap/join/joinProc.mmy" method="POST">
+      	<input type="hidden" id="emailCk" name="emailCk"> 
         <div class="form-group">
           <label for="id" class="idlabel mr-2 d-inline-block">아이디</label>
           <button type="button" id="idcheck" class="btn btn-secondary btn-sm d-inline-block mb-1">아이디 체크</button>
@@ -110,7 +111,7 @@
         </div>
         <div class="form-group">
           <label for="email1" class="idlabel mr-2 d-inline-block">이메일</label>
-          <button type="button" class="btn btn-secondary btn-sm d-inline-block mb-1">이메일 인증</button>
+          <button type="button" class="btn btn-secondary btn-sm d-inline-block mb-1" id="sendmail">이메일 인증</button>
           <div class="d-flex">
             <input type="text" class="form-control ckinput" id="email1" name="email1">
             <p>@</p>
@@ -122,6 +123,9 @@
               <option value="@korea.com">korea.com</option>
               <option value="" >직접입력</option>
             </select>
+          </div>
+          <div class="mt-2 d-none" id="mailckBox">
+          <input class="p-1" type="text" id="malick" name="mailck" placeholder="인증번호를 입력하세요">
           </div>
           <small id="pwmsg" class="text-danger">이메일 인증을 진행해주세요</small>
         </div>

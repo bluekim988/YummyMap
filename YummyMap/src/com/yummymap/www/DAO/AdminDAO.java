@@ -1,5 +1,9 @@
 package com.yummymap.www.DAO;
-
+/**
+ * @author 유태희
+ * @since 2020.05.23
+ *  이 클래스는 관리자 데이터베이스 전달 (DAO) 입니다
+ */
 import java.sql.*;
 import java.util.*;
 import com.yummymap.www.DB.*;
@@ -227,7 +231,6 @@ public class AdminDAO {
 				mvo.setMtel(rs.getString("mtel"));
 				mvo.setMemail(rs.getString("memail"));
 				mvo.setIssue(rs.getString("issue").equals("X") ? "O": "");
-				System.out.println("이슈 : " + mvo.getIssue() );
 				list.add(mvo);
 			}
 		} catch (Exception e) {

@@ -28,7 +28,6 @@ public class MailUtil {
 		prop.put("mail.smtp.ssl.enable","true");
 		prop.put("mail.smtp.starttls.enable","true");
 		prop.put("mail.debug","true");
-		System.out.println("***************************");
 		session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(user, pass);
@@ -38,7 +37,6 @@ public class MailUtil {
 	
 	public int getSend(String from) {
 		int cnt = 0;
-		System.out.println(from);
 		String getFrom = from;
 		
 		try {
@@ -46,8 +44,8 @@ public class MailUtil {
 			msg.setFrom(new InternetAddress(user));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(getFrom));
 	
-			msg.setSubject("호로로로로");
-			msg.setText("정상 발송 테스트 메일");
+			msg.setSubject("호로로로로"); //메일 제목
+			msg.setText("정상 발송 테스트 메일"); //메일 본문
 			
 			Transport.send(msg);
 			cnt = 1;

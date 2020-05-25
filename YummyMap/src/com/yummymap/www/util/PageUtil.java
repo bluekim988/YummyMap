@@ -4,8 +4,7 @@ package com.yummymap.www.util;
   이 클래스를 페이지 이동에 필요한 정보를 계산하고 저장하기 위해서 
   만들어진 유틸리티적인 클래스
  * @author 유태희
- * @since 2020.05.14
- * @version v1.0.0
+ * @since 2020.05.23
  *
  */
 
@@ -42,10 +41,6 @@ public class PageUtil {
 		calcStart();
 		calcEnd();
 		calCont();
-		
-		System.out.println(endPage + " 엔드 페이지");
-		System.out.println(startPage + " 시작 페이지");
-		System.out.println(totalPage + " 토탈 페이지");
 	}
 
 	//총 페이지 수 계산하는 함수

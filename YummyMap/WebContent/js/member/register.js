@@ -117,4 +117,25 @@ $(document).ready(function () {
 			}
 		});
   });
+  
+  $('#sendmail').click(function(){
+	  let mailId = $('#email1').val();
+	  let domain = $('#email2').val();
+	  let mail = mailId + domain;
+	  alert(mail);
+	  $.ajax({
+		 uri : '/YummyMap/join/mailCk.mmy',
+		 type: 'post',
+		 dataType: 'json',
+		 data: {
+			 'email' : mail
+		 },
+		 success : function(data){
+			 alert(data.emailCk);
+		 },error : function(){
+			alert("통신 오류") 
+		 }
+	  });
+	 $('#mailckBox').removeClass('d-none');
+  });
 });

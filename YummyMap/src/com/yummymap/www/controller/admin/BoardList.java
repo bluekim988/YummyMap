@@ -28,7 +28,6 @@ public class BoardList implements MmyController {
 		String spage = req.getParameter("nowpage");
 		String sch = req.getParameter("searchs");
 		String opt = req.getParameter("opts");
-		System.out.println("검색어 : " + sch + "검색 옵션 : " + opt);
 
 		try {
 			nowpage = Integer.parseInt(spage);
