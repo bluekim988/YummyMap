@@ -1,5 +1,9 @@
 package com.yummymap.www.controller.admin;
-
+/**
+ * @author 유태희
+ * @since 2020.05.24
+ *  이 클래스는 게시판 관리 컨트롤러 입니다
+ */
 import java.util.ArrayList;
 
 import javax.servlet.http.*;
@@ -28,9 +32,7 @@ public class BoardList implements MmyController {
 
 		try {
 			nowpage = Integer.parseInt(spage);
-		} catch (Exception e) {
-			System.out.println("받아오기 실패");
-		}
+		} catch (Exception e) {	}
 
 		
 		ArrayList<BoardInfoVO> list = null;

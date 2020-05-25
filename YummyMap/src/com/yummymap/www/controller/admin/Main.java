@@ -1,5 +1,9 @@
 package com.yummymap.www.controller.admin;
-
+/**
+ * @author 유태희
+ * @since 2020.05.23
+ *  이 클래스는 메인페이지(사용자 관리) 페이지 컨트롤러 입니다
+ */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

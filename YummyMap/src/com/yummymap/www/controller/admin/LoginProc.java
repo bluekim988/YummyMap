@@ -1,5 +1,9 @@
 package com.yummymap.www.controller.admin;
-
+/**
+ * @author 유태희
+ * @since 2020.05.23
+ *  이 클래스는 로그인 컨트롤러 입니다
+ */
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;

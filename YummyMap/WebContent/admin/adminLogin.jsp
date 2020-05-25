@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/YummyMap/css/admin/base.css">
 	<link rel="stylesheet" href="/YummyMap/css/admin/login.css">
 	<script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
+	<script type="text/javascript" src="/YummyMap/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="/YummyMap/js/admin/login.js"></script>
 	<title>관리자 로그인 페이지</title>
 
@@ -53,18 +54,36 @@
 			<div class="text-danger" id="idck"> *일치하는 관리자가 없습니다</div>
 			</c:if>
 			</form>
-			<div class="d-flex justify-content-between mb-5">
-				<div class="mt-3"><a href="#" class="text-right">관리자 정보 찾기</a></div>
+			<div class="d-flex justify-content-end mb-5">
+<!-- 				<div class="mt-3"><a class="text-right" id="sbtn">관리자 정보 찾기</a></div> -->
 				<button type="button" class="btn btn-primary" id="join">로그인</button>
 			</div>
 		</div>
-
 		<div class="bar"></div>
-
 	</div>
 
 
-
+<!-- <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true"> -->
+<!--   <div class="modal-dialog"> -->
+<!--     <div class="modal-content"> -->
+<!--       <div class="modal-header"> -->
+<!--         <h5 class="modal-title" id="staticBackdropLabel">관리자 정보 찾기</h5> -->
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+<!--           <span aria-hidden="true">&times;</span> -->
+<!--         </button> -->
+<!--       </div> -->
+<!--       <div class="modal-body text-center"> -->
+<!--       <form action="/YummyMap/admin/mailProc.mmy" method="post" id="frm2" > -->
+<!--         <div> 관리자 이름 : <input type="txet" id="name" name="name"></div> -->
+<!--         <div class="mt-3"> 관리자 메일 : <input type="txet"  id="mail" name="mail"></div> -->
+<!--        </form> -->
+<!--         </div> -->
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button> -->
+<!--         <button type="button" class="btn btn-danger" id="sendbtn">발송</button> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
 
 </body>
 

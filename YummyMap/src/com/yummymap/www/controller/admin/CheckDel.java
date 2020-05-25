@@ -1,5 +1,9 @@
 package com.yummymap.www.controller.admin;
-
+/**
+ * @author 유태희
+ * @since 2020.05.24
+ *  이 클래스는 게시물 삭제 컨트롤러 입니다
+ */
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
