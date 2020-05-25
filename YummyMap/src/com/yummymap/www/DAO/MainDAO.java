@@ -1,5 +1,13 @@
 package com.yummymap.www.DAO;
 
+/**
+ *  이 클래스는 index화면의 모든 Dao작업을 전담하는 클래스입니다.
+ *  
+ *  @author	김종형
+ *  @since	2020/05/25
+ *  @see	com.yummymap.www.sql.MainSQL
+ */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,13 +35,17 @@ public class MainDAO {
 		msql = new MainSQL();
 	}
 	// 메뉴검색시 해당 식당 리스트를 가져오는 메소드입니다.
-	public List<ResVO> getList(String str) {
+	// 파라미터로 키워드와, 유저아이디를 받습니다.
+	// 유저가 비로그인시 기본값(no)을 전달합니다.
+	// 반환값은 식당vo를 담은 List입니다.
+	public List<ResVO> getList(String str, String userID) {
 		List<ResVO> list = new ArrayList<ResVO>();
 		con = db.getConnection();
 		String sql = msql.getSQL(msql.SEL_RES);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setString(1, str);
+			pstmt.setString(1, userID);
+			pstmt.setString(2, str);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ResVO vo = new ResVO();
@@ -47,6 +59,7 @@ public class MainDAO {
 				vo.setMenuList();
 				double avg = getResAVG(resno);
 				vo.setAvg(avg);
+				vo.setIspick(rs.getString("ispick"));
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -195,5 +208,91 @@ public class MainDAO {
 		}
 		return cnt;
 	}
-
+	// 찜 추가해주는 메소드입니다.
+	// 파라미터로 아이디, 식당키값을 받습니다.
+	// 반환값은 성공0, 실패1을 반환합니다.
+	public int addMyRes(String userID, int resno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.ADD_MY_RES);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, resno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	// 찜 삭제해주는 메소드입니다.
+	// 파라미터로 아이디, 식당키값을 받습니다.
+	// 반환값은 성공0, 실패1을 반환합니다.
+	public int removeMyRes(String userID, int resno) {
+		int cnt =0;
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.REMOVE_MY_RES);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, resno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	// 유저가 해당 식당을 찜 했는지 여부를 확인해주는 메소드입니다.
+	// 파라미터로 아이디, 식당키값을 받습니다.
+	// 해당 식당을 이미 찜 했다면 반환값 1, 그렇지 않다면 0을 반환합니다.
+	public int isPickedMyRes(String userID, int resno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.IS_PICKED_MY_RES);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, resno);
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	
+	// 유저가 픽한 모든 식당키값을 가져오는 메소드입니다.
+	// 파라미터로 유저ID를 받습니다.
+	// 반환값은 식당 키값을 담은 List입니다.
+	public List<Integer> getMyPickList(String userID) {
+		List<Integer> myPickList = new ArrayList<Integer>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.GET_MY_PICK_LIST);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				myPickList.add(rs.getInt("resno"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return myPickList;
+	}
 }

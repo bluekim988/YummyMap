@@ -169,9 +169,16 @@
                     <a class="list-item-sub t2color">${menu}</a>
                     </c:forEach>
                 </div>
+                <c:if test="${sid != null && resData.ispick == 'N'}">
                 <div class="list-item-like">
-                    <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
+                    <p class="heart pickRes" id="${resData.resno}"><i class="far fa-heart " ></i> </p>
                 </div>
+                </c:if>
+                <c:if test="${sid != null && resData.ispick == 'Y'}">
+                <div class="list-item-like">
+                    <p class="heart pickRes" id="${resData.resno}"><i class="fas fa-heart"></i></p>
+                </div>
+                </c:if>
             </div>
             </c:forEach>
         </div>
@@ -205,7 +212,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bizinfo_area">
+                <div class="bizinfo_area mb-5">
                     <div class="list_bizinfo">
                         <div class="list_item list_item_biztel"><span class="tit" aria-label="전화" role="img"><svg
                                     class="icon" role="presentation" version="1.1" width="20" height="20"
@@ -287,17 +294,6 @@
 <script type="text/javascript" src="../js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-	//하트 이벤트처리 입니다.
-    $(".heart").click(function () {
-        if ($(this).hasClass("liked")) {
-            $(this).html('<i class="far fa-heart" aria-hidden="true"></i>');
-            $(this).removeClass("liked");
-        } else {
-            $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
-            $(this).addClass("liked");
-        }
-    });
-	
 	//로그인 여부를 확인합니다.
 	 let userid = '${sid}';
 	 if(!userid) {
@@ -323,6 +319,10 @@ $(document).ready(function () {
 			 alert('로그인을 진행해주세요');
 			 return;
 		 }
+		 if(!star_num){
+			 alert('평점을 선택해주세요');
+			 return;
+		 }
 		console.log(star_num); 
 		 let rtxt = $('#r-txt').val();
 		 let res_no = $(this).attr('id');
@@ -337,6 +337,25 @@ $(document).ready(function () {
 			
         }
      });
+		
+	//찜(하트) 비동기 처리입니다.
+	$('.pickRes').click(function(){
+		let resNo = $(this).attr('id');
+		$.ajax({
+			url:'/YummyMap/main/pickMyRes.mmy',
+			type:'post',
+			dataType:'json',
+			data:{
+				'resNo':resNo
+			},
+			success:function(data){
+				let success_result = data.result;
+				console.log(success_result);
+				location.reload();
+			}
+		});
+
+	});
 
 
 });

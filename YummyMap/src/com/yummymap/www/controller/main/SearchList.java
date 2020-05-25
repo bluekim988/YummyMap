@@ -14,8 +14,13 @@ public class SearchList implements MmyController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		String str = req.getParameter("q");
+		String userID = "no";
+		String userID_param = (String)req.getSession().getAttribute("sid");
+		if(userID_param != null) {
+			userID = userID_param;
+		}
 		MainDAO dao = new MainDAO();
-		List<ResVO> list = dao.getList(str);
+		List<ResVO> list = dao.getList(str, userID);
 		for(int i=0; i<list.size(); i++) {
 			ResVO rvo = list.get(i);
 			int resno = rvo.getResno();
@@ -24,6 +29,7 @@ public class SearchList implements MmyController {
 		}
 		req.setAttribute("list", list);
 		String view = "/main_1.jsp";
+
 		return view;
 	}
 
