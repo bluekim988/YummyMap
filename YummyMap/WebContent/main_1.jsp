@@ -176,14 +176,10 @@
                     </c:forEach>
                 </div>
                 <div class="list-item-like">
-                    <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
+                    <a href="/YummyMap/main/pickMyRes.mmy" class="heart"><i class="far fa-heart " aria-hidden="true"></i> </a>
                 </div>
             </div>
          	</c:forEach>
-		<!-- 사이드 리스트 아이템 끝 -->
-        <!-- 사이드 리스트 아이템 시작 -->
-
-
 		<!-- 사이드 리스트 아이템 끝 -->
         </div>
     </div>
@@ -193,18 +189,15 @@
         <!-- 이미지리스트 아이템 시작 -->
         	<c:forEach var="data2" items="${list}">
             <div class="orange-line res-item" id="${data2.resno}">
-                <div class="text-right">
+                <div class="text-right pb-1">
                     <div class="imgdiv">
                         <img src="/YummyMap/resimg/${data2.imgList.get(0)}" >
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
                             ${data2.resname}[${data2.avg}]
                         </div>
                     </div>
-                    <div class="list-item-like mt-1 mr-2">
-                        <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                    </div>
                 </div>
-                <div class="text-left ml-2">
+                <div class="text-left ml-2 pt-4">
                     <p id="star_grade">
                     	<c:forEach var="star" begin="1" end="${data2.avg}">
                         <a class="fas fa-star tcolor"></a>
@@ -293,19 +286,21 @@ $(document).ready(function () {
 	  $('#logout').show();
 	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
   }
-    
-	//검색기능 비동기 이벤트입니다.
+	
+	//검색기능 이벤트입니다.
 	  $("#searchTag").keydown(function(key) {
          if (key.keyCode == 13) {
-        	let str = $('#searchTag').val();
-			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+str);
+        	let query_str = $('#searchTag').val();
+			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+query_str);
+			
          }
       });
-	
+	  let que_str = '${param.q}';
 	//상세보기 전환 이벤트입니다.
 	$('.res-item').click(function(){
 		let resno = $(this).attr('id');
-		$(location).attr('href', '/YummyMap/main/detail.mmy?r='+resno);
+		console.log(que_str);
+		$(location).attr('href', '/YummyMap/main/detail.mmy?r='+resno+'&q='+que_str);
 	});
 
 });

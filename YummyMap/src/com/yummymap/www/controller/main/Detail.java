@@ -16,6 +16,7 @@ public class Detail implements MmyController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		String resno_ = req.getParameter("r");
+		String query_str = req.getParameter("q");
 		int resno = 0;
 		try {
 			resno = Integer.parseInt(resno_);
@@ -29,12 +30,14 @@ public class Detail implements MmyController {
 		}
 		
 		MainDAO dao = new MainDAO();
+		List<ResVO> resList = dao.getList(query_str);
 		ResVO vo = dao.getResInfo(resno);
 		List<String> imgList = dao.getResImg(resno);
 		vo.setImgList(imgList);
-		List<ReviewVO> list = dao.getReviewList(resno);
+		List<ReviewVO> reviewList = dao.getReviewList(resno);
 		req.setAttribute("vo", vo);
-		req.setAttribute("list", list);
+		req.setAttribute("list", reviewList);
+		req.setAttribute("resList", resList);
 		String view = "/main_2.jsp";
 		return view;
 	}

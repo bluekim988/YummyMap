@@ -63,7 +63,7 @@
     <div class="sel-body bg-white">
         <div class="input-group-sm input-group-sm p-rel search-box">
             <label for=""><i class="fas fa-search ml-4 mt-3"></i></label>
-            <input class="ml-1 border-top-0 border-left-0 border-right-0" placeholder="  SEARCH" type="text"
+            <input class="ml-1 border-top-0 border-left-0 border-right-0" id="searchTag" placeholder="  SEARCH" type="text"
                 class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
         <div class="p-rel search-btn">
@@ -160,27 +160,20 @@
             YUMMY LIST
         </div>
         <div>
+        	<c:forEach var="resData" items="${resList}">
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
-                    <div class="list-item-title t2color">맥도날드</div>
-                    <div class="list-item-sub t2color">주소</div>
-                    <div class="list-item-sub t2color">메뉴</div>
+                    <div class="list-item-title t2color">${resData.resname}</div>
+                    <div class="list-item-sub t2color">${resData.addr}</div>
+                    <c:forEach var="menu" items="${resData.menuList}">
+                    <a class="list-item-sub t2color">${menu}</a>
+                    </c:forEach>
                 </div>
                 <div class="list-item-like">
                     <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
                 </div>
             </div>
-            <div class="ml-3 mt-3 list-item">
-                <div class="list-item-info">
-                    <div class="list-item-title t2color">맥도날드</div>
-                    <div class="list-item-sub t2color">주소</div>
-                    <div class="list-item-sub t2color">메뉴</div>
-                </div>
-                <div class="list-item-like">
-                    <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
-                </div>
-            </div>
-
+            </c:forEach>
         </div>
     </div>
     <!--side nav 마지막입니다-->
@@ -281,7 +274,7 @@
 				            ${rdata.starnum}점
 				        </div>
 				        <c:if test="${sid == rdata.id}">
-				        <div class="pl-3 "><a href="/YummyMap/main/removeReview.mmy" class="badge badge-danger">삭제</a></div>
+				        <div class="pl-3 "><a href="/YummyMap/main/removeReview.mmy?revno=${rdata.revno}&resno=${vo.resno}" class="badge badge-danger">삭제</a></div>
 				        </c:if>
 				    </div>
 				    </c:forEach>
@@ -336,8 +329,14 @@ $(document).ready(function () {
 		 $(location).attr('href', '/YummyMap/main/reviewProc.mmy?s='+star_num+'&t='+rtxt+'&r='+res_no);
 	 });
 	 
-	 //리뷰글 삭제버튼 이벤트처리
-	 
+		//검색기능 이벤트입니다.
+	  $("#searchTag").keydown(function(key) {
+        if (key.keyCode == 13) {
+       	let query_str = $('#searchTag').val();
+			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+query_str);
+			
+        }
+     });
 
 
 });

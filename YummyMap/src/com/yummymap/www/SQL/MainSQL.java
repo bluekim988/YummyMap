@@ -7,6 +7,7 @@ public class MainSQL {
 	public final int SEL_RES_AVG = 1004;
 	public final int SEL_RES_REVIEW = 1005;
 	public final int ADD_REVIEW = 1006;
+	public final int REMOVE_REVIEW = 1007;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -58,6 +59,13 @@ public class MainSQL {
 			break;
 		case ADD_REVIEW:
 			buff.append("INSERT INTO review VALUES (getRevno.nextval, ?, ?, ?, ? , sysdate, 'Y') ");
+			break;
+		case REMOVE_REVIEW:
+			buff.append("UPDATE review ");
+			buff.append("SET ");
+			buff.append("isshow = 'N' ");
+			buff.append("WHERE ");
+			buff.append("revno = ? ");
 			break;
 		}
 		return buff.toString();
