@@ -35,7 +35,7 @@ public class MailUtil {
 		});
 	}
 	
-	public int getSend(String from) {
+	public int getSend(String from ,String mtxt) {
 		int cnt = 0;
 		String getFrom = from;
 		
@@ -43,11 +43,11 @@ public class MailUtil {
 			MimeMessage msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(user));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(getFrom));
-	
-			msg.setSubject("호로로로로"); //메일 제목
-			msg.setText("정상 발송 테스트 메일"); //메일 본문
 			
-			Transport.send(msg);
+			msg.setSubject("회원가입 인증 메일 발송"); //메일 제목
+			msg.setContent(mtxt,"text/html;charset=UTF-8"); //메일 본문
+			
+			Transport.send(msg);	
 			cnt = 1;
 		} catch (Exception e) {
 			e.printStackTrace();

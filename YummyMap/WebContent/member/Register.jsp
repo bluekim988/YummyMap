@@ -126,8 +126,9 @@
           </div>
           <div class="mt-2 d-none" id="mailckBox">
           <input class="p-1" type="text" id="malick" name="mailck" placeholder="인증번호를 입력하세요">
+           <span id="mailckBox"><button type="button" class="btn btn-secondary btn-sm d-inline-block mb-1" id="eokbtn">이메일 인증 확인</button></span>
           </div>
-          <small id="pwmsg" class="text-danger">이메일 인증을 진행해주세요</small>
+          <small id="mailmsg" class="text-danger" >이메일 인증을 진행해주세요</small>
         </div>
       </form>
       <div class="btn-box">
