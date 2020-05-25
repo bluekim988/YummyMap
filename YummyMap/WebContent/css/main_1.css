@@ -39,16 +39,6 @@
             left: 230px;
         }
 
-        .b-subtitle {
-            position: absolute;
-            top: 120px;
-            left: 300px;
-            width: 200px;
-            height: 70px;
-            font-size: 20pt;
-            color: rgb(248, 187, 168);
-        }
-
         .nav-btn {
             position: absolute;
             top: 10px;

@@ -93,11 +93,11 @@ public class MainSQL {
 			break;
 		case GET_MY_PICK_LIST:
 			buff.append("SELECT ");
-			buff.append("resno ");
+			buff.append("r.resno resno, resname, address, restel, subno, menu, NVL(ispick, 'N') ispick ");
 			buff.append("FROM ");
-			buff.append("myres ");
+			buff.append("res r, (SELECT resno, ispick FROM myres WHERE mid = ? and ispick='Y') m ");
 			buff.append("WHERE ");
-			buff.append("ispick = 'Y' AND mid = ? ");
+			buff.append("r.resno = m.resno ");
 			break;
 		}
 		return buff.toString();

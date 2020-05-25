@@ -274,9 +274,9 @@ public class MainDAO {
 	
 	// 유저가 픽한 모든 식당키값을 가져오는 메소드입니다.
 	// 파라미터로 유저ID를 받습니다.
-	// 반환값은 식당 키값을 담은 List입니다.
-	public List<Integer> getMyPickList(String userID) {
-		List<Integer> myPickList = new ArrayList<Integer>();
+	// 반환값은 식당vo를 담은 List입니다.
+	public List<ResVO> getMyPickList(String userID) {
+		List<ResVO> myPickList = new ArrayList<ResVO>();
 		con = db.getConnection();
 		String sql = msql.getSQL(msql.GET_MY_PICK_LIST);
 		pstmt = db.getPreparedStatement(con, sql);
@@ -284,7 +284,19 @@ public class MainDAO {
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				myPickList.add(rs.getInt("resno"));
+				ResVO resVo = new ResVO();
+				int resNo = rs.getInt("resno");
+				resVo.setResno(resNo);
+				resVo.setResname(rs.getString("resname"));
+				resVo.setAddr(rs.getString("address"));
+				resVo.setTel(rs.getString("restel"));
+				resVo.setSubno(rs.getInt("subno"));
+				resVo.setMenu(rs.getString("menu"));
+				resVo.setMenuList();
+				double avg = getResAVG(resNo);
+				resVo.setAvg(avg);
+				resVo.setIspick(rs.getString("ispick"));
+				myPickList.add(resVo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
