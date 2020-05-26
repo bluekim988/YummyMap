@@ -109,6 +109,27 @@
                 </c:if>
             </div>
          	</c:forEach>
+			<c:forEach var="resList" items="${topReviewResList}"> 
+            <div class="ml-3 mt-3 list-item">
+                <div class="list-item-info">
+                    <div class="list-item-title t2color">${resList.resname}</div>
+                    <div class="list-item-sub text-muted">${resList.addr}</div>
+                    <c:forEach var="menu" items="${resList.menuList}">
+                    <a class="list-item-sub text-muted">${menu}</a>
+                    </c:forEach>
+                </div>
+                <c:if test="${sid != null && resList.ispick == 'N'}">
+                <div class="list-item-like">
+                    <p class="heart pickRes" id="${resList.resno}"><i class="far fa-heart " ></i> </p>
+                </div>
+                </c:if>
+                <c:if test="${sid != null && resList.ispick == 'Y'}">
+                <div class="list-item-like">
+                    <p class="heart pickRes" id="${resList.resno}"><i class="fas fa-heart"></i></p>
+                </div>
+                </c:if>
+            </div>
+         	</c:forEach>
 		<!-- 사이드 리스트 아이템 끝 -->
         </div>
     </div>

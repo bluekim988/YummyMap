@@ -371,4 +371,38 @@ public class MainDAO {
 		}
 		return resList;
 	}
+	// 카테고리에 해당하는 모든 식당 리스트를 가져옵니다
+	// 매개변수로 카테고리이름을 받습니다.
+	// 반환값은 식당VO를 담은 List입니다.
+	public List<ResVO> getListWithCate(String category){
+		List<ResVO> resList = new ArrayList<ResVO>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_RESLIST_WITH_CATEGORY);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, category);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ResVO resVo = new ResVO();
+				resVo.setResno(rs.getInt("resno"));
+				resVo.setResname(rs.getString("resname"));
+				resVo.setAddr(rs.getString("address"));
+				resVo.setCatno(rs.getInt("catno"));
+				resVo.setTel(rs.getString("restel"));
+				resVo.setSubno(rs.getInt("subno"));
+				resVo.setMenu(rs.getString("menu"));
+				resVo.setMenuList();
+				resVo.setReviewCount(rs.getInt("count"));
+				resVo.setAvg(rs.getDouble("avg"));
+				resList.add(resVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return resList;
+	}
 }

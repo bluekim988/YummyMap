@@ -24,6 +24,7 @@ public class MainSQL {
 	public final int ADD_RES = 1012;
 	public final int SEL_AVGTOP_RES_LIST = 2001;
 	public final int SEL_REVIEWTOP_RES_LIST = 2002;
+	public final int SEL_RESLIST_WITH_CATEGORY = 2003;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -148,6 +149,15 @@ public class MainSQL {
 			buff.append("WHERE ");
 			buff.append("rw BETWEEN 1 and 3 ");    
 			break;    
+		case SEL_RESLIST_WITH_CATEGORY:
+			buff.append("SELECT ");
+			buff.append(" r.resno resno,resname, address, catno, restel, subno, menu, NVL(count, 0) count,NVL( avg, 0) avg ");
+			buff.append("FROM ");
+			buff.append("res r, ( SELECT resno, count(*) count, avg(starnum) avg FROM review WHERE    isshow = 'Y' GROUP BY    resno   ) d ");
+			buff.append("WHERE ");
+			buff.append("r.resno = d.resno(+) ");
+			buff.append("AND catno = (SELECT catno FROM category WHERE category = ? ) ");
+			break;
 		}
 		return buff.toString();
 	}

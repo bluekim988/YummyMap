@@ -71,94 +71,19 @@
             <input id="searchTag" class="ml-1 border-top-0 border-left-0 border-right-0" placeholder="  SEARCH" type="text"
                 class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
-        <div class="p-rel search-btn">
-            <button type="button" id="sub_btn" class="btn btn-warning btn-sm" data-toggle="modal"
-                data-target="#staticBackdrop">
-                위치선택
-            </button>
+        <form class="p-rel search-btn" style="width: 150px;" action="/YummyMap/main/selectCateList.mmy" method="get" id="cateFrm">
+            <select class="form-control form-control-sm border-top-0 border-left-0 border-right-0" name="category" id="cateBox">
+			  	<option selected id="cateBoxStr">CATEGORY</option>
+			  	<c:forEach var="cateList" items="${cateList}">
+			  	<option value="${cateList}">${cateList}</option>
+			  	</c:forEach>
+			</select>
+        </form>
+        <div class="text-right t2color bold	" id="cateStr" style="position: absolute; top: 22px; left: 1170px; width: 100px;">
+        	
         </div>
     </div>
     <!--검색창 영역 마지막입니다-->
-    <!--모달 페이지 시작입니다-->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title ml-4 md_ft2" id="staticBackdropLabel">위치 선택 </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-3 ml-4 mr-4 md_cl">
-                                <table class="table table-hover md_ft">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">호선</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9호선</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-6 md_cl1 ml-3">
-                                <table class="table table-hover md_ft1">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">역이름</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th class="sub-item" scope="row">신림역</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="sub-item" scope="row">구로디지털단지역</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary md_btn">선택</button>
-                    <button type="button" class="btn btn-secondary md_btn1" data-dismiss="modal">취소</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
     <div class="nav-side bg-white" style="overflow:auto; overflow-x:hidden;">
         <div class="t2color list_title text-left" >
@@ -346,6 +271,16 @@ $(document).ready(function () {
 		}
 		$(location).attr('href', '/YummyMap/main/myList.mmy');
 	});
+	
+	//카테고리 선택 이벤트입니다.
+	$('#cateBox').change(function(){
+		$('#cateFrm').submit();
+	});
+	
+	let cate_param = '${param.category}';
+	if(cate_param) {
+		$('#cateStr').text(cate_param);
+	}
 
 });
     
