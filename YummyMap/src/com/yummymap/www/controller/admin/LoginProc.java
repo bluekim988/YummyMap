@@ -24,7 +24,6 @@ public class LoginProc implements MmyController {
 		AdminDAO adao = new AdminDAO();
 		
 		int cnt = adao.selAdmin(id, pw);
-		System.out.println(cnt);
 		if(cnt == 0) {
 //			req.setAttribute("CNT", cnt);
 			

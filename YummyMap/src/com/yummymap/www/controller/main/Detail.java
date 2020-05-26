@@ -17,6 +17,11 @@ public class Detail implements MmyController {
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		String resno_ = req.getParameter("r");
 		String query_str = req.getParameter("q");
+		String userID = "no";
+		String userID_param = (String)req.getSession().getAttribute("sid");
+		if(userID_param != null) {
+			userID = userID_param;
+		}
 		int resno = 0;
 		try {
 			resno = Integer.parseInt(resno_);
@@ -30,7 +35,7 @@ public class Detail implements MmyController {
 		}
 		
 		MainDAO dao = new MainDAO();
-		List<ResVO> resList = dao.getList(query_str);
+		List<ResVO> resList = dao.getList(query_str, userID);
 		ResVO vo = dao.getResInfo(resno);
 		List<String> imgList = dao.getResImg(resno);
 		vo.setImgList(imgList);

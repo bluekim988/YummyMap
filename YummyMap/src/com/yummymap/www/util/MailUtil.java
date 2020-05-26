@@ -28,7 +28,6 @@ public class MailUtil {
 		prop.put("mail.smtp.ssl.enable","true");
 		prop.put("mail.smtp.starttls.enable","true");
 		prop.put("mail.debug","true");
-		System.out.println("***************************");
 		session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(user, pass);
@@ -36,20 +35,19 @@ public class MailUtil {
 		});
 	}
 	
-	public int getSend(String from) {
+	public int getSend(String from ,String mtxt) {
 		int cnt = 0;
-		System.out.println(from);
 		String getFrom = from;
 		
 		try {
 			MimeMessage msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(user));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(getFrom));
-	
-			msg.setSubject("호로로로로");
-			msg.setText("정상 발송 테스트 메일");
 			
-			Transport.send(msg);
+			msg.setSubject("회원가입 인증 메일 발송"); //메일 제목
+			msg.setContent(mtxt,"text/html;charset=UTF-8"); //메일 본문
+			
+			Transport.send(msg);	
 			cnt = 1;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -47,10 +47,10 @@
         .b-subtitle {
             position: absolute;
             top: 120px;
-            left: 300px;
+            left: 223px;
             width: 200px;
             height: 70px;
-            font-size: 20pt;
+            font-size: 17pt;
             color: rgb(248, 187, 168);
         }
 
@@ -89,13 +89,12 @@
         }
 
         .nav-side {
-            position: absolute;
             position: fixed;
             top: 220px;
             left: 200px;
             z-index: 3;
-            width: 200px;
-            height: 600px;
+            width: 250px;
+			height: 520px;
         }
 
         .bnone {

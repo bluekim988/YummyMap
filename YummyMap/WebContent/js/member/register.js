@@ -1,4 +1,8 @@
 $(document).ready(function () {
+	
+let mailOk;
+let mailcode=false;
+
 // 완료버튼 클릭시 이벤트를 진행합니다.
   $('#joinbtn').click(function(){
     let result = checkfrm();
@@ -25,6 +29,10 @@ $(document).ready(function () {
     }
     if($('#repw').val() != $('#pw').val()) {
     	alert('비밀번호가 일치하지 않습니다.');
+    	return;
+    }
+    if(mailcode == false){
+    	alert('이메일 인증을 진행 하세요');
     	return;
     }
     
@@ -83,7 +91,7 @@ $(document).ready(function () {
 		   $('#repwmsg').attr('class', 'text-primary' );
 	   } else {
 		   $('#repwmsg').text('비밀번가 일치하지 않습니다');
-		   $('#repwmsg').attr('class', 'text-danger' );
+		   $('#repwmsg').attr('class', 'text-danger');
 	   }
    });
 
@@ -116,5 +124,41 @@ $(document).ready(function () {
 					$('#idmsg2').show();
 			}
 		});
+  });
+  //이메일 인증 처리 
+  $('#sendmail').click(function(){
+	  let mailId = $('#email1').val();
+	  let domain = $('#email2').val();
+	  let mail = mailId + domain;
+	  alert(mail);
+	  $.ajax({
+		 url : '/YummyMap/join/mailCk.mmy',
+		 type: 'post',
+		 dataType: 'json',
+		 data: {
+			 'email' : mail
+		 },
+		 success : function(data){
+			 
+			 mailOk = data.emailCk;
+
+		 },error : function(){
+			alert("통신 오류") 
+		 }
+	  });
+	 $('#mailckBox').removeClass('d-none');
+  });
+  //이메일 인증 코드값 확인 처리
+  $('#eokbtn').click(function(){
+	 let mailo = $('#malick').val();
+	 if(mailo == mailOk){
+		 $('#mailmsg').removeClass('text-danger');
+		 $('#mailmsg').css('color','blue');
+		 $('#mailmsg').html('메일 인증이 완료 되었습니다');
+		 $('#mailckBox').addClass('d-none');
+		 mailcode = true;
+	 }else{
+		 $('#mailmsg').html('인증 번호가 틀립니다 다시 인증해주세요');
+	 }
   });
 });

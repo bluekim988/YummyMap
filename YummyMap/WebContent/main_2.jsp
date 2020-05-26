@@ -23,7 +23,7 @@
             <div class="member_nav text-right mt-3">
                 <div class="ctQZg">
                     <div class="_47KiJ">
-                        <div class="XrOey"><a class="_0ZPOP kIKUG _4700r " href="#"><svg aria-label="활동 피드"
+                        <div class="XrOey"><a class="_0ZPOP kIKUG _4700r "  id="myListIcon"><svg aria-label="활동 피드"
                                     class="_8-yf5 " fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                                     <path
                                         d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z">
@@ -48,6 +48,7 @@
         <a class="navbar-brand tcolor logo" href="/YummyMap/main.mmy" id="">
             YUMMY MAP
         </a>
+        <div class="b-subtitle text-left"><p class="pt-3">상세정보페이지</p></div>
         <div class=" nav-item-1 d-flex justify-content-end">
             <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" id="">
                 <i class="fas fa-gamepad"></i>
@@ -56,7 +57,6 @@
                 <i class="far fa-clipboard"></i>
             </a>
         </div>
-    </div>
     </div>
     <!-- nav 마지막 입니다-->
     <!--검색창 영역입니다-->
@@ -155,7 +155,7 @@
     </div>
     <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
-    <div class="nav-side">
+    <div class="nav-side" style="overflow:auto; overflow-x:hidden;">
         <div class="tcolor list_title text-left">
             YUMMY LIST
         </div>
@@ -169,9 +169,16 @@
                     <a class="list-item-sub t2color">${menu}</a>
                     </c:forEach>
                 </div>
+                <c:if test="${sid != null && resData.ispick == 'N'}">
                 <div class="list-item-like">
-                    <span class="heart"><i class="far fa-heart " aria-hidden="true"></i> </span>
+                    <p class="heart pickRes" id="${resData.resno}"><i class="far fa-heart " ></i> </p>
                 </div>
+                </c:if>
+                <c:if test="${sid != null && resData.ispick == 'Y'}">
+                <div class="list-item-like">
+                    <p class="heart pickRes" id="${resData.resno}"><i class="fas fa-heart"></i></p>
+                </div>
+                </c:if>
             </div>
             </c:forEach>
         </div>
@@ -199,13 +206,10 @@
                         </div>
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
                             ${vo.resname}
-                            <span class="heart"><i class="far fa-heart" aria-hidden="true"></i> </span>
-                            <div class="list-item-like heart">
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="bizinfo_area">
+                <div class="bizinfo_area mb-5">
                     <div class="list_bizinfo">
                         <div class="list_item list_item_biztel"><span class="tit" aria-label="전화" role="img"><svg
                                     class="icon" role="presentation" version="1.1" width="20" height="20"
@@ -287,17 +291,6 @@
 <script type="text/javascript" src="../js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-	//하트 이벤트처리 입니다.
-    $(".heart").click(function () {
-        if ($(this).hasClass("liked")) {
-            $(this).html('<i class="far fa-heart" aria-hidden="true"></i>');
-            $(this).removeClass("liked");
-        } else {
-            $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
-            $(this).addClass("liked");
-        }
-    });
-	
 	//로그인 여부를 확인합니다.
 	 let userid = '${sid}';
 	 if(!userid) {
@@ -323,6 +316,10 @@ $(document).ready(function () {
 			 alert('로그인을 진행해주세요');
 			 return;
 		 }
+		 if(!star_num){
+			 alert('평점을 선택해주세요');
+			 return;
+		 }
 		console.log(star_num); 
 		 let rtxt = $('#r-txt').val();
 		 let res_no = $(this).attr('id');
@@ -337,6 +334,34 @@ $(document).ready(function () {
 			
         }
      });
+		
+	//찜(하트) 비동기 처리입니다.
+	$('.pickRes').click(function(){
+		let resNo = $(this).attr('id');
+		$.ajax({
+			url:'/YummyMap/main/pickMyRes.mmy',
+			type:'post',
+			dataType:'json',
+			data:{
+				'resNo':resNo
+			},
+			success:function(data){
+				let success_result = data.result;
+				console.log(success_result);
+				location.reload();
+			}
+		});
+
+	});
+	
+	//마이리스트 이벤트 처리 입니다.
+	$('#myListIcon').click(function(){
+		if(!userid) {
+			alert('로그인을 진행해주세요');
+			return;
+		}
+		$(location).attr('href', '/YummyMap/main/myList.mmy');
+	});
 
 
 });

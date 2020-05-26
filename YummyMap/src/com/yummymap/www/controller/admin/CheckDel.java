@@ -32,7 +32,6 @@ public class CheckDel implements MmyController {
 		}
 		
 		AdminDAO adao = new AdminDAO();
-		int cnt = 0;
 		
 		for(int txtnos : txtno) {
 			adao.delBoard(txtnos);
