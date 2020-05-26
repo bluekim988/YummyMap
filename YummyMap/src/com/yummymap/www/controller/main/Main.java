@@ -23,9 +23,16 @@ public class Main implements MmyController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
+		String str = req.getParameter("q");
+		String userID = "no";
+		String userID_param = (String)req.getSession().getAttribute("sid");
+		if(userID_param != null) {
+			userID = userID_param;
+		}
+		
 		MainDAO mainDao = new MainDAO();
 		// 평균점수 탑3 리스트를 가져옵니다.
-		List<ResVO> topAvgResList = mainDao.getAvgTopResList();
+		List<ResVO> topAvgResList = mainDao.getAvgTopResList(userID);
 		for(int i=0; i<topAvgResList.size(); i++) {
 			ResVO rvo = topAvgResList.get(i);
 			int resno = rvo.getResno();
@@ -33,7 +40,7 @@ public class Main implements MmyController {
 			rvo.setImgList(imgList);
 		}
 		//리뷰 탑3 리스트를 가져옵니다.
-		List<ResVO> topReviewResList = mainDao.getTopReviewResList();
+		List<ResVO> topReviewResList = mainDao.getTopReviewResList(userID);
 		for(int i=0; i<topReviewResList.size(); i++) {
 			ResVO rvo = topReviewResList.get(i);
 			int resno = rvo.getResno();

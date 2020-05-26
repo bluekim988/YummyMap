@@ -82,27 +82,25 @@
             YUMMY LIST
         </div>
         <div>
-        	<c:forEach var="resData" items="${resList}">
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
-                    <div class="list-item-title t2color">${resData.resname}</div>
-                    <div class="list-item-sub text-muted">${resData.addr}</div>
-                    <c:forEach var="menu" items="${resData.menuList}">
+                    <div class="list-item-title t2color">${vo.resname}</div>
+                    <div class="list-item-sub text-muted">${vo.addr}</div>
+                    <c:forEach var="menu" items="${vo.menuList}">
                     <a class="list-item-sub text-muted">${menu}</a>
                     </c:forEach>
                 </div>
-                <c:if test="${sid != null && resData.ispick == 'N'}">
+                <c:if test="${sid != null && vo.ispick == 'N'}">
                 <div class="list-item-like">
-                    <p class="heart pickRes" id="${resData.resno}"><i class="far fa-heart " ></i> </p>
+                    <p class="heart pickRes" id="${vo.resno}"><i class="far fa-heart " ></i> </p>
                 </div>
                 </c:if>
-                <c:if test="${sid != null && resData.ispick == 'Y'}">
+                <c:if test="${sid != null && vo.ispick == 'Y'}">
                 <div class="list-item-like">
-                    <p class="heart pickRes" id="${resData.resno}"><i class="fas fa-heart"></i></p>
+                    <p class="heart pickRes" id="${vo.resno}"><i class="fas fa-heart"></i></p>
                 </div>
                 </c:if>
             </div>
-            </c:forEach>
         </div>
     </div>
     <!--side nav 마지막입니다-->
@@ -127,7 +125,7 @@
                             </p>
                         </div>
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            ${vo.resname}
+                            ${vo.resname}[${vo.avg}]
                         </div>
                     </div>
                 </div>
@@ -172,8 +170,11 @@
 
                         </div>
                     </div>
-                    <div class="rv_tt"> RIVIEW </div>
-                    	<a class="pr-2">별점선택</a>
+                    <div class="d-flex">
+	                    <div class="rv_tt "> RIVIEW</div>
+	                    <small class="text-muted pl-2 ">리뷰(${vo.reviewCount})</small>
+                    </div>
+                    <a class="pr-2">별점선택</a>
                     <div id="star_grade">
                     	<a class="fas fa-star " id="1"></a>
                     	<a class="fas fa-star " id="2"></a>
