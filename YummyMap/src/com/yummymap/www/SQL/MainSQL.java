@@ -1,5 +1,14 @@
 package com.yummymap.www.SQL;
 
+/**
+ * 이 클래스는 main, index JSP페이지에서 데이터베이스 작업에 요구되는
+ * 모든 SQL 질의명령을 전담하는 클래스이다.
+ * 
+ * @author	김종형
+ * @since	2020/05/26
+ *
+ */
+
 public class MainSQL {
 	public final int SEL_RES = 1001;
 	public final int SEL_RES_INFO = 1002;
@@ -13,6 +22,7 @@ public class MainSQL {
 	public final int IS_PICKED_MY_RES = 1010;
 	public final int GET_MY_PICK_LIST = 1011;
 	public final int ADD_RES = 1012;
+	public final int SEL_AVGTOP_RES_LIST = 2001;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -99,6 +109,25 @@ public class MainSQL {
 			buff.append("res r, (SELECT resno, ispick FROM myres WHERE mid = ? and ispick='Y') m ");
 			buff.append("WHERE ");
 			buff.append("r.resno = m.resno ");
+			break;
+		case SEL_AVGTOP_RES_LIST:
+			buff.append("SELECT ");
+			buff.append("rw, resno, resname, address, catno, restel, subno, menu, TRUNC(avg, 1) avg ");
+			buff.append("FROM( ");
+			buff.append("SELECT ");
+			buff.append("rownum rw, resno, resname, address, catno, restel, subno, menu, avg ");
+			buff.append("FROM( ");
+			buff.append("SELECT ");
+			buff.append("  r.resno resno, resname, address, catno, restel, subno, menu, avg ");
+			buff.append("FROM ");
+			buff.append(" res r, (  SELECT  resno ,avg(starnum) avg FROM   review GROUP BY  resno ) r2     ");
+			buff.append("WHERE ");
+			buff.append(" r.resno = r2.resno ");
+			buff.append("AND isshow = 'Y' ");
+			buff.append("ORDER BY ");
+			buff.append(" avg desc  ) ) ");
+			buff.append("WHERE ");
+			buff.append("rw BETWEEN 1 and 3 ");
 			break;
 		}
 		return buff.toString();
