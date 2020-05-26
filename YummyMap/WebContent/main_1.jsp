@@ -224,7 +224,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-	/*
+	
 	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 	let options;
@@ -250,7 +250,7 @@ $(document).ready(function () {
 	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	function placesSearchCB (data, status, pagination) {
 	    if (status === kakao.maps.services.Status.OK) {
-	    	*/
+	    	
 			/* 
 				##넘어오는 데이터 샘플
 				address_name: "경기 안양시 동안구 비산동 1101-2"
@@ -265,25 +265,40 @@ $(document).ready(function () {
 				road_address_name: "경기 안양시 동안구 동안로 194"
 				x: "126.949369837888"
 				y: "37.3959425465037" */
-/*
+
 		console.log(data);
+		
+		let resList = new Array();
+		let test = [1,2,3,4,5];
 		// 있으면 다음 페이지를 검색한다.
 		for(let i=0; i<data.length; i++){
-			let res_name = data[i].place_name;
-			let res_addr = data[i].address_name;
-			let res_cate = data[i].category_name;
-			let res_tel = data[i].phone;
-			console.log(i+'##########');
-			console.log(res_name);
-			console.log(res_addr);
-			console.log(res_cate);
-			console.log(res_tel);
-			console.log(i+'##########');
+			resList[i] = {
+					'res_name':data[i].place_name,
+					'res_addr':data[i].address_name,
+					'res_cate':data[i].category_name,
+					'res_tel':data[i].phone
+			}
 		}
 			if(pagination.hasNextPage){
 				pagination.nextPage();
 			}
 			console.log(pagination.hasNextPage);
+			myAjax(resList);
+			function myAjax(list){
+				var resList2 = list
+			    $.ajax({
+			    	method      : 'POST',
+			    	url:'/YummyMap/main/resDataProc.mmy',
+		    	    traditional : true,
+			    	dataType:'json',
+			    	data:{
+			    		'resList':resList2
+			    	},
+			    	success:function(data){
+			    		console.log(data.result);
+			    	}
+			    });
+			}
 	    } 
 
 
@@ -295,7 +310,7 @@ $(document).ready(function () {
      		ps.keywordSearch(query_str, placesSearchCB, options); 
          }
 	  });
-    */
+
   //로그인 여부를 확인합니다.
   let userid = '${sid}';
   if(!userid) {
@@ -307,7 +322,7 @@ $(document).ready(function () {
 	  $('#logout').show();
 	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
   }
-
+/*
 	//검색기능 이벤트입니다.
 	  $("#searchTag").keydown(function(key) {
          if (key.keyCode == 13) {
@@ -315,7 +330,7 @@ $(document).ready(function () {
 			$(location).attr('href', '/YummyMap/main/searchList.mmy?q='+query_str);
          }
       });
-
+*/
 	  let que_str = '${param.q}';
 	//상세보기 전환 이벤트입니다.
 	$('.res-item').click(function(){
