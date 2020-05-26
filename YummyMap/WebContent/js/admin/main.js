@@ -1,3 +1,8 @@
+/**
+@author 유태희
+@since 2020.05.23
+ 	이 JS는 관리자 회원관리 페이지에 사용할 JavaScript 입니다
+*/
 $(function(){
 	let mno;
 	$('.obtn').click(function(){

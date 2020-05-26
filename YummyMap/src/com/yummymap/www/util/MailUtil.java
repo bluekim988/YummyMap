@@ -12,9 +12,9 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 public class MailUtil {
-	Session session;
-	String user;
-	String pass;
+	private Session session;
+	private String user;
+	private String pass;
 
 	public MailUtil(String id , String pw) {
 		String host = "smtp.naver.com";
@@ -35,7 +35,8 @@ public class MailUtil {
 		});
 	}
 	
-	public int getSend(String from ,String mtxt) {
+	//메일 발송 전담 함수
+	public int getSend(String from ,String title , String mtxt) {
 		int cnt = 0;
 		String getFrom = from;
 		
@@ -44,7 +45,7 @@ public class MailUtil {
 			msg.setFrom(new InternetAddress(user));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(getFrom));
 			
-			msg.setSubject("회원가입 인증 메일 발송"); //메일 제목
+			msg.setSubject(title); //메일 제목
 			msg.setContent(mtxt,"text/html;charset=UTF-8"); //메일 본문
 			
 			Transport.send(msg);	

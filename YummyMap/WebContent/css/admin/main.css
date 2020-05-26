@@ -1,3 +1,8 @@
+/**
+@author 유태희
+@since 2020.05.23
+ 	이 CSS는 관리자 회원정보 관리 페이지에 사용할 CSS 입니다
+*/
 .bar{
 	border-bottom: 3px solid rgb(255, 165, 69);
 }

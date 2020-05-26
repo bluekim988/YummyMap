@@ -4,6 +4,8 @@ public class JoinSQL {
 	public final int CHECK_LOGIN = 1001;
 	public final int ADD_MEMB = 1002;
 	public final int ID_CHECK = 1003;
+	public final int ID_SEARCH = 1004;
+	public final int PASS_SEARCH = 1005;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -33,6 +35,26 @@ public class JoinSQL {
 			buff.append("member ");
 			buff.append("WHERE ");
 			buff.append("mid=? ");
+			break;
+		case ID_SEARCH:
+			buff.append("SELECT "); 
+			buff.append("    RPAD(substr(mid,1,3),length(mid),'*') mid "); 
+			buff.append("FROM "); 
+			buff.append("    member "); 
+			buff.append("WHERE "); 
+			buff.append("    mname = ? "); 
+			buff.append("    and memail = ? "); 
+			buff.append("    and grade = 'M' ");
+			break;
+		case PASS_SEARCH:
+			buff.append("SELECT "); 
+			buff.append("    COUNT(*) cnt "); 
+			buff.append("FROM "); 
+			buff.append("    member "); 
+			buff.append("WHERE "); 
+			buff.append("    mid = ? "); 
+			buff.append("    and memail = ? "); 
+			buff.append("    and grade = 'M' ");
 			break;
 		}
 		return buff.toString();

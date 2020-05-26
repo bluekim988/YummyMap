@@ -29,7 +29,7 @@ public class AdminDAO {
 		int cnt = 0;
 		con = db.getConnection();
 		
-		String sql = asql.getSQL(asql.SEL_AD);
+		String sql = asql.getSQL(asql.SEL_ADMIN);
 		
 		pstmt = db.getPreparedStatement(con, sql);
 		
@@ -309,7 +309,7 @@ public class AdminDAO {
 	public void reMember(MemberInfoVO mvo) {
 		con = db.getConnection();
 		
-		String sql = asql.getSQL(asql.USER_RE);
+		String sql = asql.getSQL(asql.UPDATE_USER);
 		
 		pstmt = db.getPreparedStatement(con, sql);
 		
@@ -319,8 +319,7 @@ public class AdminDAO {
 			pstmt.setString(3, mvo.getMtel());
 			pstmt.setString(4, mvo.getMemail());
 			pstmt.setString(5, mvo.getIssue());
-			pstmt.setString(6, mvo.getIsshow());
-			pstmt.setInt(7, mvo.getMno());
+			pstmt.setInt(6, mvo.getMno());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -335,7 +334,7 @@ public class AdminDAO {
 	public void reMemberNopass(MemberInfoVO mvo) {
 		con = db.getConnection();
 		
-		String sql = asql.getSQL(asql.USER_RE_NOPASS);
+		String sql = asql.getSQL(asql.UPDATE_ADMIN_NOPASS);
 		
 		pstmt = db.getPreparedStatement(con, sql);
 		
@@ -344,8 +343,7 @@ public class AdminDAO {
 			pstmt.setString(2, mvo.getMtel());
 			pstmt.setString(3, mvo.getMemail());
 			pstmt.setString(4, mvo.getIssue());
-			pstmt.setString(5, mvo.getIsshow());
-			pstmt.setInt(6, mvo.getMno());
+			pstmt.setInt(5, mvo.getMno());
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -356,11 +354,11 @@ public class AdminDAO {
 		}
 		
 	}
-	//회원 수정 전담 함수(패스워드 포함)
+	//어드민 정보 수정(패스워드 포함)
 	public void reAdmin(MemberInfoVO mvo) {
 		con = db.getConnection();
 		
-		String sql = asql.getSQL(asql.ADMIN_RE);
+		String sql = asql.getSQL(asql.UPDATE_ADMIN);
 		
 		pstmt = db.getPreparedStatement(con, sql);
 		
@@ -380,11 +378,11 @@ public class AdminDAO {
 		}
 		
 	}
-	//회원 수정 전담 함수(패스워드 미 수정)
+	//어드민 수정 전담 함수(패스워드 미 수정)
 	public void reAdminNopass(MemberInfoVO mvo) {
 		con = db.getConnection();
 		
-		String sql = asql.getSQL(asql.ADMIN_RE_NOPASS);
+		String sql = asql.getSQL(asql.UPDATE_ADMIN_NOPASS);
 		
 		pstmt = db.getPreparedStatement(con, sql);
 		

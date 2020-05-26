@@ -29,7 +29,7 @@ public class MailCk implements MmyController {
 		}
 		
 		String inck = tmp.toString();
-		
+		String title = "회원가입 인증 메일 입니다";
 		StringBuffer mtxt = new StringBuffer();
 		mtxt.append("<h2>반갑습니다. <b>YummyMap</b> 입니다.</h2> ");
 		mtxt.append("<br> ");
@@ -39,7 +39,7 @@ public class MailCk implements MmyController {
 		mtxt.append("<h3>감사합니다.</h3> ");
 		
 		
-		mailsend.getSend(mail, mtxt.toString());
+		mailsend.getSend(mail, title, mtxt.toString());
 		StringBuffer buff = new StringBuffer();
 		buff.append("{ \"emailCk\":");
 		buff.append("\""+inck+"\"");

@@ -1,3 +1,8 @@
+<!-- 
+@author 유태희
+@since 2020.05.24
+ 	이 페이지는 관리자 게시글 상세보기 페이지입니다
+ -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
