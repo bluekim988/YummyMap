@@ -12,6 +12,7 @@ public class MainSQL {
 	public final int REMOVE_MY_RES = 1009;
 	public final int IS_PICKED_MY_RES = 1010;
 	public final int GET_MY_PICK_LIST = 1011;
+	public final int ADD_RES = 1012;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
