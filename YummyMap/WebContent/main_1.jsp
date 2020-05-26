@@ -160,8 +160,8 @@
     </div>
     <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
-    <div class="nav-side" style="overflow:auto; overflow-x:hidden;">
-        <div class="tcolor list_title text-left" >
+    <div class="nav-side bg-white" style="overflow:auto; overflow-x:hidden;">
+        <div class="t2color list_title text-left" >
             YUMMY LIST
         </div>
         <div id="sideitem" >
@@ -170,9 +170,9 @@
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
                     <div class="list-item-title t2color">${data.resname}</div>
-                    <div class="list-item-sub t2color">${data.addr}</div>
+                    <div class="list-item-sub text-muted">${data.addr}</div>
                     <c:forEach var="menu" items="${data.menuList}">
-                    <a class="list-item-sub t2color">${menu}</a>
+                    <a class="list-item-sub text-muted">${menu}</a>
                     </c:forEach>
                 </div>
                 <c:if test="${sid != null && data.ispick == 'N'}">
@@ -191,7 +191,7 @@
         </div>
     </div>
     <!--side nav 마지막입니다-->
-    <div class=" line2 list2-ml">
+    <div class=" line2 list2-ml" style="overflow-x:none;">
         <div class="row" id="line2">
         <!-- 이미지리스트 아이템 시작 -->
         	<c:forEach var="data2" items="${list}">

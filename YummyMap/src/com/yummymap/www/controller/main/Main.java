@@ -14,6 +14,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yummymap.www.DAO.GameDAO;
 import com.yummymap.www.DAO.MainDAO;
 import com.yummymap.www.controller.MmyController;
 import com.yummymap.www.vo.ResVO;
@@ -23,14 +24,30 @@ public class Main implements MmyController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		MainDAO mainDao = new MainDAO();
-		List<ResVO> topResList = mainDao.getAvgTopResList();
-		for(int i=0; i<topResList.size(); i++) {
-			ResVO rvo = topResList.get(i);
+		// 평균점수 탑3 리스트를 가져옵니다.
+		List<ResVO> topAvgResList = mainDao.getAvgTopResList();
+		for(int i=0; i<topAvgResList.size(); i++) {
+			ResVO rvo = topAvgResList.get(i);
 			int resno = rvo.getResno();
 			List<String> imgList = mainDao.getResImg(resno);
 			rvo.setImgList(imgList);
 		}
-		req.setAttribute("avgTopResList", topResList);
+		//리뷰 탑3 리스트를 가져옵니다.
+		List<ResVO> topReviewResList = mainDao.getTopReviewResList();
+		for(int i=0; i<topReviewResList.size(); i++) {
+			ResVO rvo = topReviewResList.get(i);
+			int resno = rvo.getResno();
+			List<String> imgList = mainDao.getResImg(resno);
+			rvo.setImgList(imgList);
+		}
+		
+		//카테고리 리스트를 가져옵니다.
+		GameDAO gameDao = new GameDAO();
+		List<String> cateList = gameDao.getAllCateList();
+		
+		req.setAttribute("avgTopResList", topAvgResList);
+		req.setAttribute("topReviewResList", topReviewResList);
+		req.setAttribute("cateList", cateList);
 		String view = "/main_0.jsp";
 		return view;
 	}

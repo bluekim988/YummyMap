@@ -155,8 +155,8 @@
     </div>
     <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
-    <div class="nav-side" style="overflow:auto; overflow-x:hidden;">
-        <div class="tcolor list_title text-left">
+    <div class="nav-side bg-white" style="overflow:auto; overflow-x:hidden;">
+        <div class="t2color list_title text-left">
             YUMMY LIST
         </div>
         <div>
@@ -164,9 +164,9 @@
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
                     <div class="list-item-title t2color">${resData.resname}</div>
-                    <div class="list-item-sub t2color">${resData.addr}</div>
+                    <div class="list-item-sub text-muted">${resData.addr}</div>
                     <c:forEach var="menu" items="${resData.menuList}">
-                    <a class="list-item-sub t2color">${menu}</a>
+                    <a class="list-item-sub text-muted">${menu}</a>
                     </c:forEach>
                 </div>
                 <c:if test="${sid != null && resData.ispick == 'N'}">
@@ -184,7 +184,7 @@
         </div>
     </div>
     <!--side nav 마지막입니다-->
-    <div class="line2 list2-ml mb-5">
+    <div class="line2 list2-ml mb-5" style="overflow-x:none;">
         <div class="row">
             <div class="orange-line res-item content">
                 <div class="text-right md_ft1">

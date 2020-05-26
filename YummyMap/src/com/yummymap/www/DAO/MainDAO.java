@@ -339,4 +339,36 @@ public class MainDAO {
 		}
 		return topResList;
 	}
+	// 리뷰수 TOP3 에 해당하는 식당을 가져오는 메소드입니다.
+	// 반환값은 식당VO를 담은 List입니다.
+	public List<ResVO> getTopReviewResList(){
+		List<ResVO> resList = new ArrayList<ResVO>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_REVIEWTOP_RES_LIST);
+		stmt = db.getStatement(con);
+		try {
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				ResVO resVo = new ResVO();
+				resVo.setResno(rs.getInt("resno"));
+				resVo.setResname(rs.getString("resname"));
+				resVo.setAddr(rs.getString("address"));
+				resVo.setCatno(rs.getInt("catno"));
+				resVo.setTel(rs.getString("restel"));
+				resVo.setSubno(rs.getInt("subno"));
+				resVo.setMenu(rs.getString("menu"));
+				resVo.setMenuList();
+				resVo.setReviewCount(rs.getInt("count"));
+				resVo.setAvg(rs.getDouble("avg"));
+				resList.add(resVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(stmt);
+			db.close(con);
+		}
+		return resList;
+	}
 }
