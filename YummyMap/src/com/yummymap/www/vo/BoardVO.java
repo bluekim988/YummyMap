@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 public class BoardVO {
 	private int rno, txtno, mno, count, rnum, catno, lv;
-	private String title, mid, mname, mtxt, bdate, rtxt;
+	private String title, mid, mname, mtxt, bdate, rtxt, category;
 	private Date cDate;
 	public int getRno() {
 		return rno;
@@ -55,6 +55,12 @@ public class BoardVO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getMid() {
 		return mid;

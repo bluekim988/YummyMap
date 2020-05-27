@@ -52,11 +52,11 @@ public class BoardSQL {
 			buff.append("		FROM ");
 			buff.append("			( ");
 			buff.append("				SELECT ");
-			buff.append("					txtno, title, mid, cdate, count, rnum, catno, lv ");
+			buff.append("					txtno, title, mid, cdate, count, rnum, category, lv ");
 			buff.append("				FROM ");
-			buff.append("					txt");
+			buff.append("					txt t , category c ");
 			buff.append("				WHERE ");
-			buff.append("					isshow = 'Y' ");
+			buff.append("					isshow = 'Y' ANC t.catno = c.catno ");
 			buff.append("				ORDER BY ");
 			buff.append("					cdate DESC ");
 			buff.append("			) ");
