@@ -198,51 +198,39 @@ public class BoardDAO {
 		}
 		return cnt;
 	}
-/*
-	// 글번호로 검색한 해당 글 가져오기 전담 처리 함수
-	public BoardVO getConnect(int txtno) {
-		BoardVO bVO = new BoardVO();
-		con = db.getConnection();
-		String sql = bSQL.getSQL(bSQL.EDIT_CLICK_BRD);
-		pstmt = db.getPreparedStatement(con, sql);
-		int cnt = 0;
-		try {
-			pstmt.setInt(1, txtno);
-			cnt = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			db.close(pstmt);
-		}
-		if (cnt != 1) {
-			System.out.println("클릭수 증가 실패 ㅜㅡㅜ");
-		}
 
-		sql = bSQL.getSQL(bSQL.SEL_CONT);
+	// 게시글의 상세정보를 가져오는 메소드입니다.
+	// 매개변수로 게시글의 키값을 받습니다.
+	// 반환값은 게시글데이터를담은 VO를 반환합니다.
+	public BoardVO getTextInfo(int txtno) {
+		BoardVO boardVo = new BoardVO();
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.SEL_CONT);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
 			pstmt.setInt(1, txtno);
 			rs = pstmt.executeQuery();
 			rs.next();
-			bVO.setTxtno(rs.getInt("txtno"));
-			bVO.setTitle(rs.getString("title"));
-			bVO.setMtxt(rs.getString("mtxt").replaceAll("\r\n", "<br>"));
-			bVO.setcDate(rs.getDate("cdate"));
-			bVO.setBdate();
-			bVO.setMid(rs.getString("mid"));
-			bVO.setLv(rs.getInt("lv"));
-			bVO.setRnum(rs.getInt("rnum"));
-			bVO.setCount(rs.getInt("catno"));
-		} catch (Exception e) {
+			boardVo.setTxtno(rs.getInt("txtno"));
+			boardVo.setTitle(rs.getString("title"));
+			boardVo.setMid(rs.getString("mid"));
+			boardVo.setcDate(rs.getDate("cdate"));
+			boardVo.setBdate();
+			boardVo.setCount(rs.getInt("count"));
+			boardVo.setRnum(rs.getInt("rnum"));
+			boardVo.setCatno(rs.getInt("catno"));
+			boardVo.setMtxt(rs.getString("mtxt"));
+			boardVo.setLv(rs.getInt("lv"));
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			db.close(rs);
 			db.close(pstmt);
 			db.close(con);
 		}
-		return bVO;
+		return boardVo;
 	}
-
+/*
 	public ArrayList<BoardVO> getReplyList(int txtno) {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		// Connection

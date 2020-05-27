@@ -35,7 +35,7 @@ public class BoardSQL {
 			break;
 		case SEL_CONT:
 			buff.append("SELECT ");
-			buff.append("	rno, txtno, title, txt.mid mid, cdate, count, rnum, catno, lv ");
+			buff.append("	txtno, title, txt.mid mid, cdate, count, rnum, catno,  mtxt ,lv ");
 			buff.append("FROM ");
 			buff.append("	txt, member ");
 			buff.append("WHERE ");
@@ -74,7 +74,7 @@ public class BoardSQL {
 			break;
 		case SEL_RECOM:
 			buff.append("SELECT ");
-			buff.append("	recomno, mid, txtno, isrec ");
+			buff.append("	recomno, m.mid, txtno, isrec ");
 			buff.append("FROM ");
 			buff.append("	recommend r, member m, txt t ");
 			buff.append("WHERE ");
