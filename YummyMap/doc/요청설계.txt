@@ -154,9 +154,9 @@
 	뷰		 : /board/boardDetail.mmy (리다이렉트)
 
 1. 리플 삭제 요청 컨트롤러
-	요청내용 : /board/replyRemvePeoc.mmy
+	요청내용 : /board/replyRemveProc.mmy
 	파라미터 : rno ,txtno
-	컨트롤러 : com.yummymap.www.controller.board.replyRemvePeoc
+	컨트롤러 : com.yummymap.www.controller.board.ReplyRemveProc
 	뷰		 : /board/boardDetail.mmy (리다이렉트)	
 	
 #########게임##########################################
