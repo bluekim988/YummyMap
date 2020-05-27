@@ -1,5 +1,10 @@
 package com.yummymap.www.controller.join;
-
+/**
+ * 이 클래스는 회원가입 처리 유청을 컨트롤하는 클래스입니다.
+ * 
+ * @author	김종형
+ * @see		com.yummymap.www.DAO.JoinDAO
+ */
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
