@@ -31,10 +31,6 @@
 			}
 		$('#update').click(function() {
 			// 데이터 유효성 체크
-			var title = $('#title').val();
-			alert(title);
-			var mtxt = $('#mtxt').val();
-			alert(mtxt);
 			$('#frm').attr('action', '/YummyMap/board/boardEdit.mmy');
 			$('#frm').submit();
 		});
@@ -103,8 +99,8 @@
 	<form method="post" action="" id="frm">
 	<%-- 	<input type="hidden" name="catno" id="catno" value="${DATA.catno}">  --%>
 		<input type="hidden" name="txtno" id="txtno" value="${DATA.txtno}"> 
-<%-- 		<input type="hidden" name="title" id="title" value="${bVO.title}">  --%>
-<%-- 		<input type="hidden" name="mtxt" id="mtxt" value="${bVO.mtxt}">  --%>
+		<input type="hidden" name="title" id="title" value="${DATA.title}"> 
+		<input type="hidden" name="mtxt" id="mtxt" value="${DATA.mtxt}"> 
 		<input	type="hidden" name="nowPage" id="nowPage" value="${nowPage}">
 	
 	<div class="main-body">
@@ -116,7 +112,7 @@
 			</div>
 			<div class="b-w border-bottom ml-5 mt-4"></div>
 			<div class="d-flex title">
-				<div class="txt-title pt-4" name="title"  id="title" value="${DATA.title}">${DATA.title}</div>
+				<div class="txt-title pt-4" id="title">${DATA.title}</div>
 				<div class="pt-4 d-flex">
 					<div class="list-item-like like-size">
 						<span class="heart"><i class="far fa-heart "
@@ -139,43 +135,39 @@
 					<p class="tcolor" id="re-count">20</p>
 					<p>개</p>
 				</div>
+				
 				<div class="d-flex justify-content-end reply-btn mt-1">
-					<button type="button" class="btn btn-sm btn-info myd-none"
-						id="reply-btn">작성</button>
+				<c:if test="${not empty sid}">
+					<button type="button" class="btn btn-sm btn-info myd-none" id="reply-btn">작성</button>
+				</c:if>
 				</div>
 			</div>
 			<!--댓글 input태그 시작 영역 입니다-->
 			<div class="re-input d-flex">
-				<p class="pt-3 pl-4" id="">블루</p>
+				<p class="pt-3 pl-4" id="">${sid }</p>
 				<form action="" method="POST" id="re-frm">
+					<input type="hidden" name="tno" value="${DATA.txtno}">
 					<textarea class="form-control re-text-area ml-4" rows="2"
 						name="reply" id="reply-area"></textarea>
 				</form>
 			</div>
 			<!--댓글 input태그 마지막 영역 입니다-->
 			<!--댓글 내용 시작 영역 입니다-->
+			<c:forEach var="data" items="${LIST}">
 			<div class="reply-body mt-4 " id="">
 				<div class="d-flex reply-txt-1 mt-3">
-					<p id="">블루</p>
-					<p id="" class="pl-2">2020/05/16</p>
+					<p id="">${data.mid }</p>
+					<p id="" class="pl-2">${data.cDate}</p>
 				</div>
 				<div class="reply-txt-2 ">
-					<p id="">내용</p>
+					<p id="">${data.rtxt }</p>
 				</div>
+				<c:if test="${data.mid eq sid}">
+					<a href="#" class="badge badge-danger">Danger</a>
+				</c:if>
 				<div class="b-w border-bottom ml-5 mt-4"></div>
 			</div>
-			<!--댓글 내용 마지막 영역 입니다-->
-			<!--댓글 내용 시작 영역 입니다-->
-			<div class="reply-body mt-4 " id="">
-				<div class="d-flex reply-txt-1 mt-3">
-					<p id="">블루</p>
-					<p id="" class="pl-2">2020/05/16</p>
-				</div>
-				<div class="reply-txt-2 ">
-					<p id="">내용</p>
-				</div>
-				<div class="b-w border-bottom ml-5 mt-4"></div>
-			</div>
+			</c:forEach>
 			<!--댓글 내용 마지막 영역 입니다-->
 		</div>
 		<!-- body 마지막 입니다-->
@@ -200,7 +192,8 @@ $(document).ready(function(){
   
   $('#reply-btn').click(function () { 
     $('#reply-btn').hide();
-      
+    $('#re-frm').attr('action','/YummyMap/board/replyPeoc.mmy');
+   	$('#re-frm').submit();
   });
 
 });;

@@ -146,12 +146,12 @@
 	뷰		 : /admin/login.mmy
 
 	
-	
-	
-	
-	
-	
-	
+#########게시판##########################################
+1. 리플 작성 요청 컨트롤러
+	요청내용 : /board/replyPeoc.mmy
+	파라미터 : rtxt , txtno , id(session)
+	컨트롤러 : com.yummymap.www.controller.board.ReplyProc
+	뷰		 : /board/boardDelete.mmy (리 다이렉트)
 	
 	
 #########게임##########################################

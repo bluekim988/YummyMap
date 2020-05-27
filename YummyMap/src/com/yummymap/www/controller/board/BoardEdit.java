@@ -23,7 +23,6 @@ public class BoardEdit implements MmyController {
 		int cat = 0;
 		try {
 			sno = Integer.parseInt(txtno);
-//			cat = Integer.parseInt(catno);
 		} catch (Exception e) {
 		}
 		System.out.println("edit.sno : " + sno);
@@ -38,8 +37,8 @@ public class BoardEdit implements MmyController {
 //		req.setAttribute("mtxt", mtxt);
 
 		BoardDAO bDAO = new BoardDAO();
-//		BoardVO bVO = bDAO.getConnect(sno);
-//		req.setAttribute("bVO", bVO);
+		BoardVO bVO = bDAO.getTextInfo(sno);
+		req.setAttribute("bVO", bVO);
 		return view;
 	}
 

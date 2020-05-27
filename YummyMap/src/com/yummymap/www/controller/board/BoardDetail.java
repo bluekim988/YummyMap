@@ -1,16 +1,14 @@
 package com.yummymap.www.controller.board;
 
-/**
- * @author	김소영
- * @since	2020.05.27
- *  이 클래스는 게시판 글 상세보기 페이지 컨트롤러 입니다
- */
-import java.util.*;
-import javax.servlet.http.*;
+import java.util.List;
 
-import com.yummymap.www.controller.*;
-import com.yummymap.www.DAO.*;
-import com.yummymap.www.vo.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.yummymap.www.DAO.BoardDAO;
+import com.yummymap.www.controller.MmyController;
+import com.yummymap.www.vo.BoardVO;
 
 public class BoardDetail implements MmyController {
 	@Override
@@ -31,9 +29,9 @@ public class BoardDetail implements MmyController {
 		if (cookieFromReq != null && cookieFromReq.length > 0) {
 			for (int i = 0; i < cookieFromReq.length; i++) {
 				if (cookieFromReq[i].getName().equals("cookie" + stno)) {
-					System.out.println("처음 쿠키가 없을 경우 null 생성");
+					System.out.println("처음 쿠키값");
 					cookieVal = cookieFromReq[i];
-					System.out.println();
+					System.out.println("처음 쿠기 값 입니다 : " + cookieVal.getValue());
 				}
 			}
 		}
@@ -63,6 +61,11 @@ public class BoardDetail implements MmyController {
 			
 			}
 		}
+		
+		
+		List<BoardVO> list = bdao.getAllReplyList(tno);
+		
+		req.setAttribute("LIST", list);
 		req.setAttribute("DATA", bVO);
 
 //		bVO.setBdate(req.getParameter("bdate"));
@@ -72,7 +75,7 @@ public class BoardDetail implements MmyController {
 //		bVO.setCatno(Integer.parseInt(req.getParameter("catno")));
 		req.setAttribute("nowPage", req.getParameter("nowPage"));
 //		
-
+		
 		return view;
 	}
 
