@@ -56,10 +56,10 @@
     </a>
     <div class="b-subtitle text-left"><p class="pt-3">골라줘게임</p></div>
     <div class=" nav-item-1 d-flex justify-content-end">
-        <a class="navbar-brand nav-item-size" href="#" id="">
+        <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" id="">
             <i class="fas fa-gamepad"></i>
         </a>
-        <a class="navbar-brand nav-item-size" href="#">
+        <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy">
             <i class="far fa-clipboard"></i>
         </a>
     </div>
@@ -155,6 +155,14 @@ $(document).ready(function () {
 		  $('#logout').show();
 		  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
 	}
+	//마이리스트 이벤트 처리 입니다.
+	$('#myListIcon').click(function(){
+		if(!userid) {
+			alert('로그인을 진행해주세요');
+			return;
+		}
+		$(location).attr('href', '/YummyMap/main/myList.mmy');
+	});
 });
 </script>
 </html>

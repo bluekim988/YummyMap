@@ -15,6 +15,11 @@ public class BoardEdit implements MmyController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
+		String userID = "no";
+		String userID_session = (String)req.getSession().getAttribute("sid");
+		if(userID_session != null) {
+			userID = userID_session;
+		}
 		String view = "/board/boardEdit.jsp";
 //		String catno = req.getParameter("catno");
 		String txtno = req.getParameter("txtno");
@@ -37,7 +42,7 @@ public class BoardEdit implements MmyController {
 //		req.setAttribute("mtxt", mtxt);
 
 		BoardDAO bDAO = new BoardDAO();
-		BoardVO bVO = bDAO.getTextInfo(sno);
+		BoardVO bVO = bDAO.getTextInfo(sno,userID);
 		req.setAttribute("bVO", bVO);
 		return view;
 	}

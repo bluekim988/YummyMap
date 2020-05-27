@@ -31,6 +31,14 @@
 			$('#logout').show();
 			$('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
 		}
+		//마이리스트 이벤트 처리 입니다.
+		$('#myListIcon').click(function(){
+			if(!userid) {
+				alert('로그인을 진행해주세요');
+				return;
+			}
+			$(location).attr('href', '/YummyMap/main/myList.mmy');
+		});
 
 		$('#write').click(function() {
 			$(location).attr('href', '/YummyMap/board/boardWrite.mmy');
@@ -67,6 +75,14 @@
 			$('#nowPage').val('${PAGE.nowPage}');
 			$('#frm').attr('action', '/YummyMap/board/boardDetail.mmy');
 			$('#frm').submit();
+		});
+		//마이리스트 이벤트 처리 입니다.
+		$('#myListIcon').click(function(){
+			if(!userid) {
+				alert('로그인을 진행해주세요');
+				return;
+			}
+			$(location).attr('href', '/YummyMap/main/myList.mmy');
 		});
 	});
 </script>
@@ -137,9 +153,6 @@
 		<div class="writebox d-flex">
 			<div class="writeBtnBox">
 				<button type="button" class="btn btn-secondary" id="write">글쓰기</button>
-			</div>
-			<div class="">
-				<input class="form-control selbox" type="text" placeholder="검색">
 			</div>
 		</div>
 		<!--게시글 영역 입니다-->

@@ -12,6 +12,7 @@ public class BoardSQL {
 	public final int SEL_CONT = 1003;
 	public final int SEL_RECOM = 1004;
 	public final int SEL_LIST_REPLY = 1005;
+	public final int SEL_ISREC = 1006;
 	
 	public final int EDIT_CLICK_BRD = 2001;
 	public final int EDIT_RNUM_BRD = 2002;
@@ -38,12 +39,11 @@ public class BoardSQL {
 			break;
 		case SEL_CONT:
 			buff.append("SELECT ");
-			buff.append("	txtno, title, txt.mid mid, cdate, count, rnum, catno,  mtxt ,lv ");
+			buff.append("	t.txtno, title, mid, cdate, count, rnum, catno,  mtxt ,lv, NVL(isrec, 'N') isrec ");
 			buff.append("FROM ");
-			buff.append("	txt, member ");
+			buff.append("	txt t,  (SELECT isrec, txtno  FROM recommend WHERE isrec = 'Y' AND	mid = ? AND txtno = ? ) e  ");
 			buff.append("WHERE ");
-			buff.append("	txt.mid = member.mid ");
-			buff.append("	AND txtno = ? ");
+			buff.append("  t.txtno = ? AND isshow ='Y' AND t.txtno = e.txtno(+) ");
 			break;
 		case SEL_ALL_LIST:
 			buff.append("SELECT ");
@@ -95,7 +95,7 @@ public class BoardSQL {
 			break;
 		case ADD_RECOMMEND:
 			buff.append("INSERT INTO recommend (recomno, mid, txtno) ");
-			buff.append("VALUSE( ");
+			buff.append("VALUES( ");
 			buff.append("getRecomno.nextval, ?, ? ");
 			buff.append(") ");
 			break;

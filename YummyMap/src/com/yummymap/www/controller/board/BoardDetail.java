@@ -13,6 +13,11 @@ import com.yummymap.www.vo.BoardVO;
 public class BoardDetail implements MmyController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
+		String userID = "no";
+		String userID_session = (String)req.getSession().getAttribute("sid");
+		if(userID_session != null) {
+			userID = userID_session;
+		}
 		String view = "/board/boardDetail.jsp";
 		// 할일
 		// 파라미터 받고
@@ -22,7 +27,7 @@ public class BoardDetail implements MmyController {
 			tno = Integer.parseInt(stno);
 		} catch (Exception e) {}
 		BoardDAO bdao = new BoardDAO();
-		BoardVO bVO = bdao.getTextInfo(tno);
+		BoardVO bVO = bdao.getTextInfo(tno,userID);
 		
 		Cookie[] cookieFromReq = req.getCookies();
 		Cookie cookieVal = null;

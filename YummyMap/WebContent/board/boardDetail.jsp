@@ -79,7 +79,7 @@
 				</div>
 			</div>
 		</div>
-		<a class="navbar-brand tcolor logo" href=/YummyMap/main.mmy " id="">
+		<a class="navbar-brand tcolor logo" href="/YummyMap/main.mmy" id="">
 			YUMMY MAP </a>
 		<div class="b-subtitle text-left">
 			<p class="pt-3">커뮤니티</p>
@@ -107,17 +107,25 @@
 		<!--게시글 영역 입니다-->
 		<div class="txt-line shadow-sm border mb-4">
 			<div class="btns d-flex justify-content-end pr-4 mt-2">
-				<a class="badge badge-info mr-1" id="update">수정</a> <a
-					href="#" class="badge badge-danger" id="delete">삭제</a>
+			<c:if test="${sid == DATA.mid}">
+				<a class="badge badge-info mr-1" id="update">수정</a> 
+				<a class="badge badge-danger" id="delete">삭제</a>
+			</c:if>
 			</div>
 			<div class="b-w border-bottom ml-5 mt-4"></div>
 			<div class="d-flex title">
 				<div class="txt-title pt-4" id="title">${DATA.title}</div>
 				<div class="pt-4 d-flex">
+	                <c:if test="${sid != null && DATA.isrec == 'N'}">
 					<div class="list-item-like like-size">
-						<span class="heart"><i class="far fa-heart "
-							aria-hidden="true"></i> </span>
+						<span class="heart"><i id="recN" class="far fa-heart " aria-hidden="true"></i> </span>
 					</div>
+	                </c:if>
+	                <c:if test="${sid != null && DATA.isrec == 'Y'}">
+					<div class="list-item-like like-size">
+						<span class="heart"><i id="recY" class="fas fa-heart " aria-hidden="true"></i> </span>
+					</div>
+	                </c:if>
 					<div class="pl-3 pt-2" id="rnum">${DATA.rnum}</div>
 				</div>
 			</div>
@@ -176,16 +184,25 @@
 <script type="text/javascript">
 'use strict';
 $(document).ready(function(){
-  $(".heart").click(function(){
-    if($(this).hasClass("liked")){
-      $(this).html('<i class="far fa-heart" aria-hidden="true"></i>');
-      $(this).removeClass("liked");
-    }else{
-      $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
-      $(this).addClass("liked");
-    }
-  });
-
+	
+	  //로그인 여부를 확인합니다.
+	  let userid = '${sid}';
+	  if(!userid) {
+		  $('#login').show();
+		  $('#logout').hide();
+		  $('#mypage').attr('href', '/YummyMap/join/join.mmy');
+	  } else {
+		  $('#login').hide();
+		  $('#logout').show();
+		  $('#mypage').attr('href', '/YummyMap/member/member.mmy');
+	  }
+	  
+	$('#recY').click(function(){
+		$(location).attr('href', '/YummyMap/board/recommendProc.mmy?r=Y&txtno=${DATA.txtno}');
+	});
+	$('#recN').click(function(){
+		$(location).attr('href', '/YummyMap/board/recommendProc.mmy?r=N&txtno=${DATA.txtno}');
+	});
 
   $('#reply-area').focusin(function(){
 	  $('#reply-btn').show();
@@ -196,6 +213,15 @@ $(document).ready(function(){
     $('#re-frm').attr('action','/YummyMap/board/replyPeoc.mmy');
    	$('#re-frm').submit();
   });
+  
+	//마이리스트 이벤트 처리 입니다.
+	$('#myListIcon').click(function(){
+		if(!userid) {
+			alert('로그인을 진행해주세요');
+			return;
+		}
+		$(location).attr('href', '/YummyMap/main/myList.mmy');
+	});
 
 });;
 </script>

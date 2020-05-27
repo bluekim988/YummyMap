@@ -44,6 +44,14 @@ $(document).ready(function() {
 			$(location).attr('href', '/YummyMap/board/boardMain.mmy');
 			
 		});
+		//마이리스트 이벤트 처리 입니다.
+		$('#myListIcon').click(function(){
+			if(!userid) {
+				alert('로그인을 진행해주세요');
+				return;
+			}
+			$(location).attr('href', '/YummyMap/main/myList.mmy');
+		});
 	});
 </script>
 </head>
@@ -83,7 +91,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 		</div>
-		<a class="navbar-brand tcolor logo" href="#" id=""> YUMMY MAP </a>
+		<a class="navbar-brand tcolor logo" href="/YummyMap/main.mmy" id=""> YUMMY MAP </a>
 		<div class="b-subtitle text-left">
 			<p class="pt-3">커뮤니티</p>
 		</div>
