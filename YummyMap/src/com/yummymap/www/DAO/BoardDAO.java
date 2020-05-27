@@ -8,6 +8,7 @@ package com.yummymap.www.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -172,6 +173,26 @@ public class BoardDAO {
 			pstmt.setInt(1, txtno);
 			cnt = pstmt.executeUpdate();
 		} catch (Exception e) {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	
+	// 해당게시글의 조회수를 +1 증가시켜주는 메소드입니다.
+	// 매개변수로 글번호를 받습니다.
+	// 반환값은 성공시 1, 실패시 0을 반환합니다.
+	public int increaseTxtCount(int txtno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.EDIT_CLICK_BRD);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, txtno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			db.close(pstmt);
 			db.close(con);
 		}
