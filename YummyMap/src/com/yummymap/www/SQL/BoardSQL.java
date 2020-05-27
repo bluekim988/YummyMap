@@ -44,11 +44,11 @@ public class BoardSQL {
 			break;
 		case SEL_ALL_LIST:
 			buff.append("SELECT ");
-			buff.append("	rno, txtno, title, mid, cdate, count, rnum, catno, lv ");
+			buff.append("	rno, txtno, title, mid, cdate, count, rnum, category, lv ");
 			buff.append("FROM ");
 			buff.append("	( ");
 			buff.append("		SELECT ");
-			buff.append("			ROWNUM rno, txtno, title, mid, cdate, count, rnum, catno, lv ");
+			buff.append("			ROWNUM rno, txtno, title, mid, cdate, count, rnum, category, lv ");
 			buff.append("		FROM ");
 			buff.append("			( ");
 			buff.append("				SELECT ");
