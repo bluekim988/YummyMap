@@ -15,4 +15,8 @@
   .mar-top{margin-top: 350px;}
   .padd-right{padding-right: 0px;}
   .padd-text{padding-right: 15px;}
-  .por-button{position: relative; left: 145px; top: 50px;}
+  .padd-left{padding-left: 0px;}
+  .por-button{position: relative; left: 160px; top: 55px;}
+  .por-button2 {  position: relative; top: 5px; left: 160px;}
+  .por-nav{ position: relative; right: -147px;}
+  .a-font{ color: black; font-weight :bold;}

@@ -4,9 +4,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-<link rel="stylesheet" href="/YummyMap/css/member/login.css">
-<link rel="stylesheet" href="/YummyMap/css/nav.css">
 <link rel="stylesheet" href="/YummyMap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/YummyMap/css/nav.css">
+<link rel="stylesheet" href="/YummyMap/css/member/login.css">
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -72,9 +72,15 @@
       </form>
       <div class="btn-box">
         <div class="optionbox d-flex mt-3">
-          <a><p class="option-item-text text-primary" id="searchmem" style="cursor: pointer;">아이디/비밀번호 찾기</p></a>
+          <a><p class="option-item-text" id="searchmem">아이디/비밀번호 찾기</p></a>
           <a href="/YummyMap/join/join.mmy" class="ml-5"><p class="option-item-text">회원가입</p></a>
           <a href="/YummyMap/main.mmy" class="ml-5"><p class="option-item-text">홈으로</p></a>
+        </div>
+        <div class=" mt-5">
+          <button type="button" class="btn btn-success naverbtn">네이버 계정으로 로그인</button>
+        </div>
+        <div class="mt-1">
+          <button type="button" class="btn btn-warning kakaobtn" id="kakao">카카오 계정으로 로그인</button>
         </div>
       </div>
     </div>
@@ -103,8 +109,9 @@
        	
        </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="mdbtn">취소</button>
         <button type="button" class="btn btn-danger" id="sendbtn">발송</button>
+        <button type="button" class="btn btn-danger d-none" data-dismiss="modal" id="cbtn">닫기</button>
       </div>
     </div>
   </div>
@@ -132,6 +139,9 @@ $(document).ready(function () {
 		$('#name').val('');	
 		$('#mail').val('');
 		$('#ids').val('');
+		$('#mdbtn').removeClass('d-none');
+		$('#sendbtn').removeClass('d-none');
+		$('#cbtn').addClass('d-none');
 		$('#srchint').addClass('d-none');
 		$('#okbox').addClass('d-none');
 		$('.modal-body').removeClass('d-none');
@@ -141,8 +151,7 @@ $(document).ready(function () {
 	//라디오 버튼 클릭식 폼태그 변경
 	$('input[name=memSrc]').click(function(){
 		let sd = $(this).val();
-		alert(sd);
-		
+		$('#srchint').addClass('d-none');
 		if(sd == 'pass'){
 			$('#frm2').html('<div> 사용자 아이디 : <input type="txet" id="ids" name="ids"></div>'+
 			        		'<div class="mt-3"> 사용자 이메일 : <input type="txet"  id="mail" name="mail"></div>');		
@@ -174,8 +183,10 @@ $(document).ready(function () {
 				success: function(data){
 					if(data.result == 'ok'){
 						
+						$('#mdbtn').addClass('d-none');
+						$('#sendbtn').addClass('d-none');
+						$('#cbtn').removeClass('d-none');
 						$('#srchint').addClass('d-none');
-						
 						$('.modal-body').addClass('d-none');
 						$('#okbox').html('<h3>고객님의 개정은 </h3> <h2>' + data.id + '</h2> <h3>입니다</h3>');
 						$('#okbox').removeClass('d-none');
@@ -204,13 +215,18 @@ $(document).ready(function () {
 					'mail' : mail
 				},
 				success: function(data){
-					
-					
-// 					if(data.result == 'ok'){
+					if(data.result == 'ok'){
 						
-// 					}else if(data.result == 'no'){
-// 						$('#srchint').removeClass('d-none');
-// 					}
+						$('#mdbtn').addClass('d-none');
+						$('#sendbtn').addClass('d-none');
+						$('#srchint').addClass('d-none');
+						$('#cbtn').removeClass('d-none');
+						$('.modal-body').addClass('d-none');
+						$('#okbox').html('<h4>고객님의 메일로 임시 패스워드가 발급 되었습니다. <h4>');
+						$('#okbox').removeClass('d-none');
+					}else if(data.result == 'no'){
+						$('#srchint').removeClass('d-none');
+					}
 				},error : function(){
 					alert('통싱오류 ㅠㅜ ');
 				}

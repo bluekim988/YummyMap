@@ -3,9 +3,12 @@
 @since 2020.05.24
  	이 JS는 관리자 게시글관리 페이지에 사용할 JavaScript 입니다
 */
+
 $(function(){
 	let txtnos = [];
 	let tno;
+	
+	
 	$('.pbtn').click(function(){
 		let page = $(this).text();
 		$('#nowpage').val(page);
@@ -17,6 +20,27 @@ $(function(){
 		$('#frm').submit();
 	});
 	
+	$('.next').click(function(){
+		let aa= $(this).attr('id');
+		let inid = $('#search-input').val();
+		let opt = $('#opt').val();
+		$('#searchs').val(inid);
+		$('#opts').val(opt);
+		$('#nowpage').val(aa);
+		$('#frm').attr('action','/YummyMap/admin/boardList.mmy');
+		$('#frm').submit();
+	});
+	
+	$('.pre').click(function(){
+		let inid = $('#search-input').val();
+		let opt = $('#opt').val();
+		let aa = $(this).attr('id');
+		$('#nowpage').val(aa);
+		$('#searchs').val(inid);
+		$('#opts').val(opt);
+		$('#frm').attr('action','/YummyMap/admin/boardList.mmy');
+		$('#frm').submit();
+	});
 	$('#sbtn').click(function(){
 		let inid = $('#search-input').val();
 		let opt = $('#opt').val();

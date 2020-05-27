@@ -28,20 +28,17 @@ public class BoardList implements MmyController {
 		String spage = req.getParameter("nowpage");
 		String sch = req.getParameter("searchs");
 		String opt = req.getParameter("opts");
-
+		
 		try {
 			nowpage = Integer.parseInt(spage);
 		} catch (Exception e) {	}
-
 		
 		ArrayList<BoardInfoVO> list = null;
 		PageUtil page = null;
 		int boardCnt = 0;
 		AdminDAO adao = new AdminDAO();
 		if ( opt == null || opt.equals("nos") ) {
-
 			boardCnt = adao.boardCnt();
-
 			page = new PageUtil(nowpage, boardCnt, 10, 5);
 			list = adao.boardList(page.getStartCont(), page.getEndCont());
 		}else if(opt.equals("titlch")) {

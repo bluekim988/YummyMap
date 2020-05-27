@@ -129,8 +129,11 @@ let mailcode=false;
   $('#sendmail').click(function(){
 	  let mailId = $('#email1').val();
 	  let domain = $('#email2').val();
+	  if(!mailId || !domain){
+		  alert('메일을 입력해 주세요');
+		  return;
+	  }
 	  let mail = mailId + domain;
-	  alert(mail);
 	  $.ajax({
 		 url : '/YummyMap/join/mailCk.mmy',
 		 type: 'post',

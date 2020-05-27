@@ -11,6 +11,11 @@ $(function(){
 	});
 	
 	$('#delete').click(function(){
+		$('#staticBackdrop').modal();
+
+	});
+	
+	$('#rmbtn').click(function(){
 		$('#frm').attr('action','/YummyMap/admin/checkDel.mmy');
 		$('#frm').submit();
 	});

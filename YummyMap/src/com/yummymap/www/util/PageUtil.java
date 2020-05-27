@@ -24,6 +24,8 @@ public class PageUtil {
 	private int startCont; 	// 현재 페이지에서 보여줄 시작 게시물 로우넘버
 	private int endCont; 	// 현재 페이지에서 보여줄 마지막 게시물 로우넘버
 	
+	private int nextPage;  //next 버튼을 위해 만들어둔 변수
+	private int prePage;   //pre 버튼을 위해 만들어둔 변수
 	
 	public PageUtil() {	}
 	public PageUtil(int nowPage , int totalCount) {
@@ -41,6 +43,11 @@ public class PageUtil {
 		calcStart();
 		calcEnd();
 		calCont();
+//		nextno = endPage + 1;
+//		preno = startPage -1;
+		
+		prePage = (startPage == 1)?(1) : (startPage -1);
+		nextPage = (endPage < totalPage)?(endPage + 1) : (endPage);
 	}
 
 	//총 페이지 수 계산하는 함수
@@ -152,6 +159,19 @@ public class PageUtil {
 	public void setEndCont(int endCont) {
 		this.endCont = endCont;
 	}
+	public int getNextPage() {
+		return nextPage;
+	}
+	public void setNextPage(int nextPage) {
+		this.nextPage = nextPage;
+	}
+	public int getPrePage() {
+		return prePage;
+	}
+	public void setPrePage(int prePage) {
+		this.prePage = prePage;
+	}
+	
 	
 	
 	

@@ -28,6 +28,29 @@ $(function(){
 		
 	});
 	
+	$('.next').click(function(){
+		let page = $(this).attr('id');
+		let sel =	$('#opt').val();
+		let scname = $('#search-input').val();
+		$('#searchs').val(scname);
+		$('#opts').val(sel);
+		$('#nowpage').val(page);
+		$('#frm').attr('action','/YummyMap/admin/main.mmy');
+		$('#frm').submit();
+	});
+	
+	$('.pre').click(function(){
+		let page = $(this).attr('id');
+		let sel =	$('#opt').val();
+		let scname = $('#search-input').val();
+		$('#searchs').val(scname);
+		$('#opts').val(sel);
+		$('#nowpage').val(page);
+		$('#frm').attr('action','/YummyMap/admin/main.mmy');
+		$('#frm').submit();
+	});
+	
+	
 	$('#sbtn').click(function(){
 		let sel =	$('#opt').val();
 		let scname = $('#search-input').val();

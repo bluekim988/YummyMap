@@ -334,7 +334,7 @@ public class AdminDAO {
 	public void reMemberNopass(MemberInfoVO mvo) {
 		con = db.getConnection();
 		
-		String sql = asql.getSQL(asql.UPDATE_ADMIN_NOPASS);
+		String sql = asql.getSQL(asql.UPDATE_USER_NOPASS);
 		
 		pstmt = db.getPreparedStatement(con, sql);
 		

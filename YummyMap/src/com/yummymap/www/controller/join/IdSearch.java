@@ -1,3 +1,8 @@
+/**
+ * @author 유태희
+ * @since 2020.05.26
+ * 	이클래스는 회원 ID 찾기 컨트롤러 입니다 (비동기)
+ */
 package com.yummymap.www.controller.join;
 
 import java.io.IOException;
@@ -16,7 +21,6 @@ public class IdSearch implements MmyController {
 		String mail = req.getParameter("mail");
 		JoinDAO jdao = new JoinDAO();
 		String id = jdao.searchId(name, mail);
-		System.out.println(id);
 		StringBuffer buff = new StringBuffer();
 		buff.append("{ \"result\": ");
 		if(id.length() != 0) {
