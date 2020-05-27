@@ -56,7 +56,7 @@ public class BoardSQL {
 			buff.append("				FROM ");
 			buff.append("					txt t , category c ");
 			buff.append("				WHERE ");
-			buff.append("					isshow = 'Y' ANC t.catno = c.catno ");
+			buff.append("					isshow = 'Y' AND t.catno = c.catno ");
 			buff.append("				ORDER BY ");
 			buff.append("					cdate DESC ");
 			buff.append("			) ");
