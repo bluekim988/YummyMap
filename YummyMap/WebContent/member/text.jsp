@@ -49,7 +49,7 @@
 			$('#frm').submit();
 		});
 		$('#mlink').click(function() {
-			$("#modal").modal();
+			$("#staticBackdrop").modal();
 		});
 		$('#dbtn').click(function() {
 			alert('asdsad');
@@ -126,25 +126,23 @@
 						</a>
 					</div>
 					<div class="mar-top bor-bottom-or padd-text">
-						<a href="#myModal"><h6 style="color: black" class="font-weight-bold text-danger" data-toggle="modal" id="mlink">회원탈퇴</h6></a>
-						<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title">회원탈퇴</h5>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<p><h4 class="text-center">정말로 탈퇴 하시겠습니까?</h4>
-										</h4>
-										</p>
+					<h6 type="button" style="color: black" class="font-weight-bold text-danger" data-toggle="modal" id="mlink">회원탈퇴</h6>
+					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog" >
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">회원탈퇴 </h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p><h4 class="text-center">정말로 탈퇴 하시겠습니까?</h4></h4></p>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">취소</button>
+										data-dismiss="modal">취소</button>
 									<button type="button" class="btn btn-primary" id="dbtn">예</button>
 								</div>
 							</div>

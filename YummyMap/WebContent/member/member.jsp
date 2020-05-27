@@ -17,11 +17,34 @@
 <style>
 </style>
 <script type="text/javascript">
-
-
+    function pwchk(pw) {
+        let patt = /(?=.*\d{1})(?=.*[~`!@#$%\^&*()-+=]{1})(?=.*[a-zA-Z]{2}).{8,15}$/;
+        let pwok = patt.test(pw);
+    		
+        return pwok;
+       }
 	$(document).ready(function() {
-		
+	       
+	    $('#sbtn').click(function() {
+	      //패스워드 정규식
+          let pw = $('#changePW_V').val();
+          let pwck = pwchk(pw);
+          
+          if(!pwck){
+            alert('숫자/특수문자/영문 대/소문자 1자리이상 포함한 8자리이상 15자리 이하입니다');
+            return;
+          }
+          
+          if ($('#changePW_V').val() != $('#change_PW_check_V').val()) {
+				alert('비밀번호 확인이 일치하지 않습니다.');
+				return;
+			}
+          
+			$('#ff').submit();
+			//$('#ff').submit();
 		 //로그인 여부를 확인합니다.
+		  
+	    });
 		  let userid = '${sid}';
 		  if(!userid) {
 			  $('#login').show();
@@ -39,25 +62,12 @@
 		$('#ebtn').click(function() {
 			$('#ff').css('display', '');
 		});
-
-		$('#sbtn').click(function() {
-			/*     	 var changePW = $('#changePW').val();
-			 var change_PW_check = $('#change_PW_check').val();
-			 if(changePW != change_PW_check){
-			 alert('새로운 비밀번호가 서로 다릅니다');
-			 return ; */
-			if ($('#changePW_V').val() != $('#change_PW_check_V').val()) {
-				alert('비밀번호 확인이 일치하지 않습니다.');
-				return;
-			}
-			$('#ff').submit();
-			//$('#ff').submit();
-		});
+		
 		$('#mlink').click(function(){
-			$("#modal").modal();
+			$("#staticBackdrop").modal();
 		});
+		
 		$('#dbtn').click(function(){
-				alert('asdsad');
 				$(location).attr('href' , '/YummyMap/Drop/dropProc.mmy');
 		});
 
@@ -132,9 +142,9 @@
 							보기</a>
 				</div>
 				<div class="mar-top bor-bottom-or padd-text">
-						<a href="#myModal"><h6 style="color: black" class="font-weight-bold text-danger" data-toggle="modal" id="mlink">회원탈퇴</h6></a>
-				<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-						<div class="modal-dialog" >
+				<h6 type="button" style="color: black" class="font-weight-bold text-danger" data-toggle="modal" id="mlink">회원탈퇴</h6>
+					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog" >
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title">회원탈퇴 </h5>

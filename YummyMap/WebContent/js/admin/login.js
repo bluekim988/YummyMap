@@ -3,6 +3,8 @@
 @since 2020.05.23
  	이 JS는 관리자 로그인 사용할 JavaScript 입니다
 */
+
+ 
 function join(){
 
 		let sid = $('#id').val();
@@ -53,7 +55,6 @@ function join(){
 			}
 		});*/
 }
-
 function idchk(id) {
 	let pett = /^([A-Za-z]){1}\w{4,12}$/;
 	let ok = pett.test(id);
@@ -67,7 +68,7 @@ function pwchk(pw) {
 }
 
 $(function(){
-
+	
 	$('#join').click(join);
 	
 	
