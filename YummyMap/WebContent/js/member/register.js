@@ -22,6 +22,10 @@ let mailcode=false;
     	alert('비밀번호 입력이 잘못되었습니다.');
     	return;
     }
+    if(!(namechk($('#name').val()))){
+    	alert('이름 입력이 잘못되었습니다.')
+    	return;
+    }
     let tel = $('#telmid').val() + $('#telend').val();
     if(!(telchk(tel))) {
     	alert('휴대전화 입력이 잘못되었습니다.');
@@ -63,6 +67,11 @@ let mailcode=false;
       	var ok = reg.test(num);
       	return ok;
    }
+   function namechk(num) {
+     	var reg = /^[가-힣]{2,6}$/;
+     	var ok = reg.test(num);
+     	return ok;
+  }
    
    $('#id').keyup(function(){
 	   $('#idmsg1').show();
