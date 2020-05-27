@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/YummyMap/css/member/text.css">
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script type="text/javascript"src="/YummyMap/js/bootstrap.bundle.min.js"></script>
 <style>
 </style>
@@ -98,13 +99,14 @@
 		<div class="b-subtitle text-right">
 			<p class="pt-3 text-left">마이페이지</p>
 		</div>
-		<div class=" nav-item-1 d-flex justify-content-end">
-			<a class="navbar-brand nav-item-size" href="#" id=""> <i
-				class="fas fa-gamepad"></i>
-			</a> <a class="navbar-brand nav-item-size" href="#"> <i
-				class="far fa-clipboard"></i>
-			</a>
-		</div>
+  <div class=" nav-item-1 d-flex justify-content-end">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" >
+                <i class="fas fa-gamepad" id="game"></i>
+            </a>
+            <a class="navbar-brand nav-item-size" href="#">
+                <i class="far fa-clipboard"></i>
+            </a>
+        </div>
 	</div>
 	<!-- nav 마지막 입니다-->
 
