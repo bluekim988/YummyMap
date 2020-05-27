@@ -1,11 +1,3 @@
-  .tcolor{color: rgb(255, 128, 89) !important;}
-  .nav-body{width: 100%; height: 200px;}
-  .nav-item{background-color: rgb(255, 128, 89); color: white;}
-  .logo{ font-size: 25pt; font-weight: bold; margin-top: 20px;}
-  .nav-item-1{margin-left: 820px;}
-  .nav-item-size{font-size: 30pt;}
-  .main-body{position: absolute; top: 240px;}
-  .mxw{white: 750px;}
   .por{position: relative;}
   .h90{height:150px;}
   .bor-bottom{border-bottom :1px solid grey;}
@@ -15,8 +7,37 @@
   .mar-top{margin-top: 350px;}
   .padd-right{padding-right: 0px;}
   .padd-text{padding-right: 15px;}
-  .padd-left{padding-left: 0px;}
-  .por-button{position: relative; left: 160px; top: 55px;}
-  .por-button2 {  position: relative; top: 5px; left: 160px;}
-  .por-nav{ position: relative; right: -147px;}
+  .por-button{position: relative; left: 145px; top: 50px;}
+  .pd-left-500{padding-left: 500px;}
   .a-font{ color: black; font-weight :bold;}
+  .por-nav{     position: relative; left: 149px;}
+  .bg-or{background-color: rgb(255, 128, 89);}
+  
+  .ctQZg{
+  	    position: relative;
+    	left: 140px;
+  }
+  
+  .pbtn {
+	cursor: pointer;
+}
+.next{
+	cursor: pointer;
+}
+.pre {
+	cursor: pointer;
+	
+}
+.pbtnck{
+	z-index: 2;
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6
+
+}
+
+.por{
+	
+	margin-top: 29px;
+}
