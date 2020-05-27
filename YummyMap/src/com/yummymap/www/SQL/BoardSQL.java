@@ -7,8 +7,8 @@ package com.yummymap.www.SQL;
  * 
  */
 public class BoardSQL {
-	public final int SEL_TOTAL_CNT = 1002;
-	public final int SEL_ALL_LIST = 1001;
+	public final int SEL_TOTAL_CNT = 1001;
+	public final int SEL_ALL_LIST = 1002;
 	public final int SEL_CONT = 1003;
 	public final int SEL_RECOM = 1004;
 	public final int SEL_LIST_REPLY = 1005;
@@ -21,6 +21,7 @@ public class BoardSQL {
 
 	public final int REMOVE_CONT = 3001;
 	public final int REMOVE_RNUM_BRD = 3002;
+	public final int REMOVE_REPLY = 3003;
 
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -139,6 +140,13 @@ public class BoardSQL {
 			buff.append("	reply ");
 			buff.append("WHERE ");
 			buff.append("	txtno = ? AND isshow = 'Y' ");
+			break;
+		case REMOVE_REPLY:
+			buff.append("UPDATE reply ");
+			buff.append("SET ");
+			buff.append("	isshow = 'N' ");
+			buff.append("WHERE ");
+			buff.append(" rno = ? ");
 			break;
 		}
 		return buff.toString();

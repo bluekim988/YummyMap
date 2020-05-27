@@ -1,6 +1,6 @@
 package com.yummymap.www.DAO;
 /**
- * @author	김소영
+ * @author	김소영, 김종형
  * @since	2020.05.27
  *  이 클래스는 게시판 데이터베이스 전달 (DAO) 입니다
  */
@@ -93,6 +93,7 @@ public class BoardDAO {
 
 	// 게시판 테이블 글 등록 데이터베이스 작업 전담 처리 함수
 	// 매개변수로 개시글 데이터를 담은 VO를 받습니다.
+	// VO객체는 제목, 작성자아이디, 카테고리번호, 본문을 필수로 포함해야합니다.
 	// 반환값으로 Insert에 성공시 1을 반환, 실패시 0을 반환합니다.
 	public int addBoard(BoardVO bvo) {
 		int cnt = 0;
@@ -137,6 +138,25 @@ public class BoardDAO {
 			db.close(con);
 		}
 		// 6. 결과 내보내고
+		return cnt;
+	}
+	// 해당리플을 삭제해주는 메소드입니다.
+	// 매개변수로 리플의 키값을 받습니다.
+	// 반환값은 성공시1을 실패시 0을 반환합니다.
+	public int removeReply(int rno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.REMOVE_REPLY);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, rno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
 		return cnt;
 	}
 
@@ -244,7 +264,7 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardVO replyVo = new BoardVO();
 				replyVo.setRno(rs.getInt("rno"));
-				replyVo.setRtxt(rs.getString("stxt"));
+				replyVo.setRtxt(rs.getString("rtxt"));
 				replyVo.setMid(rs.getString("mid"));
 				replyVo.setcDate(rs.getDate("cdate"));
 				replyVo.setTxtno(rs.getInt("txtno"));
