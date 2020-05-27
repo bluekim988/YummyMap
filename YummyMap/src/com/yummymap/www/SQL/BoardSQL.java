@@ -18,10 +18,12 @@ public class BoardSQL {
 	public final int EDIT_CONT = 2003;
 	public final int ADD_BRD = 2004;
 	public final int ADD_REPLY = 2005;
+	public final int ADD_RECOMMEND = 2006;
 
 	public final int REMOVE_CONT = 3001;
 	public final int REMOVE_RNUM_BRD = 3002;
 	public final int REMOVE_REPLY = 3003;
+	public final int REMOVE_RECOMMEND = 3004;
 
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -85,23 +87,33 @@ public class BoardSQL {
 			break;
 		case EDIT_RNUM_BRD:
 			buff.append("UPDATE ");
-			buff.append("	recommend r, txt t, member m ");
+			buff.append("	txt  ");
 			buff.append("SET ");
 			buff.append("	rnum = rnum + 1 ");
 			buff.append("WHERE ");
 			buff.append("	txtno = ? ");
-			buff.append("	AND isrec = 'Y' ");
-			buff.append("	AND r.mid = m.mid ");
+			break;
+		case ADD_RECOMMEND:
+			buff.append("INSERT INTO recommend (recomno, mid, txtno) ");
+			buff.append("VALUSE( ");
+			buff.append("getRecomno.nextval, ?, ? ");
+			buff.append(") ");
 			break;
 		case REMOVE_RNUM_BRD:
 			buff.append("UPDATE ");
-			buff.append("	txt t, recommend r, member m ");
+			buff.append("	txt  ");
 			buff.append("SET ");
 			buff.append("	rnum = rnum - 1 ");
 			buff.append("WHERE ");
 			buff.append("	txtno = ? ");
-			buff.append("	AND isshow = 'N' ");
-			buff.append("	AND r.mid = m.mid ");
+			break;
+		case REMOVE_RECOMMEND:
+			buff.append("UPDATE ");
+			buff.append(" recommend ");
+			buff.append("SET ");
+			buff.append("	isrec='N' ");
+			buff.append("WHERE ");
+			buff.append("	txtno=? AND mid = ? ");
 			break;
 		case REMOVE_CONT:
 			buff.append("UPDATE ");
@@ -129,7 +141,7 @@ public class BoardSQL {
 			break;
 		case ADD_REPLY: 
 			buff.append("INSERT INTO reply (rno, rtxt, mid, txtno) ");
-			buff.append("VALUSE ( ");
+			buff.append("VALUES ( ");
 			buff.append(" getrno.nextval, ?, ?, ? ");
 			buff.append(") ");
 			break;

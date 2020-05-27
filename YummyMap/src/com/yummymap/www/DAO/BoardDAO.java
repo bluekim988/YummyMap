@@ -279,6 +279,46 @@ public class BoardDAO {
 		}
 		return replyList;
 	}
+	// 해당 게시글의 추천수를 +1 증가해주는 메소드입니다.
+	// 매개변수로 게시글의 키값을 받습니다.
+	// 반환값은 성공시 1, 실패시0을 반환합니다.
+	public int increaseTextRnum(int txtno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.EDIT_RNUM_BRD);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, txtno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	// 게시글추천여부 기록의 데이터를 추가해주는 메소드입니다.
+	// increaseTextRnum() 선행되어야합니다.
+	// 매개변수로 사용자 아이디와, 해당글의 키값을 입력받습니다.
+	public int addRecommendData(String userID, int txtno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.ADD_RECOMMEND);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, txtno);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
 	
+	// 해당 게시글의 추천수를 +1 증가해주는 메소드입니다.
+	// 매개변수로 게시글의 키값을 받습니다.
+	// 반환값은 성공시 1, 실패시0을 반환합니다.
+	
+	// 게시글의 추천여부 기록 데이터를 삭제해주는 메소드입니다.
 }
 
