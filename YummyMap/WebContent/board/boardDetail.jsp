@@ -160,11 +160,12 @@
 					<p id="" class="pl-2">${data.cDate}</p>
 				</div>
 				<div class="reply-txt-2 ">
-					<p id="">${data.rtxt }</p>
-				</div>
+					<p id="" style=" display:inline-block; width: 680px;">${data.rtxt }
+					</p>
 				<c:if test="${data.mid eq sid}">
-					<a href="#" class="badge badge-danger">Danger</a>
+					<a href="#" class="badge badge-danger">댓글삭제</a>
 				</c:if>
+				</div>
 				<div class="b-w border-bottom ml-5 mt-4"></div>
 			</div>
 			</c:forEach>
