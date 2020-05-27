@@ -76,12 +76,12 @@
 						</div>
 					</div>
 					<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
-					<a href="#" class="badge badge-light nav-item" id="login">LOGIN</a>
-					<a href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
+					<a href="/YummyMap/join/login.mmy" class="badge badge-light nav-item" id="login">LOGIN</a>
+					<a href="/YummyMap/join/logoutProc.mmy"" class="badge badge-light nav-item" id="logout">LOGOUT</a>
 				</div>
 			</div>
 		</div>
-		<a class="navbar-brand tcolor logo" href="#" id=""> YUMMY MAP </a>
+		<a class="navbar-brand tcolor logo" href="/YummyMap/main.mmy" id=""> YUMMY MAP </a>
 		<div class="b-subtitle text-right">
 			<p class="pt-3 text-left">마이페이지</p>
 		</div>

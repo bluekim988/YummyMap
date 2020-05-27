@@ -169,7 +169,7 @@ $(document).ready(function () {
   } else {
 	  $('#login').hide();
 	  $('#logout').show();
-	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
+	  $('#mypage').attr('href', '/YummyMap/member/member.mmy');
   }
 
 	//검색기능 이벤트입니다.
