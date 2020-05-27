@@ -115,9 +115,9 @@ public class BoardSQL {
 			buff.append("	txt ");
 			buff.append("SET ");
 			buff.append("	title = ? , ");
-			buff.append("	rtxt = ?  ");
+			buff.append("	mtxt = ?  ");
 			buff.append("WHERE ");
-			buff.append("	rno = ? ");
+			buff.append("	txtno = ? ");
 			break;
 		case ADD_BRD: 
 			buff.append("INSERT INTO ");
