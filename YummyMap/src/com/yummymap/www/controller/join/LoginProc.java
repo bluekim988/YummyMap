@@ -2,7 +2,7 @@ package com.yummymap.www.controller.join;
 /**
  * 이 클래스는 로그인 처리 메소드를 사용하여 일치여부에 따라 맞는 페이지로 리다이렉트 시켜주는 역할을 전담한다.
  * @author 임서진
- * @since 2020.05.26
+ * @since 2020.05.27
  */
 import java.io.IOException;
 
@@ -39,7 +39,7 @@ public class LoginProc implements MmyController {
       } else if (cnt == 0) {
          try {
             // 회원가입 화면으로 리다이렉트
-            resp.sendRedirect("/YummyMap/join/join.mmy?r=x");
+            resp.sendRedirect("/YummyMap/join/login.mmy?r=x");
          } catch (IOException e) {}
       }
 
