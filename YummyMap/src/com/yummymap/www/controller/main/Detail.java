@@ -35,14 +35,18 @@ public class Detail implements MmyController {
 		}
 		
 		MainDAO dao = new MainDAO();
-		List<ResVO> resList = dao.getList(query_str, userID);
-		ResVO vo = dao.getResInfo(resno);
+
+		ResVO vo = dao.getResInfo(resno, userID);
 		List<String> imgList = dao.getResImg(resno);
 		vo.setImgList(imgList);
 		List<ReviewVO> reviewList = dao.getReviewList(resno);
+		if(reviewList.size() != 0) {
+			int reviewCount = reviewList.get(0).getReviewCount();
+			req.setAttribute("reviewCount", reviewCount);
+		}
 		req.setAttribute("vo", vo);
 		req.setAttribute("list", reviewList);
-		req.setAttribute("resList", resList);
+
 		String view = "/main_2.jsp";
 		return view;
 	}

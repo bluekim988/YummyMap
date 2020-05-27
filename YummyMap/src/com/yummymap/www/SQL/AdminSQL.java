@@ -1,7 +1,13 @@
+/**
+ * @author 유태희
+ * @since 2020.05.23
+ * 	이 클래스는 어드민계정이 사용하는 쿼리 생성 클래스 입니다
+ */
+
 package com.yummymap.www.SQL;
 
 public class AdminSQL {
- public final int SEL_AD = 1001;
+ public final int SEL_ADMIN = 1001;
  public final int SEL_ALL_USER = 1002;
  public final int SEL_USER = 1003;
  public final int SEL_ID_USER = 1004;
@@ -24,17 +30,17 @@ public class AdminSQL {
  public final int TITLE_BOARD_CNT = 2005;
  public final int NAME_BOARD_CNT = 2006;
  
- public final int USER_RE = 3001;
- public final int USER_RE_NOPASS = 3002;
+ public final int UPDATE_USER = 3001;
+ public final int UPDATE_USER_NOPASS = 3002;
  public final int DEL_UESR = 3003;
- public final int ADMIN_RE = 3004;
- public final int ADMIN_RE_NOPASS = 3005;
+ public final int UPDATE_ADMIN = 3004;
+ public final int UPDATE_ADMIN_NOPASS = 3005;
  
  public String getSQL(int code) {
 	 StringBuffer buff = new StringBuffer();
 	 
 	 switch(code) {
-	 case SEL_AD : 
+	 case SEL_ADMIN : 
 		 buff.append("SELECT ");
 		 buff.append(" count(*) cnt ");
 		 buff.append("FROM ");
@@ -63,6 +69,7 @@ public class AdminSQL {
 		 buff.append("        member "); 
 		 buff.append("    WHERE "); 
 		 buff.append("        grade = 'M' "); 
+		 buff.append("        AND isshow = 'Y' "); 
 		 buff.append("  )  "); 
 		 buff.append("WHERE "); 
 		 buff.append("    rno BETWEEN ? and ? ");
@@ -77,6 +84,7 @@ public class AdminSQL {
 		 buff.append("        member "); 
 		 buff.append("    WHERE "); 
 		 buff.append("        grade = 'M' "); 
+		 buff.append("        and isshow = 'Y' "); 
 		 buff.append("    	  and mid = ?  ");
 		 buff.append("  )  "); 
 		 buff.append("WHERE "); 
@@ -92,6 +100,7 @@ public class AdminSQL {
 		 buff.append("        member "); 
 		 buff.append("    WHERE "); 
 		 buff.append("        grade = 'M' "); 
+		 buff.append("        and isshow = 'Y' "); 
 		 buff.append("        AND mname = ? "); 
 		 buff.append("  )  "); 
 		 buff.append("WHERE "); 
@@ -104,6 +113,7 @@ public class AdminSQL {
 		 buff.append("    member "); 
 		 buff.append("WHERE "); 
 		 buff.append("    grade = 'M' "); 
+		 buff.append("    AND isshow = 'Y' "); 
 		 break;
 	 case USER_ID_CNT: 
 		 buff.append("SELECT  "); 
@@ -112,6 +122,7 @@ public class AdminSQL {
 		 buff.append("    member "); 
 		 buff.append("WHERE "); 
 		 buff.append("    grade = 'M' "); 
+		 buff.append("    AND isshow = 'Y' "); 
 		 buff.append("    and mid = ? ");
 		 break;
 	 case USER_NAME_CNT: 
@@ -121,6 +132,7 @@ public class AdminSQL {
 		 buff.append("    member "); 
 		 buff.append("WHERE "); 
 		 buff.append("    grade = 'M' "); 
+		 buff.append("    AND isshow = 'Y' "); 
 		 buff.append("    and mname = ? ");
 		 break;
 	 case USER_INFO : 
@@ -141,25 +153,25 @@ public class AdminSQL {
 		 buff.append("    grade = 'A' "); 
 		 buff.append("    and mid = ? ");
 		 break;	 
-	 case USER_RE:
+	 case UPDATE_USER:
 		 buff.append("UPDATE  "); 
 		 buff.append("    member  "); 
 		 buff.append("SET "); 
-		 buff.append("    mname = ? , mpw= ? , mtel= ? , memail= ?, issue= ? ,isshow=? "); 
+		 buff.append("    mname = ? , mpw= ? , mtel= ? , memail= ?, issue= ? "); 
 		 buff.append("WHERE "); 
 		 buff.append("	grade = 'M'   "); 
 		 buff.append("  AND  mno= ? ");
 		 break;
-	 case USER_RE_NOPASS:
+	 case UPDATE_USER_NOPASS:
 		 buff.append("UPDATE  "); 
 		 buff.append("    member  "); 
 		 buff.append("SET "); 
-		 buff.append("    mname = ? , mtel= ? , memail= ?, issue= ? ,isshow=? "); 
+		 buff.append("    mname = ? , mtel= ? , memail= ?, issue= ? "); 
 		 buff.append("WHERE ");
 		 buff.append("	grade = 'M'   "); 
 		 buff.append("  AND  mno= ? ");
 		 break;
-	 case ADMIN_RE:
+	 case UPDATE_ADMIN:
 		 buff.append("UPDATE  "); 
 		 buff.append("    member  "); 
 		 buff.append("SET "); 
@@ -168,7 +180,7 @@ public class AdminSQL {
 		 buff.append("	grade = 'A'   "); 
 		 buff.append("  AND  mid= ? ");
 		 break;
-	 case ADMIN_RE_NOPASS:
+	 case UPDATE_ADMIN_NOPASS:
 		 buff.append("UPDATE  "); 
 		 buff.append("    member  "); 
 		 buff.append("SET "); 
@@ -183,7 +195,7 @@ public class AdminSQL {
 		 buff.append("SET "); 
 		 buff.append("   isshow='N' "); 
 		 buff.append("WHERE "); 
-		 buff.append("	grade = 'A' "); 
+		 buff.append("	grade = 'M' "); 
 		 buff.append("  AND  mno= ? ");
 		 break;
 	 case PAGE_BOARD_LIST:

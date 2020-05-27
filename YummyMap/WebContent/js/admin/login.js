@@ -1,3 +1,8 @@
+/**
+@author 유태희
+@since 2020.05.23
+ 	이 JS는 관리자 로그인 사용할 JavaScript 입니다
+*/
 $(function(){
 	$('#join').click(function(){
 		let sid = $('#id').val();

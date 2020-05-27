@@ -95,4 +95,60 @@ public class JoinDAO {
 		}
 		return cnt;
 	}
+	
+	//아이디 찾기 전담 함수 
+	public String searchId(String name , String mail) {
+		String id = "";
+		
+		con = db.getConnection();
+		
+		String sql = jsql.getSQL(jsql.ID_SEARCH);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, name);
+			pstmt.setString(2, mail);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getString("mid");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return id;
+	}
+	
+	//비밀번호 찾기 전담 함수 
+	public int searchPass(String id , String mail) {
+		int cnt = 0;
+		
+		con = db.getConnection();
+		
+		String sql = jsql.getSQL(jsql.PASS_SEARCH);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, id);
+			pstmt.setString(2, mail);
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt("cnt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return cnt;
+	}
+
 }

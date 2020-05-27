@@ -71,97 +71,22 @@
             <input id="searchTag" class="ml-1 border-top-0 border-left-0 border-right-0" placeholder="  SEARCH" type="text"
                 class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
-        <div class="p-rel search-btn">
-            <button type="button" id="sub_btn" class="btn btn-warning btn-sm" data-toggle="modal"
-                data-target="#staticBackdrop">
-                위치선택
-            </button>
+        <form class="p-rel search-btn" style="width: 150px;" action="/YummyMap/main/selectCateList.mmy" method="get" id="cateFrm">
+            <select class="form-control form-control-sm border-top-0 border-left-0 border-right-0" name="category" id="cateBox">
+			  	<option selected id="cateBoxStr">CATEGORY</option>
+			  	<c:forEach var="cateList" items="${cateList}">
+			  	<option value="${cateList}">${cateList}</option>
+			  	</c:forEach>
+			</select>
+        </form>
+        <div class="text-right t2color bold	" id="cateStr" style="position: absolute; top: 22px; left: 1170px; width: 100px;">
+        	
         </div>
     </div>
     <!--검색창 영역 마지막입니다-->
-    <!--모달 페이지 시작입니다-->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title ml-4 md_ft2" id="staticBackdropLabel">위치 선택 </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-3 ml-4 mr-4 md_cl">
-                                <table class="table table-hover md_ft">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">호선</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9호선</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-6 md_cl1 ml-3">
-                                <table class="table table-hover md_ft1">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">역이름</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th class="sub-item" scope="row">신림역</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="sub-item" scope="row">구로디지털단지역</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary md_btn">선택</button>
-                    <button type="button" class="btn btn-secondary md_btn1" data-dismiss="modal">취소</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
-    <div class="nav-side" style="overflow:auto; overflow-x:hidden;">
-        <div class="tcolor list_title text-left" >
+    <div class="nav-side bg-white" style="overflow:auto; overflow-x:hidden;">
+        <div class="t2color list_title text-left" >
             YUMMY LIST
         </div>
         <div id="sideitem" >
@@ -170,9 +95,9 @@
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
                     <div class="list-item-title t2color">${data.resname}</div>
-                    <div class="list-item-sub t2color">${data.addr}</div>
+                    <div class="list-item-sub text-muted">${data.addr}</div>
                     <c:forEach var="menu" items="${data.menuList}">
-                    <a class="list-item-sub t2color">${menu}</a>
+                    <a class="list-item-sub text-muted">${menu}</a>
                     </c:forEach>
                 </div>
                 <c:if test="${sid != null && data.ispick == 'N'}">
@@ -191,7 +116,7 @@
         </div>
     </div>
     <!--side nav 마지막입니다-->
-    <div class=" line2 list2-ml">
+    <div class=" line2 list2-ml" style="overflow-x:none;">
         <div class="row" id="line2">
         <!-- 이미지리스트 아이템 시작 -->
         	<c:forEach var="data2" items="${list}">
@@ -221,81 +146,9 @@
     </div>
 </body>
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-	/*
-	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-	let options;
-	// 장소 검색 객체를 생성합니다
-	var ps = new kakao.maps.services.Places(); 
-  	navigator.geolocation.getCurrentPosition(function(position) {
-		console.log(position);
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
-		
-		var latlng = new kakao.maps.LatLng(latitude, longitude);
-		options = {
-			location : latlng,
-			radius : 1000,
-			page : 10
-		};
-    }, function(error) {
-         // 위치를 가져오는데 실패한 경우
-         consol.log(error.message);
-    });
-	// 키워드로 장소를 검색합니다
-	
-	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-	function placesSearchCB (data, status, pagination) {
-	    if (status === kakao.maps.services.Status.OK) {
-	    	*/
-			/* 
-				##넘어오는 데이터 샘플
-				address_name: "경기 안양시 동안구 비산동 1101-2"
-				category_group_code: "FD6"
-				category_group_name: "음식점"
-				category_name: "음식점 > 치킨 > 60계"
-				distance: "567"
-				id: "1360555804"
-				phone: "031-388-5959"
-				place_name: "60계 안양샛별한양점"
-				place_url: "http://place.map.kakao.com/1360555804"
-				road_address_name: "경기 안양시 동안구 동안로 194"
-				x: "126.949369837888"
-				y: "37.3959425465037" */
-/*
-		console.log(data);
-		// 있으면 다음 페이지를 검색한다.
-		for(let i=0; i<data.length; i++){
-			let res_name = data[i].place_name;
-			let res_addr = data[i].address_name;
-			let res_cate = data[i].category_name;
-			let res_tel = data[i].phone;
-			console.log(i+'##########');
-			console.log(res_name);
-			console.log(res_addr);
-			console.log(res_cate);
-			console.log(res_tel);
-			console.log(i+'##########');
-		}
-			if(pagination.hasNextPage){
-				pagination.nextPage();
-			}
-			console.log(pagination.hasNextPage);
-	    } 
-
-
-	}
-	
-	 $("#searchTag").keydown(function(key) {
-         if (key.keyCode == 13) {
-        	 let query_str = $('#searchTag').val();
-     		ps.keywordSearch(query_str, placesSearchCB, options); 
-         }
-	  });
-    */
   //로그인 여부를 확인합니다.
   let userid = '${sid}';
   if(!userid) {
@@ -351,6 +204,16 @@ $(document).ready(function () {
 		}
 		$(location).attr('href', '/YummyMap/main/myList.mmy');
 	});
+	
+	//카테고리 선택 이벤트입니다.
+	$('#cateBox').change(function(){
+		$('#cateFrm').submit();
+	});
+	
+	let cate_param = '${param.category}';
+	if(cate_param) {
+		$('#cateStr').text(cate_param);
+	}
 
 });
     

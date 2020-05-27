@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.StringTokenizer;
 
 public class ResVO {
-	private int resno, catno, subno;
+	private int resno, catno, subno, reviewCount;
 	private double avg;
 	private String resname, addr, tel, menu, ispick;
 	private List<String> menuList;
@@ -14,6 +14,13 @@ public class ResVO {
 	}
 	public void setResno(int resno) {
 		this.resno = resno;
+	}
+	
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 	public int getCatno() {
 		return catno;

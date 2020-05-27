@@ -1,9 +1,15 @@
-/* 노말라이즈 작업(초기화) */
+/**
+@author 유태희
+@since 2020.05.20
+ 	이 CSS는 초기값 설정 CSS 입니다
+*/
+
+/* �끂留먮씪�씠利� �옉�뾽(珥덇린�솕) */
 html,body {padding: 0px; margin: 0; font-size: 16px;
 	color: #111;  box-sizing: border-box;}
 
 div,p,ul,li,ol,dl,dd,dt,form,h1,h2,h3,h4,h5,h6{padding: 0; margin: 0; box-sizing: border-box;}
-/* box-sizing: border-box; 보더를 포함하여 박스사이즈로 잡는다 */
+/* box-sizing: border-box; 蹂대뜑瑜� �룷�븿�븯�뿬 諛뺤뒪�궗�씠利덈줈 �옟�뒗�떎 */
 
 ul,ol,li {list-style: none;}
 img {margin: 0; padding: 0; border: 0;}
@@ -12,7 +18,7 @@ table, td {border-spacing: 0; border-collapse: collapse;}
 input {box-sizing: border-box;}
 button {border: none;}
 
-/* 공통사항 */
+/* 怨듯넻�궗�빆 */
 .clear:after {display: block; content: ""; clear: both;}
 .pointer {cursor: pointer;}
 .img {width: 100%;}

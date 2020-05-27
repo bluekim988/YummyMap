@@ -66,133 +66,52 @@
             <input class="ml-1 border-top-0 border-left-0 border-right-0" id="searchTag" placeholder="  SEARCH" type="text"
                 class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
-        <div class="p-rel search-btn">
-            <button type="button" id="sub_btn" class="btn btn-warning btn-sm" data-toggle="modal"
-                data-target="#staticBackdrop">
-                위치선택
-            </button>
-        </div>
+        <form class="p-rel search-btn" style="width: 150px;" action="/YummyMap/main/selectCateList.mmy" method="get" id="cateFrm">
+            <select class="form-control form-control-sm border-top-0 border-left-0 border-right-0" name="category" id="cateBox">
+			  	<option selected id="cateSet">CATEGORY</option>
+			  	<c:forEach var="cateList" items="${cateList}">
+			  	<option value="${cateList}">${cateList}</option>
+			  	</c:forEach>
+			</select>
+        </form>
     </div>
     <!--검색창 영역 마지막입니다-->
-    <!--모달 페이지 시작입니다-->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title ml-4 md_ft2" id="staticBackdropLabel">위치 선택 </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-3 ml-4 mr-4 md_cl">
-                                <table class="table table-hover md_ft">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">호선</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9호선</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-6 md_cl1 ml-3">
-                                <table class="table table-hover md_ft1">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">역이름</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">강남역</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">구로디지털단지역</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary md_btn">선택</button>
-                    <button type="button" class="btn btn-secondary md_btn1" data-dismiss="modal">취소</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
-    <div class="nav-side" style="overflow:auto; overflow-x:hidden;">
-        <div class="tcolor list_title text-left">
+    <div class="nav-side bg-white" style="overflow:auto; overflow-x:hidden;">
+        <div class="t2color list_title text-left">
             YUMMY LIST
         </div>
         <div>
-        	<c:forEach var="resData" items="${resList}">
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
-                    <div class="list-item-title t2color">${resData.resname}</div>
-                    <div class="list-item-sub t2color">${resData.addr}</div>
-                    <c:forEach var="menu" items="${resData.menuList}">
-                    <a class="list-item-sub t2color">${menu}</a>
+                    <div class="list-item-title t2color" id="resName">${vo.resname}</div>
+                    <div class="list-item-sub text-muted">${vo.addr}</div>
+                    <c:forEach var="menu" items="${vo.menuList}">
+                    <a class="list-item-sub text-muted">${menu}</a>
                     </c:forEach>
                 </div>
-                <c:if test="${sid != null && resData.ispick == 'N'}">
+                <c:if test="${sid != null && vo.ispick == 'N'}">
                 <div class="list-item-like">
-                    <p class="heart pickRes" id="${resData.resno}"><i class="far fa-heart " ></i> </p>
+                    <p class="heart pickRes" id="${vo.resno}"><i class="far fa-heart " ></i> </p>
                 </div>
                 </c:if>
-                <c:if test="${sid != null && resData.ispick == 'Y'}">
+                <c:if test="${sid != null && vo.ispick == 'Y'}">
                 <div class="list-item-like">
-                    <p class="heart pickRes" id="${resData.resno}"><i class="fas fa-heart"></i></p>
+                    <p class="heart pickRes" id="${vo.resno}"><i class="fas fa-heart"></i></p>
                 </div>
                 </c:if>
             </div>
-            </c:forEach>
         </div>
     </div>
     <!--side nav 마지막입니다-->
-    <div class="line2 list2-ml mb-5">
+    <div class="line2 list2-ml mb-5" style="overflow-x:none;">
         <div class="row">
             <div class="orange-line res-item content">
                 <div class="text-right md_ft1">
                     <div class="imgdiv">
                         <span class="imgspan">
-                        	<c:forEach var="imgdata" items="${vo.imgList}">
-                            <img src="/YummyMap/resimg/${imgdata}" style="height: 260px;">
-                            </c:forEach>
+                            <img src="/YummyMap/resimg/${vo.imgList.get(0)}" style="height: 260px;">
+                            <div id="map" style="width:100%;height:260px;"></div>
                         </span>
                         <div class="text-left ml-2">
                             <p id="star_grade">
@@ -205,7 +124,7 @@
                             </p>
                         </div>
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            ${vo.resname}
+                            ${vo.resname}[${vo.avg}]
                         </div>
                     </div>
                 </div>
@@ -229,8 +148,7 @@
                                 </svg></span>
                             <div class="txt dt_pd">
                                 <ul class="list_address">
-                                    <li><span class="addr dt_ft">${vo.addr}</span><span class="btn"><a class="link"
-                                                href="#">지도보기</a></span>
+                                    <li><span class="addr dt_ft" id="resAddr">${vo.addr}</span><span class="btn"></span>
                                     </li>
                                 </ul>
                             </div>
@@ -250,8 +168,11 @@
 
                         </div>
                     </div>
-                    <div class="rv_tt"> RIVIEW </div>
-                    	<a class="pr-2">별점선택</a>
+                    <div class="d-flex">
+	                    <div class="rv_tt "> RIVIEW</div>
+	                    <small class="text-muted pl-2 ">리뷰(${vo.reviewCount})</small>
+                    </div>
+                    <a class="pr-2">별점선택</a>
                     <div id="star_grade">
                     	<a class="fas fa-star " id="1"></a>
                     	<a class="fas fa-star " id="2"></a>
@@ -288,6 +209,7 @@
     </div>
 
 </body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript" src="../js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -362,6 +284,67 @@ $(document).ready(function () {
 		}
 		$(location).attr('href', '/YummyMap/main/myList.mmy');
 	});
+
+	//카테고리 선택 이벤트입니다.
+	$('#cateBox').change(function(){
+		$('#cateFrm').submit();
+	});
+	
+	let cate_param = '${param.category}';
+	if(cate_param) {
+		$('#cateSet').val(cate_param);
+	}
+	
+	
+	// 카카오 지도 API
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+	// 장소 검색 객체를 생성합니다
+	var ps = new kakao.maps.services.Places(); 
+	var keyword = document.getElementById('resName').innerText;
+	// 키워드로 장소를 검색합니다
+	ps.keywordSearch('구로디지털단지역'+keyword, placesSearchCB); 
+
+	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+	function placesSearchCB (data, status, pagination) {
+	    if (status === kakao.maps.services.Status.OK) {
+
+	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+	        // LatLngBounds 객체에 좌표를 추가합니다
+	        var bounds = new kakao.maps.LatLngBounds();
+
+	        for (var i=0; i<data.length; i++) {
+	            displayMarker(data[i]);    
+	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+	        }       
+
+	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+	        map.setBounds(bounds);
+	    } 
+	}
+	// 지도에 마커를 표시하는 함수입니다
+	function displayMarker(place) {
+	    
+	    // 마커를 생성하고 지도에 표시합니다
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: new kakao.maps.LatLng(place.y, place.x) 
+	    });
+
+	    // 마커에 클릭이벤트를 등록합니다
+	    kakao.maps.event.addListener(marker, 'click', function() {
+	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+	        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+	        infowindow.open(map, marker);
+	    });
+	}
 
 
 });

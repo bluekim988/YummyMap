@@ -24,23 +24,35 @@
 	컨트롤러 : /com.yummymap.www.controller.main.ReviewProc
 	뷰		 : /main_2.jsp
 	------------------------------------------------------------------------------
-4. 내가작성한 리뷰 삭제 처리 요청
+5. 내가작성한 리뷰 삭제 처리 요청
 	요청내용 : /main/removeReview.mmy
 	파라미터 : revno
 	컨트롤러 : /com.yummymap.www.controller.main.RemoveReviewProc
 	뷰		 : /main_2.jsp
 	------------------------------------------------------------------------------
-5. 찜(하트) 처리 요청
+6. 찜(하트) 처리 요청
 	요청내용 : /main/pickMyRes.mmy
 	파라미터 : resno
 	컨트롤러 : /com.yummymap.www.controller.main.PickMyRes
 	뷰		 : 비동기
 	------------------------------------------------------------------------------
-5. 찜리스트 뷰 요청
+7. 찜리스트 뷰 요청
 	요청내용 : /main/myList.mmy
 	파라미터 : 
 	컨트롤러 : /com.yummymap.www.controller.main.MyListViewForward
 	뷰		 : /main_2.jsp
+	------------------------------------------------------------------------------	
+8. 식당리스트 데이터 비동기처리
+	요청내용 : /main/resDataProc.mmy
+	파라미터 : 
+	컨트롤러 : /com.yummymap.www.controller.main.ResDataProc
+	뷰		 : 비동기
+	------------------------------------------------------------------------------	
+9. 카테고리 선택시 이벤트 처리
+	요청내용 : /main/selectCateList.mmy
+	파라미터 : 
+	컨트롤러 : /com.yummymap.www.controller.main.SelectCateList
+	뷰		 : 비동기
 	------------------------------------------------------------------------------	
 	
 	
@@ -199,5 +211,17 @@
 	요청내용 : /join/mailCk.mmy
 	파라미터 : 
 	컨트롤러 : com.yummymap.www.controller.join.MailCk
+	뷰		 : 비동기
+--------------------------------------------------------
+8. 아이디 찾기 비동기 처리 요청
+	요청내용 : /join/idSearch.mmy
+	파라미터 : name , mail
+	컨트롤러 : com.yummymap.www.controller.join.IdSearch
+	뷰		 : 비동기
+--------------------------------------------------------
+9. 비밀번호 찾기 비동기 처리 요청
+	요청내용 : /join/passSearch.mmy
+	파라미터 : id , mail
+	컨트롤러 : com.yummymap.www.controller.join.PassSearch
 	뷰		 : 비동기
 --------------------------------------------------------

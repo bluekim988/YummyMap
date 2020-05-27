@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="/YummyMap/css/member/login.css">
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <link rel="stylesheet" href="/YummyMap/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+<script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
@@ -70,20 +72,42 @@
       </form>
       <div class="btn-box">
         <div class="optionbox d-flex mt-3">
-          <a href=""><p class="option-item-text">아이디/비밀번호 찾기</p></a>
+          <a><p class="option-item-text text-primary" id="searchmem" style="cursor: pointer;">아이디/비밀번호 찾기</p></a>
           <a href="/YummyMap/join/join.mmy" class="ml-5"><p class="option-item-text">회원가입</p></a>
           <a href="/YummyMap/main.mmy" class="ml-5"><p class="option-item-text">홈으로</p></a>
-        </div>
-        <div class=" mt-5">
-          <button type="button" class="btn btn-success naverbtn">네이버 계정으로 로그인</button>
-        </div>
-        <div class="mt-1">
-          <button type="button" class="btn btn-warning kakaobtn" id="kakao">카카오 계정으로 로그인</button>
         </div>
       </div>
     </div>
   </div>
-<!-- body 마지막 입니다-->
+<!-- body 마지막 입니다 -->
+<!-- 모달창 입니다 -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">회원 정보 찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+       <input type="radio" name="memSrc" id="idSrc" value="id" checked="checked" > 아이디 찾기
+       <input class="ml-2" type="radio" name="memSrc" id="passSrc" value="pass" > 비밀번호 찾기
+      <form class="mt-3" action="/YummyMap/admin/mailProc.mmy" method="post" id="frm2" >
+        <div> 사용자 이름 : <input type="txet" id="name" name="name"></div>
+        <div class="mt-3"> 사용자 메일 : <input type="txet"  id="mail" name="mail"></div>
+       </form>
+        </div>
+        <small class="d-none text-danger text-center" id="srchint">*입력하신 계정 정보가 없습니다</small>
+       <div class="d-none text-center" id="okbox">
+       	
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger" id="sendbtn">발송</button>
+      </div>
+    </div>
+  </div>
 </body>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -103,6 +127,98 @@ $(document).ready(function () {
 	if(result == 'x'){
 		$('#msg1').show();
 	}
+	
+	$('#searchmem').click(function(){
+		$('#name').val('');	
+		$('#mail').val('');
+		$('#ids').val('');
+		$('#srchint').addClass('d-none');
+		$('#okbox').addClass('d-none');
+		$('.modal-body').removeClass('d-none');
+		$('#staticBackdrop').modal();
+	});
+	
+	//라디오 버튼 클릭식 폼태그 변경
+	$('input[name=memSrc]').click(function(){
+		let sd = $(this).val();
+		alert(sd);
+		
+		if(sd == 'pass'){
+			$('#frm2').html('<div> 사용자 아이디 : <input type="txet" id="ids" name="ids"></div>'+
+			        		'<div class="mt-3"> 사용자 이메일 : <input type="txet"  id="mail" name="mail"></div>');		
+		}else if(sd == 'id'){
+			$('#frm2').html('<div> 사용자 이름 : <input type="txet" id="name" name="name"></div>'+
+    						'<div class="mt-3"> 사용자 메일 : <input type="txet"  id="mail" name="mail"></div>');	
+		}
+	})
+	
+	$('#sendbtn').click(function(){
+		 let src = $('input[name=memSrc]:checked').val();
+		 
+		if(src == 'id'){
+			let name = $('#name').val();	
+			let mail = $('#mail').val();
+			if(!name || !mail){
+				alert('정보를 입력해 주세요!!');
+				return;
+			}
+			
+			$.ajax({
+				url : '/YummyMap/join/idSearch.mmy',
+				type: 'post',
+				dataType:'json',
+				data: {
+					'name' : name,
+					'mail' : mail
+				},
+				success: function(data){
+					if(data.result == 'ok'){
+						
+						$('#srchint').addClass('d-none');
+						
+						$('.modal-body').addClass('d-none');
+						$('#okbox').html('<h3>고객님의 개정은 </h3> <h2>' + data.id + '</h2> <h3>입니다</h3>');
+						$('#okbox').removeClass('d-none');
+					}else if(data.result == 'no'){
+						$('#srchint').removeClass('d-none');
+					}
+				},error : function(){
+					alert('통싱오류 ㅠㅜ ');
+				}
+				
+			});
+		}else if(src == 'pass'){
+			let id = $('#ids').val();	
+			let mail = $('#mail').val();
+			if(!id || !mail){
+				alert('정보를 입력해 주세요!!');
+				return;
+			}
+			
+			$.ajax({
+				url : '/YummyMap/join/passSearch.mmy',
+				type: 'post',
+				dataType:'json',
+				data: {
+					'id' : id,
+					'mail' : mail
+				},
+				success: function(data){
+					
+					
+// 					if(data.result == 'ok'){
+						
+// 					}else if(data.result == 'no'){
+// 						$('#srchint').removeClass('d-none');
+// 					}
+				},error : function(){
+					alert('통싱오류 ㅠㅜ ');
+				}
+				
+			});
+		}
+	});
+	
 	
 });
 </script>

@@ -1,11 +1,14 @@
 package com.yummymap.www.vo;
-
+/**
+ * 
+ * @author	김종형
+ */
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class ReviewVO {
 
-	private int revno, resno, starnum;
+	private int revno, resno, starnum, reviewCount;
 	private String id, 	txt, sdate;
 	private Date crdate;
 	public int getRevno() {
@@ -13,6 +16,12 @@ public class ReviewVO {
 	}
 	public void setRevno(int revno) {
 		this.revno = revno;
+	}
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 	public int getResno() {
 		return resno;

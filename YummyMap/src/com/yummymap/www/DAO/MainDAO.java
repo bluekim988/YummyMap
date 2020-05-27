@@ -72,13 +72,14 @@ public class MainDAO {
 		return list;
 	}
 	// 해당 식당의 상세정보를 가져오는 메소드입니다.
-	public ResVO getResInfo(int resno) {
+	public ResVO getResInfo(int resno, String userID) {
 		ResVO vo = new ResVO();
 		con = db.getConnection();
 		String sql = msql.getSQL(msql.SEL_RES_INFO);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setInt(1, resno);
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, resno);
 			rs = pstmt.executeQuery();
 			rs.next();
 			vo.setResno(resno);
@@ -90,6 +91,7 @@ public class MainDAO {
 			vo.setMenuList();
 			double avg = getResAVG(resno);
 			vo.setAvg(avg);
+			vo.setIspick(rs.getString("ispick"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -151,6 +153,7 @@ public class MainDAO {
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
 			pstmt.setInt(1, resno);
+			pstmt.setInt(2, resno);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ReviewVO vo = new ReviewVO();
@@ -160,6 +163,7 @@ public class MainDAO {
 				vo.setStarnum(rs.getInt("starnum"));
 				vo.setCrdate(rs.getDate("crdate"));
 				vo.setSdate();
+				vo.setReviewCount(rs.getInt("cnt"));
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -306,5 +310,110 @@ public class MainDAO {
 			db.close(con);
 		}
 		return myPickList;
+	}
+	
+	// 리뷰 평점 TOP3 에 해당하는 식당을 가져오는 메소드입니다.
+	// 반환값은 식당VO를 담은 List입니다.
+	public List<ResVO> getAvgTopResList(String userID){
+		List<ResVO> topResList = new ArrayList<ResVO>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_AVGTOP_RES_LIST);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ResVO resVo = new ResVO();
+				resVo.setResno(rs.getInt("resno"));
+				resVo.setResname(rs.getString("resname"));
+				resVo.setAddr(rs.getString("address"));
+				resVo.setCatno(rs.getInt("catno"));
+				resVo.setTel(rs.getString("restel"));
+				resVo.setSubno(rs.getInt("subno"));
+				resVo.setMenu(rs.getString("menu"));
+				resVo.setMenuList();
+				resVo.setReviewCount(rs.getInt("count"));
+				resVo.setAvg(rs.getDouble("avg"));
+				resVo.setIspick(rs.getString("ispick"));
+				topResList.add(resVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return topResList;
+	}
+	// 리뷰수 TOP3 에 해당하는 식당을 가져오는 메소드입니다.
+	// 반환값은 식당VO를 담은 List입니다.
+	public List<ResVO> getTopReviewResList(String userID){
+		List<ResVO> resList = new ArrayList<ResVO>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_REVIEWTOP_RES_LIST);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ResVO resVo = new ResVO();
+				resVo.setResno(rs.getInt("resno"));
+				resVo.setResname(rs.getString("resname"));
+				resVo.setAddr(rs.getString("address"));
+				resVo.setCatno(rs.getInt("catno"));
+				resVo.setTel(rs.getString("restel"));
+				resVo.setSubno(rs.getInt("subno"));
+				resVo.setMenu(rs.getString("menu"));
+				resVo.setMenuList();
+				resVo.setReviewCount(rs.getInt("count"));
+				resVo.setAvg(rs.getDouble("avg"));
+				resVo.setIspick(rs.getString("ispick"));
+				resList.add(resVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return resList;
+	}
+	// 카테고리에 해당하는 모든 식당 리스트를 가져옵니다
+	// 매개변수로 카테고리이름을 받습니다.
+	// 반환값은 식당VO를 담은 List입니다.
+	public List<ResVO> getListWithCate(String category, String userID){
+		List<ResVO> resList = new ArrayList<ResVO>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_RESLIST_WITH_CATEGORY);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			pstmt.setString(2, category);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ResVO resVo = new ResVO();
+				resVo.setResno(rs.getInt("resno"));
+				resVo.setResname(rs.getString("resname"));
+				resVo.setAddr(rs.getString("address"));
+				resVo.setCatno(rs.getInt("catno"));
+				resVo.setTel(rs.getString("restel"));
+				resVo.setSubno(rs.getInt("subno"));
+				resVo.setMenu(rs.getString("menu"));
+				resVo.setMenuList();
+				resVo.setReviewCount(rs.getInt("count"));
+				resVo.setAvg(rs.getDouble("avg"));
+				resVo.setIspick(rs.getString("ispick"));
+				resList.add(resVo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return resList;
 	}
 }
