@@ -144,15 +144,15 @@ public class BoardDAO {
 	// 매개변수로 리플데이터를 담은 VO를 받습니다.
 	// VO객체는 제목, 본문, 키값을 필수로 포함해야합니다.
 	// 반환값으로 Insert성공시 1을 실패시 0을 반환합니다.
-	public int editBoard(BoardVO replyVo) {
+	public int editBoard(BoardVO txtVo) {
 		int cnt = 0;
 		con = db.getConnection();
 		String sql = bSQL.getSQL(bSQL.EDIT_CONT);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setString(1, replyVo.getTitle());
-			pstmt.setString(2, replyVo.getRtxt());
-			pstmt.setInt(3, replyVo.getRno());
+			pstmt.setString(1, txtVo.getTitle());
+			pstmt.setString(2, txtVo.getMtxt());
+			pstmt.setInt(3, txtVo.getTxtno());
 			cnt = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
