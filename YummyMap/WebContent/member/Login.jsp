@@ -76,12 +76,6 @@
           <a href="/YummyMap/join/join.mmy" class="ml-5"><p class="option-item-text">회원가입</p></a>
           <a href="/YummyMap/main.mmy" class="ml-5"><p class="option-item-text">홈으로</p></a>
         </div>
-        <div class=" mt-5">
-          <button type="button" class="btn btn-success naverbtn">네이버 계정으로 로그인</button>
-        </div>
-        <div class="mt-1">
-          <button type="button" class="btn btn-warning kakaobtn" id="kakao">카카오 계정으로 로그인</button>
-        </div>
       </div>
     </div>
   </div>

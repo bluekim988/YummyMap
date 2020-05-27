@@ -68,7 +68,7 @@ public class WebDBCP {
 				((PreparedStatement) sqlResourceObj).close();
 			} else if (sqlResourceObj instanceof ResultSet) {
 				((ResultSet) sqlResourceObj).close();
-			}
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
