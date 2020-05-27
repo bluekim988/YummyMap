@@ -7,6 +7,7 @@ public class JoinSQL {
 	public final int ID_SEARCH = 1004;
 	public final int PASS_SEARCH = 1005;
 	
+	public final int UPDATE_USER_TEMPPASS = 1006;
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
 		switch(code) {
@@ -55,6 +56,14 @@ public class JoinSQL {
 			buff.append("    mid = ? "); 
 			buff.append("    and memail = ? "); 
 			buff.append("    and grade = 'M' ");
+			break;
+		case UPDATE_USER_TEMPPASS:
+			buff.append("UPDATE "); 
+			buff.append("    member "); 
+			buff.append("SET "); 
+			buff.append("    mpw = ? "); 
+			buff.append("WHERE "); 
+			buff.append("    mid =? ");
 			break;
 		}
 		return buff.toString();

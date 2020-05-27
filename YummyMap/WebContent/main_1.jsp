@@ -38,7 +38,7 @@
                                 <div class="poA5q" style="margin-left: -423px;"></div>
                             </div>
                         </div>
-                        <div class="XrOey" id=""><a href="#" id="mypage"><svg aria-label="프로필" class="_8-yf5 " fill="#262626" height="24"
+                        <div class="XrOey" id=""><a id="mypage"><svg aria-label="프로필" class="_8-yf5 " fill="#262626" height="24"
                                     viewBox="0 0 48 48" width="24">
                                     <path
                                         d="M24 26.7c7.4 0 13.4-6 13.4-13.4S31.4 0 24 0 10.6 6 10.6 13.4s6 13.3 13.4 13.3zM24 3c5.7 0 10.4 4.6 10.4 10.4S29.7 23.7 24 23.7s-10.4-4.6-10.4-10.4S18.3 3 24 3zm9.1 27.1H14.9c-7.4 0-13.4 6-13.4 13.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c0-5.7 4.6-10.4 10.4-10.4h18.3c5.7 0 10.4 4.6 10.4 10.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c-.1-7.4-6.1-13.4-13.5-13.4z">
@@ -158,7 +158,7 @@ $(document).ready(function () {
   } else {
 	  $('#login').hide();
 	  $('#logout').show();
-	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
+	  $('#mypage').attr('href', '/YummyMap/member/member.mmy');
   }
 
 	//검색기능 이벤트입니다.

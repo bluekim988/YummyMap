@@ -222,7 +222,7 @@ $(document).ready(function () {
 	 } else {
 	  $('#login').hide();
 	  $('#logout').show();
-	  $('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
+	  $('#mypage').attr('href', '/YummyMap/member/member.mmy');
 	 }
 	 
 	//별 이벤트처리

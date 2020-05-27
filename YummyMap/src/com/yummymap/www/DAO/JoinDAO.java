@@ -150,5 +150,23 @@ public class JoinDAO {
 		
 		return cnt;
 	}
-
+	//임시 비밀번호 저장 함수
+	public int getTmpPass(String pass , String id) {
+		int cnt = 0;
+		
+		con = db.getConnection();
+		
+		String sql = jsql.getSQL(jsql.UPDATE_USER_TEMPPASS);
+		
+		pstmt = db.getPreparedStatement(con, sql);
+		
+		try {
+			pstmt.setString(1, pass);
+			pstmt.setString(2, id);
+			cnt = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return cnt;
+	}
 }

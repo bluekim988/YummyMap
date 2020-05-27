@@ -166,10 +166,10 @@ public class AdminSQL {
 		 buff.append("UPDATE  "); 
 		 buff.append("    member  "); 
 		 buff.append("SET "); 
-		 buff.append("    mname = ? , mtel= ? , memail= ?, issue= ? "); 
+		 buff.append("    mname = ? ,  mtel= ? , memail= ?, issue= ? "); 
 		 buff.append("WHERE ");
-		 buff.append("	grade = 'M'   "); 
-		 buff.append("  AND  mno= ? ");
+		 buff.append("	grade = 'M' "); 
+		 buff.append("  AND  mno = ? ");
 		 break;
 	 case UPDATE_ADMIN:
 		 buff.append("UPDATE  "); 

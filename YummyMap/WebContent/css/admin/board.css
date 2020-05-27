@@ -61,3 +61,26 @@ a:hover {
 	border-bottom: none;
 	text-decoration: none;
 }
+
+.title:hover{
+	cursor: pointer;
+}
+
+.pbtn {
+	cursor: pointer;
+}
+.next{
+	cursor: pointer;
+}
+.pre {
+	cursor: pointer;
+	
+}
+.pbtnck{
+	z-index: 2;
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6
+
+}

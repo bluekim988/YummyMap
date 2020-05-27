@@ -36,9 +36,8 @@
 					<div class="ctQZg">
 						<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
 						<div class="badge badge-light nav-item">${SID}</div>
-						<a href="http://localhost/YummyMap/admin/adminedit.mmy"
-							class="badge badge-light nav-item">정보수정</a> <a href="#"
-							class="badge badge-light nav-item" id="logout">LOGOUT</a>
+						<a href="http://localhost/YummyMap/admin/adminedit.mmy" class="badge badge-light nav-item">정보수정</a> 
+						<sapn class="badge badge-light nav-item" id="logout">LOGOUT</sapn>
 					</div>
 				</div>
 			</div>
@@ -65,8 +64,8 @@
 				style="height: 575px;">
 				<div class="txt-line  mb-4">
 					<div class="btns d-flex justify-content-end pr-4 mt-2">
-						<a href="#" class="badge badge-danger mr-2 p-2" id="lbtn">뒤로가기</a>
-						<a href="#" class="badge badge-danger p-2" id="delete">삭제</a>
+						<a class="badge badge-info text-white mr-2 p-2" id="lbtn">뒤로가기</a>
+						<a class="badge badge-danger text-white p-2" id="delete">삭제</a>
 					</div>
 					<div class="b-w border-bottom ml-5 mt-4"></div>
 					<div class="d-flex title">
@@ -99,7 +98,9 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body"></div>
+				<div class="modal-body text-center">
+					해당 글을 정말 삭제 하겠습니까? 
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">취소</button>

@@ -3,6 +3,25 @@
 @since 2020.05.23
  	이 JS는 관리자 회원관리 페이지에 사용할 JavaScript 입니다
 */
+
+function search(){
+		let sel =	$('#opt').val();
+		let scname = $('#search-input').val();
+		if(sel == 'nos'){
+			alert('검색 조건을 먼저 선택하세요');
+			return;
+		}
+		if(sel != 'nos' && !scname){
+			alert('검색어를 입력하세요');
+			return;
+		}
+		
+		$('#searchs').val(scname);
+		$('#opts').val(sel);
+		$('#frm').attr('action','/YummyMap/admin/main.mmy');
+		$('#frm').submit();
+	}
+
 $(function(){
 	let mno;
 	$('.obtn').click(function(){
@@ -28,19 +47,35 @@ $(function(){
 		
 	});
 	
-	$('#sbtn').click(function(){
+	$('.next').click(function(){
+		let page = $(this).attr('id');
 		let sel =	$('#opt').val();
 		let scname = $('#search-input').val();
-		if(sel != 'nos' && !scname){
-			alert('검색어를 입력하세요 ! ');
-			$('#search-input').focus();
-			return;
-		}
-		
 		$('#searchs').val(scname);
 		$('#opts').val(sel);
+		$('#nowpage').val(page);
 		$('#frm').attr('action','/YummyMap/admin/main.mmy');
 		$('#frm').submit();
+	});
+	
+	$('.pre').click(function(){
+		let page = $(this).attr('id');
+		let sel =	$('#opt').val();
+		let scname = $('#search-input').val();
+		$('#searchs').val(scname);
+		$('#opts').val(sel);
+		$('#nowpage').val(page);
+		$('#frm').attr('action','/YummyMap/admin/main.mmy');
+		$('#frm').submit();
+	});
+	
+	
+	$('#sbtn').click(search);
+	$('#search-input').keydown(function(key){
+		if(key.keyCode == 13){
+			search();
+			return;
+		}
 	});
 	
 	$('.rbtn').click(function(){

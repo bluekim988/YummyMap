@@ -111,17 +111,34 @@
 							style="position: relative; vertical-align: top;" name="search"
 							value="${SCH}">
 					</div>
-					<button type="button" class="btn btn-secondary" id="sbtn">검색</button>
+					<button type="button" class="btn btn-primary" id="sbtn">검색</button>
 				</div>
-				<div class="d-flex justify-content-around mb-1 mt-2"
-					id="${PAGE.nowPage}">
-					<div class="btn-group mr-2" role="group" aria-label="First group">
-						<c:forEach var="page" begin="${PAGE.startPage}"
-							end="${PAGE.endPage}">
-							<button type="button" class="btn btn-secondary pbtn">${page}</button>
-						</c:forEach>
-					</div>
-				</div>
+	<div class="pager d-flex justify-content-center paging">
+         <div class="mb-5">
+            <nav aria-label="Page navigation example">
+               <ul class="pagination">
+                  <c:if test="${PAGE.endPage > 5}">
+                     <li class="page-item pre" id="${PAGE.prePage }"><a class="page-link"   aria-label="Previous"><span aria-hidden="true" >&laquo;</span>
+                     </a></li>
+                  </c:if>
+                  <c:forEach var="pageNo" begin="${PAGE.startPage}" end="${PAGE.endPage}">
+                  	<c:if test="${PAGE.nowPage eq pageNo }">
+                     <li class="page-item  page-link pbtn pbtnck">${pageNo}</li>
+                    </c:if>
+                  	<c:if test="${PAGE.nowPage ne pageNo }" >
+                     <li class="page-item  page-link pbtn">${pageNo}</li>
+                    </c:if>
+                  </c:forEach>
+                  <c:if test="${PAGE.endPage ne PAGE.totalPage}">
+                     <li class="page-item next" id="${PAGE.nextPage }" ><a class="page-link" 
+                        aria-label="Next"> <span aria-hidden="true" >&raquo;</span>
+                     </a></li>
+                  </c:if>
+
+               </ul>
+            </nav>
+         </div>
+      </div>
 
 			</div>
 		</div>

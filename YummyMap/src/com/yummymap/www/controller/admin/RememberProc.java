@@ -26,12 +26,10 @@ public class RememberProc implements MmyController {
 		String issues = req.getParameter("issue");
 		String mail = mailid + "@" + domain;
 		String issue="N";
-		String isshow="Y";
 		
 		
 		try {
 			if(issues.equals("ok")){
-				isshow="N";
 				issue = "X";
 			}
 		} catch (Exception e) {	}
@@ -51,19 +49,18 @@ public class RememberProc implements MmyController {
 		mvo.setMtel(tel);
 		mvo.setMemail(mail);
 		mvo.setIssue(issue);
-		mvo.setIsshow(isshow);
 		
 		AdminDAO adao = new AdminDAO();
 		adao.reMember(mvo);
 
 	 }else {
 			MemberInfoVO mvo = new MemberInfoVO();
+			
 			mvo.setMno(mno);
 			mvo.setMname(name);
 			mvo.setMtel(tel);
 			mvo.setMemail(mail);
 			mvo.setIssue(issue);
-			mvo.setIsshow(isshow);
 			
 			AdminDAO adao = new AdminDAO();
 			adao.reMemberNopass(mvo);

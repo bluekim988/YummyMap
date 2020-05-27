@@ -19,33 +19,36 @@
 <style>
 </style>
 <script type="text/javascript">
-	function setNum(cnt) {
-		cnt = cnt + 1;
-		return cnt;
+$(document).ready(function() {
+	let userid = '${sid}';
+	if (!userid) {
+		$('#login').show();
+		$('#logout').hide();
+		$('#mypage').attr('href', '/YummyMap/join/join.mmy');
+	} else {
+		$('#login').hide();
+		$('#logout').show();
+		$('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
 	}
-
-	$(document).ready(function() {
-			let userid = '${sid}';
-			if (!userid) {
-				$('#login').show();
-				$('#logout').hide();
-				$('#mypage').attr('href', '/YummyMap/join/join.mmy');
-			} else {
-				$('#login').hide();
-				$('#logout').show();
-				$('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
-			}
 		$('#submitBtn').click(function() {
+			var txtno = $('#txtno').val();
+			alert(txtno);
+			var title = $('#title').val();
+			alert(title);
+			var mtxt = $('#mtxt').val();
+			alert(mtxt);
 			// 데이터 유효성 체크
 			$('#frm').submit();
 		});
 		$('#exitBtn').click(function() {
 			$(location).attr('href', '/YummyMap/board/boardMain.mmy');
+			
 		});
 	});
 </script>
 </head>
 <body>
+
 	<!-- nav 영역입니다-->
 	<div class="bg-white border-bottom fixed-top nav-body">
 		<div class=" mt-2 nav-btn">
@@ -74,8 +77,9 @@
 						</div>
 					</div>
 					<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
-					<a href="http://localhost/YummyMap/join/login.mmy" class="badge badge-light nav-item" id="login">LOGIN</a>
-					<a href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
+					<a href="http://localhost/YummyMap/join/login.mmy"
+						class="badge badge-light nav-item" id="login">LOGIN</a> <a
+						href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
 				</div>
 			</div>
 		</div>
@@ -83,21 +87,30 @@
 		<div class="b-subtitle text-left">
 			<p class="pt-3">커뮤니티</p>
 		</div>
-		<div class=" nav-item-1 d-flex justify-content-end">
-			<a class="navbar-brand nav-item-size" href="#" id=""> <i
-				class="fas fa-gamepad"></i>
-			</a> <a class="navbar-brand nav-item-size" href="#"> <i
-				class="far fa-clipboard"></i>
-			</a>
-		</div>
+       <div class=" nav-item-1 d-flex justify-content-end">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" >
+                <i class="fas fa-gamepad" id="game"></i>
+            </a>
+            <a class="navbar-brand nav-item-size" href="http://localhost/YummyMap/board/boardMain.mmy">
+                <i class="far fa-clipboard"></i>
+            </a>
+        </div>
 	</div>
 	<!-- nav 마지막 입니다-->
 
 	<!-- body 시작 입니다-->
+	
+	<%-- <form method="post" action="/YummyMap/board/boardEditProc.mmy" id="frm">
+		 <input
+			type="hidden" name="title" id="title" value="${bVO.title}"> <input
+			type="hidden" name="mtxt" id="mtxt" value="${bVO.mtxt}"> <input
+			type="hidden" name="nowPage" id="nowPage" value="${nowPage}">
+	</form> --%>
 	<div class="main-body">
 		<div class="txt-line mb-4">
-			<form action="/YummyMap/board/boardWriteProc.mmy" method="POST"
+			<form action="/YummyMap/board/boardEditProc.mmy" method="POST"
 				id="frm">
+		<input type="hidden" name="txtno" id="txtno" value="${bVO.txtno}">
 				<div class="form-group d-flex">
 
 					<select name="catno" id="catno">
@@ -111,13 +124,12 @@
 						<option value="7" id="w3-button cat-item" name="cat">베트남요리</option>
 						<option value="8" id="w3-button cat-item" name="cat">인도요리</option>
 						<option value="9" id="w3-button cat-item" name="cat">야식</option>
-					</select> 
-					<input type="text" class="form-control ml-1" id="title"
-						name="title" placeholder="제목">
+					</select><input type="text" class="form-control ml-1"  id="title" name="title"
+						 placeholder="제목" value="${bVO.title}">
 				</div>
 				<div class="form-group mt-2">
-					<textarea class="form-control" id="mtxt"  rows="15" name="mtxt"
-						style="resize: none;"></textarea>
+					<textarea class="form-control" rows="15" id="mtxt" name="mtxt"
+						style="resize: none;">${bVO.mtxt} </textarea>
 				</div>
 				<button type="button" class="btn btn-primary btn-sm" id="submitBtn">완료</button>
 				<button type="button" class="btn btn-secondary btn-sm" id="exitBtn">취소</button>

@@ -225,3 +225,27 @@
 	컨트롤러 : com.yummymap.www.controller.join.PassSearch
 	뷰		 : 비동기
 --------------------------------------------------------
+10. 회원정보 페이지 요청
+   요청내용 :   /member/member.mmy
+   파라미터 : mid
+   컨트롤러 :   com.yummymap.www.controller.SelectMbr
+   뷰          : member/member.jsp
+--------------------------------------------------------
+11. 회원탈퇴  요청
+   요청내용 :   /member/DropUser.mmy
+   파라미터 : mid
+   컨트롤러 :   com.yummymap.www.controller.member.DropUser
+   뷰          : 무
+--------------------------------------------------------
+12.	비밀번호변경  요청
+   요청내용 :   /member/passProc.mmy
+   파라미터 : mid
+   컨트롤러 :   com.yummymap.www.controller.member.UpdateUserProc
+   뷰          : 무
+--------------------------------------------------------
+13.	내가쓴글 보기
+   요청내용 :   /member/txtList.mmy
+   파라미터 : mid
+   컨트롤러 :   com.yummymap.www.controller.member.TxtList
+   뷰          : /member/text.jsp
+---------------------------------------------------------------------
