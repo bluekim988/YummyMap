@@ -77,7 +77,7 @@ public class BoardDAO {
 				bVO.setBdate();
 				bVO.setCount(rs.getInt("count"));
 				bVO.setRnum(rs.getInt("rnum"));
-				bVO.setCatno(rs.getInt("cntno"));
+				bVO.setCatno(rs.getInt("catno"));
 				bVO.setLv(rs.getInt("lv"));
 				list.add(bVO);
 			}
