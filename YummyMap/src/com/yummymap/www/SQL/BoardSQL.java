@@ -133,10 +133,14 @@ public class BoardSQL {
 			buff.append(") ");
 			break;
 		case SEL_LIST_REPLY:
-			buff.append(" ");
+			buff.append("SELECT ");
+			buff.append("	rno, rtxt, mid, cdate, txtno ");
+			buff.append("FROM ");
+			buff.append("	reply ");
+			buff.append("WHERE ");
+			buff.append("	txtno = ? AND isshow = 'Y' ");
+			break;
 		}
-		
-		
 		return buff.toString();
 	}
 }

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.yummymap.www.DB.WebDBCP;
 import com.yummymap.www.SQL.BoardSQL;
@@ -230,36 +231,35 @@ public class BoardDAO {
 		}
 		return boardVo;
 	}
-/*
-	public ArrayList<BoardVO> getReplyList(int txtno) {
-		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
-		// Connection
+	// 해당 게시글의 모든 리플 리스트를 가져오는 메소드입니다.
+	// 매개변수로 게시글의 키값을 받습니다.
+	// 반환값은 reply VO를 담은 List입니다.
+	public List<BoardVO> getAllReplyList(int txtno) {
+		List<BoardVO> replyList = new ArrayList<BoardVO>();
 		con = db.getConnection();
 		String sql = bSQL.getSQL(bSQL.SEL_LIST_REPLY);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
 			pstmt.setInt(1, txtno);
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				BoardVO bVO = new BoardVO();
-				// 데이터 뽑고 VO에 담고
-				bVO.setMid(rs.getString("rno"));
-				bVO.setMid(rs.getString("mid"));
-				bVO.setTxtno(rs.getInt("rtxt"));
-				bVO.setTitle(rs.getString(""));
-				bVO.setcDate(rs.getDate("cdate"));
-				bVO.setBdate();
-				list.add(bVO);
+			while(rs.next()) {
+				BoardVO replyVo = new BoardVO();
+				replyVo.setRno(rs.getInt("rno"));
+				replyVo.setRtxt(rs.getString("stxt"));
+				replyVo.setMid(rs.getString("mid"));
+				replyVo.setcDate(rs.getDate("cdate"));
+				replyVo.setTxtno(rs.getInt("txtno"));
+				replyList.add(replyVo);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			db.close(rs);
 			db.close(pstmt);
 			db.close(con);
 		}
-		return list;
+		return replyList;
 	}
-	*/
+	
 }
 
