@@ -8,6 +8,7 @@
 <title></title>
 <link rel="stylesheet" href="/YummyMap/css/w3.css">
 <link rel="stylesheet" href="/YummyMap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="/YummyMap/css/member/text.css">
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
@@ -55,6 +56,16 @@
 			alert('asdsad');
 			$(location).attr('href', '/YummyMap/Drop/dropProc.mmy');
 		});
+		
+	      $('.bolist').click(function(){
+	          //글번호 알아낸다
+	          var txtno = $(this).attr('id');
+	          $('#txtno').val(txtno);
+	          $('#nowPage').val('${PAGE.nowPage}');
+	          $('#frm').attr('action','/YummyMap/board/boardDetail.mmy?txtno='+txtno);
+	          $('#frm').submit();
+	       });
+	
 	});
 </script>
 </head>
@@ -103,7 +114,7 @@
             <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" >
                 <i class="fas fa-gamepad" id="game"></i>
             </a>
-            <a class="navbar-brand nav-item-size" href="#">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy">
                 <i class="far fa-clipboard"></i>
             </a>
         </div>
@@ -169,19 +180,19 @@
 							</thead>
 							<tbody>
 								<c:forEach var="data" items="${LIST}">
-									<tr>									
-									<td>${data.txtno}</td>
-									<td>${data.title}</td>
-									<td>${data.mid}</td>
-									<td>${data.cdate}</td>
-									<td>${data.count}</td>
-									<td>${data.rnum}</td>
-									</tr>
+		                           <tr class="bolist" id="${data.txtno}">                           
+			                           <td>${data.txtno}</td>
+			                           <td>${data.title}</td>
+			                           <td>${data.mid}</td>
+			                           <td>${data.cdate}</td>
+			                           <td>${data.count}</td>
+			                           <td>${data.rnum}</td>
+		                           </tr>
 								</c:forEach>
 							</tbody>
 						</table>
 	<div class="pager d-flex justify-content-center paging">
-         <div class="mb-5">
+         <div class="mb-3">
             <nav aria-label="Page navigation example">
                <ul class="pagination">
                   <c:if test="${PAGE.endPage > 5}">
