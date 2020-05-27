@@ -121,9 +121,9 @@ public class BoardSQL {
 			break;
 		case ADD_BRD: 
 			buff.append("INSERT INTO ");
-			buff.append("	txt(txtno, mid, title, mtxt, catno ,lv) ");
+			buff.append("	txt (txtno, title, mid, catno, mtxt ) ");
 			buff.append("VALUES( ");
-			buff.append("	getTxtno.nextval, ?, ?, ?, ?, ? ");
+			buff.append("	getTxtno.nextval, ?, ?, ?, ? ");
 			buff.append(") ");
 			break;
 		case ADD_REPLY: 

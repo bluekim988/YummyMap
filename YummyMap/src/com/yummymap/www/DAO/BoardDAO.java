@@ -100,11 +100,10 @@ public class BoardDAO {
 		String sql = bSQL.getSQL(bSQL.ADD_BRD);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setString(1, bvo.getMid());
-			pstmt.setString(2, bvo.getTitle());
-			pstmt.setString(3, bvo.getMtxt());
-			pstmt.setInt(4, bvo.getCatno());
-			pstmt.setInt(5, bvo.getLv());
+			pstmt.setString(1, bvo.getTitle());
+			pstmt.setString(2, bvo.getMid());
+			pstmt.setInt(3, bvo.getCatno());
+			pstmt.setString(4, bvo.getMtxt());
 			cnt = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
