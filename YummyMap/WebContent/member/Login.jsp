@@ -72,15 +72,9 @@
       </form>
       <div class="btn-box">
         <div class="optionbox d-flex mt-3">
-          <a><p class="option-item-text" id="searchmem">아이디/비밀번호 찾기</p></a>
+          <a><p class="option-item-text text-primary" id="searchmem" style="cursor: pointer;">아이디/비밀번호 찾기</p></a>
           <a href="/YummyMap/join/join.mmy" class="ml-5"><p class="option-item-text">회원가입</p></a>
           <a href="/YummyMap/main.mmy" class="ml-5"><p class="option-item-text">홈으로</p></a>
-        </div>
-        <div class=" mt-5">
-          <button type="button" class="btn btn-success naverbtn">네이버 계정으로 로그인</button>
-        </div>
-        <div class="mt-1">
-          <button type="button" class="btn btn-warning kakaobtn" id="kakao">카카오 계정으로 로그인</button>
         </div>
       </div>
     </div>

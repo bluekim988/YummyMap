@@ -146,76 +146,9 @@
     </div>
 </body>
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-/*	
-	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-	let options;
-	// 장소 검색 객체를 생성합니다
-	var ps = new kakao.maps.services.Places(); 
-  	navigator.geolocation.getCurrentPosition(function(position) {
-		console.log(position);
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
-		
-		var latlng = new kakao.maps.LatLng(latitude, longitude);
-		options = {
-			location : latlng,
-			radius : 1000,
-			page : 10
-		};
-    }, function(error) {
-         // 위치를 가져오는데 실패한 경우
-         consol.log(error.message);
-    });
-	// 키워드로 장소를 검색합니다
-	
-	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-	function placesSearchCB (data, status, pagination) {
-	    if (status === kakao.maps.services.Status.OK) {
-*/	    	
-			/* 
-				##넘어오는 데이터 샘플
-				address_name: "경기 안양시 동안구 비산동 1101-2"
-				category_group_code: "FD6"
-				category_group_name: "음식점"
-				category_name: "음식점 > 치킨 > 60계"
-				distance: "567"
-				id: "1360555804"
-				phone: "031-388-5959"
-				place_name: "60계 안양샛별한양점"
-				place_url: "http://place.map.kakao.com/1360555804"
-				road_address_name: "경기 안양시 동안구 동안로 194"
-				x: "126.949369837888"
-				y: "37.3959425465037" */
-/*
-		console.log(data);
-		
-		let resList = new Array();
-		let test = [1,2,3,4,5];
-		// 있으면 다음 페이지를 검색한다.
-		for(let i=0; i<data.length; i++){
-			resList[i] = 
-					'#'+data[i].place_name+
-					'#'+data[i].address_name+
-					'#'+data[i].category_name+
-					'#'+data[i].phone;
-		}
-			if(pagination.hasNextPage){
-				pagination.nextPage();
-			}
-			console.log(pagination.hasNextPage);
-	}
-	
-	 $("#searchTag").keydown(function(key) {
-         if (key.keyCode == 13) {
-        	 let query_str = $('#searchTag').val();
-     		ps.keywordSearch(query_str, placesSearchCB, options); 
-         }
-	  });
-*/
   //로그인 여부를 확인합니다.
   let userid = '${sid}';
   if(!userid) {

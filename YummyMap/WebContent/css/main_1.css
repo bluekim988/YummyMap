@@ -123,6 +123,7 @@
             font-size: 12pt;
             font-weight: 650;
             margin-bottom: 5px;
+            width: 160px;
         }
 
         .list-item-sub {
@@ -171,7 +172,7 @@
         .res-item-title {
             font-size: 12pt;
             font-weight: 600;
-            width: 180px;
+            width: 240px;
             border-bottom: 5px;
         }
 

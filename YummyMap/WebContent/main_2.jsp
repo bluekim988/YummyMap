@@ -84,7 +84,7 @@
         <div>
             <div class="ml-3 mt-3 list-item">
                 <div class="list-item-info">
-                    <div class="list-item-title t2color">${vo.resname}</div>
+                    <div class="list-item-title t2color" id="resName">${vo.resname}</div>
                     <div class="list-item-sub text-muted">${vo.addr}</div>
                     <c:forEach var="menu" items="${vo.menuList}">
                     <a class="list-item-sub text-muted">${menu}</a>
@@ -110,9 +110,8 @@
                 <div class="text-right md_ft1">
                     <div class="imgdiv">
                         <span class="imgspan">
-                        	<c:forEach var="imgdata" items="${vo.imgList}">
-                            <img src="/YummyMap/resimg/${imgdata}" style="height: 260px;">
-                            </c:forEach>
+                            <img src="/YummyMap/resimg/${vo.imgList.get(0)}" style="height: 260px;">
+                            <div id="map" style="width:100%;height:260px;"></div>
                         </span>
                         <div class="text-left ml-2">
                             <p id="star_grade">
@@ -149,8 +148,7 @@
                                 </svg></span>
                             <div class="txt dt_pd">
                                 <ul class="list_address">
-                                    <li><span class="addr dt_ft">${vo.addr}</span><span class="btn"><a class="link"
-                                                href="#">지도보기</a></span>
+                                    <li><span class="addr dt_ft" id="resAddr">${vo.addr}</span><span class="btn"></span>
                                     </li>
                                 </ul>
                             </div>
@@ -211,6 +209,7 @@
     </div>
 
 </body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript" src="../js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -295,6 +294,58 @@ $(document).ready(function () {
 	if(cate_param) {
 		$('#cateSet').val(cate_param);
 	}
+	
+	
+	// 카카오 지도 API
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+	// 장소 검색 객체를 생성합니다
+	var ps = new kakao.maps.services.Places(); 
+	var keyword = document.getElementById('resName').innerText;
+	// 키워드로 장소를 검색합니다
+	ps.keywordSearch('구로디지털단지역'+keyword, placesSearchCB); 
+
+	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+	function placesSearchCB (data, status, pagination) {
+	    if (status === kakao.maps.services.Status.OK) {
+
+	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+	        // LatLngBounds 객체에 좌표를 추가합니다
+	        var bounds = new kakao.maps.LatLngBounds();
+
+	        for (var i=0; i<data.length; i++) {
+	            displayMarker(data[i]);    
+	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+	        }       
+
+	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+	        map.setBounds(bounds);
+	    } 
+	}
+	// 지도에 마커를 표시하는 함수입니다
+	function displayMarker(place) {
+	    
+	    // 마커를 생성하고 지도에 표시합니다
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: new kakao.maps.LatLng(place.y, place.x) 
+	    });
+
+	    // 마커에 클릭이벤트를 등록합니다
+	    kakao.maps.event.addListener(marker, 'click', function() {
+	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+	        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+	        infowindow.open(map, marker);
+	    });
+	}
+
 
 });
 </script>
