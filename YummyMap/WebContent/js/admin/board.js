@@ -3,7 +3,23 @@
 @since 2020.05.24
  	이 JS는 관리자 게시글관리 페이지에 사용할 JavaScript 입니다
 */
-
+function search(){
+		let inid = $('#search-input').val();
+		let opt = $('#opt').val();
+		if(opt == 'nos'){
+			alert('검색 조건을 먼저 선택하세요');
+			return;
+		}
+		if(opt != 'nos' && !inid){
+			alert('검색어를 입력하세요');
+			return;
+		}
+		$('#searchs').val(inid);
+		$('#opts').val(opt);
+		$('#frm').attr('action','/YummyMap/admin/boardList.mmy');
+		$('#frm').submit();
+		
+}
 $(function(){
 	let txtnos = [];
 	let tno;
@@ -41,16 +57,14 @@ $(function(){
 		$('#frm').attr('action','/YummyMap/admin/boardList.mmy');
 		$('#frm').submit();
 	});
-	$('#sbtn').click(function(){
-		let inid = $('#search-input').val();
-		let opt = $('#opt').val();
-		$('#searchs').val(inid);
-		$('#opts').val(opt);
-		$('#frm').attr('action','/YummyMap/admin/boardList.mmy');
-		$('#frm').submit();
-		
-	});
 	
+	$('#sbtn').click(search);
+	$('#search-input').keydown(function(key){
+		if(key.keyCode == 13){
+			search();
+			return;
+		}
+	});
 	$('#allck').click(function(){
 		$("input:checkbox").attr('checked','checked');
 		

@@ -111,7 +111,7 @@
 							style="position: relative; vertical-align: top;" name="search"
 							value="${SCH}">
 					</div>
-					<button type="button" class="btn btn-secondary" id="sbtn">검색</button>
+					<button type="button" class="btn btn-primary" id="sbtn">검색</button>
 				</div>
 	<div class="pager d-flex justify-content-center paging">
          <div class="mb-5">

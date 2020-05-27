@@ -3,8 +3,8 @@
 @since 2020.05.23
  	이 JS는 관리자 로그인 사용할 JavaScript 입니다
 */
-$(function(){
-	$('#join').click(function(){
+function join(){
+
 		let sid = $('#id').val();
 		let spw = $('#pw').val();
 		if(!sid){
@@ -52,21 +52,39 @@ $(function(){
 				alert('통신 실패');
 			}
 		});*/
-		
+}
+
+function idchk(id) {
+	let pett = /^([A-Za-z]){1}\w{4,12}$/;
+	let ok = pett.test(id);
+	return ok;
+}
+
+function pwchk(pw) {
+	let patt = /^([a-z0-9!@#$%^&*-+_]){1}(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*-=])[a-zA-Z0-9!@#$%^&*-+_]{7,12}$/i;
+	let pwok = patt.test(pw);
+	return pwok;
+}
+
+$(function(){
+
+	$('#join').click(join);
+	
+	
+	$('#id').keydown(function(key) {
+		if (key.keyCode == 13) {
+			$('#pw').focus();
+			return;
+		}
 	});
 	
-	function idchk(id) {
-		let pett = /^([A-Za-z]){1}\w{4,12}$/;
-		let ok = pett.test(id);
-		return ok;
-	}
-	
-	function pwchk(pw) {
-		let patt = /^([a-z0-9!@#$%^&*-+_]){1}(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*-=])[a-zA-Z0-9!@#$%^&*-+_]{7,12}$/i;
-		let pwok = patt.test(pw);
-		return pwok;
-	}
-	
+	$('#pw').keydown(function(key) {
+		if (key.keyCode == 13) {
+			join();
+		}
+	});
+
+
 	$('#sbtn').click(function(){
 		$('#staticBackdrop').modal();
 	});
