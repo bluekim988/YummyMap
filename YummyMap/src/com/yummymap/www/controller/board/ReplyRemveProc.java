@@ -11,14 +11,14 @@ public class ReplyRemveProc implements MmyController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		String srno = req.getParameter("rno");
-		String stxtno = req.getParameter("txtno");
+		String stxtno = req.getParameter("tno");
 		
 		int rno = 0;
 		try {
 			rno = Integer.parseInt(srno);
 		} catch (Exception e) {}
 
-		
+		System.out.println("############################");
 		BoardDAO bdao = new BoardDAO();
 		int cnt = bdao.removeReply(rno);
 		

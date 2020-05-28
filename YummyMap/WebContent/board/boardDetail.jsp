@@ -152,8 +152,9 @@
 			</div>
 			<!--댓글 input태그 시작 영역 입니다-->
 			<div class="re-input d-flex">
-				<p class="pt-3 pl-4" id="">${sid }</p>
+				<p class="pt-3 pl-4" id="">${sid}</p>
 				<form action="" method="POST" id="re-frm">
+					<input type="hidden" name="rno" >
 					<input type="hidden" name="tno" value="${DATA.txtno}">
 					<textarea class="form-control re-text-area ml-4" rows="2"
 						name="reply" id="reply-area"></textarea>
@@ -162,7 +163,7 @@
 			<!--댓글 input태그 마지막 영역 입니다-->
 			<!--댓글 내용 시작 영역 입니다-->
 			<c:forEach var="data" items="${LIST}">
-			<div class="reply-body mt-4 " id="">
+			<div class="reply-body mt-4 rply-box">
 				<div class="d-flex reply-txt-1 mt-3">
 					<p id="">${data.mid }</p>
 					<p id="" class="pl-2">${data.cDate}</p>
@@ -171,7 +172,7 @@
 					<p id="" style=" display:inline-block; width: 680px;">${data.rtxt }
 					</p>
 				<c:if test="${data.mid eq sid}">
-					<a href="#" class="badge badge-danger">댓글삭제</a>
+					<a href="/YummyMap/board/replyRemveProc.mmy?tno=${data.txtno}&rno=${data.rno}" class="badge badge-danger">댓글삭제</a>
 				</c:if>
 				</div>
 				<div class="b-w border-bottom ml-5 mt-4"></div>
@@ -210,7 +211,7 @@ $(document).ready(function(){
   
   $('#reply-btn').click(function () { 
     $('#reply-btn').hide();
-    $('#re-frm').attr('action','/YummyMap/board/replyPeoc.mmy');
+    $('#re-frm').attr('action','/YummyMap/board/replyProc.mmy');
    	$('#re-frm').submit();
   });
   

@@ -21,7 +21,13 @@ public class BoardWriteProc implements MmyController {
 		// 세션에 기록된 아이디를 가져온다.
 		String mid = (String) req.getSession().getAttribute("sid");
 		String catno_param = req.getParameter("catno");
-		int catno = Integer.parseInt(catno_param);
+		int catno = 0;
+		
+		try {
+			
+			 catno = Integer.parseInt(catno_param);
+		} catch (Exception e) {}
+		
 		// 데이터 꺼내고
 		String title_param = req.getParameter("title");
 		System.out.println("proc.title : " + title_param);

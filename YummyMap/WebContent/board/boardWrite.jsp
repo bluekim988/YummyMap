@@ -33,10 +33,16 @@
 			} else {
 				$('#login').hide();
 				$('#logout').show();
-				$('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
+				$('#mypage').attr('href', '/YummyMap/member/member.mmy');
 			}
 		$('#submitBtn').click(function() {
 			// 데이터 유효성 체크
+			
+			let selet = $('#catno').val();
+			if(!selet){
+				alert('카테고리를 선택 하세요!');
+				return;
+			}
 			$('#frm').submit();
 		});
 		$('#exitBtn').click(function() {
