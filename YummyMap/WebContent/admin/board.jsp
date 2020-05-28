@@ -36,23 +36,23 @@
 					<div class="ctQZg">
 						<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
 						<div class="badge badge-light nav-item">${SID}</div>
-						<a href="http://localhost/YummyMap/admin/adminedit.mmy" class="badge badge-light nav-item">정보수정</a>
-						<a href="http://localhost/YummyMap/admin/logoutProc.mmy" class="badge badge-light nav-item" id="logout">LOGOUT</a>
+						<a href="./adminedit.mmy" class="badge badge-light nav-item">정보수정</a>
+						<a href="./logoutProc.mmy" class="badge badge-light nav-item" id="logout">LOGOUT</a>
 					</div>
 				</div>
 			</div>
-			<a class="navbar-brand tcolor logo ml-1" href="http://localhost/YummyMap/admin/main.mmy" id=""> YUMMY MAP </a>
+			<a class="navbar-brand tcolor logo ml-1" href="./main.mmy" id=""> YUMMY MAP </a>
 		</div>
 		<div class="bar"></div>
 		<div class="row row-cols-2 sub ml-1">
 			<div class="col-3 pt-5 pr-4 text-right bar-ri">
 				<div class="text-left mt-3">
-					<a href="http://localhost/YummyMap/admin/main.mmy">
+					<a href="./main.mmy">
 						<h5>회원 관리</h5>
 					</a>
 				</div>
 				<div class="mt-4 text-left">
-					<a href="http://localhost/YummyMap/admin/boardList.mmy">
+					<a href="./boardList.mmy">
 						<h5>게시글 관리</h5>
 					</a>
 				</div>

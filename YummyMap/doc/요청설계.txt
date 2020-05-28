@@ -139,7 +139,7 @@
 	뷰		 : /admin/boardDetail.jsp
 	------------------------------------------------------------------------------
 	
-12. 로그아웃 처리 요청
+13. 로그아웃 처리 요청
 	요청내용 : /admin/logoutProc.mmy
 	파라미터 : sid
 	컨트롤러 : /com.yummymap.www.controller.admin.LogoutProc
