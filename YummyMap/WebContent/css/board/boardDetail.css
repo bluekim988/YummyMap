@@ -14,6 +14,6 @@
 .re-input{background-color: rgba(0, 0, 0, 0.08);}
 .reply-txt-1{ padding-left: 90px; color: rgba(0, 0, 0, 0.4);}
 .reply-txt-2{ padding-left: 90px; }
-.re-text-area{width: 710px;}
+.re-text-area{width: 710px; resize: none;}
 .reply-btn{height: 30px; padding-left: 10px;}
 .myd-none{display: none;}
