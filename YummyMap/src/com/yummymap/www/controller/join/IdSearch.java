@@ -30,8 +30,6 @@ public class IdSearch implements MmyController {
 			buff.append("\"no\"");			
 		}
 		buff.append("}");
-		
-		System.out.println(buff.toString());
 		try {
 			resp.getWriter().write(buff.toString());
 		} catch (IOException e) {

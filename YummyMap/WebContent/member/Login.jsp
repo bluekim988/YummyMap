@@ -104,7 +104,7 @@
        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="mdbtn">취소</button>
-        <button type="button" class="btn btn-danger" id="sendbtn">발송</button>
+        <button type="button" class="btn btn-danger" id="sendbtn">찾기</button>
         <button type="button" class="btn btn-danger d-none" data-dismiss="modal" id="cbtn">닫기</button>
       </div>
     </div>
@@ -149,9 +149,12 @@ $(document).ready(function () {
 		if(sd == 'pass'){
 			$('#frm2').html('<div> 사용자 아이디 : <input type="txet" id="ids" name="ids"></div>'+
 			        		'<div class="mt-3"> 사용자 이메일 : <input type="txet"  id="mail" name="mail"></div>');		
+			$('#sendbtn').text('발송');
 		}else if(sd == 'id'){
 			$('#frm2').html('<div> 사용자 이름 : <input type="txet" id="name" name="name"></div>'+
     						'<div class="mt-3"> 사용자 메일 : <input type="txet"  id="mail" name="mail"></div>');	
+			$('#sendbtn').text('찾기');
+		
 		}
 	})
 	

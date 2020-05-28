@@ -30,7 +30,6 @@ public class PassSearch implements MmyController {
 			buff.append("{ \"result\": ");
 			buff.append("\"no\"");
 			buff.append("}");
-			System.out.println(buff.toString());
 			try {
 				resp.getWriter().write(buff.toString());
 			} catch (IOException e) {
@@ -62,7 +61,6 @@ public class PassSearch implements MmyController {
 		buff.append("{ \"result\": ");
 		buff.append("\"ok\"");
 		buff.append("}");
-		System.out.println(buff.toString());
 		try {
 			resp.getWriter().write(buff.toString());
 		} catch (IOException e) {

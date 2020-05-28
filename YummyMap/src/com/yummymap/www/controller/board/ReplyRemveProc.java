@@ -18,15 +18,9 @@ public class ReplyRemveProc implements MmyController {
 			rno = Integer.parseInt(srno);
 		} catch (Exception e) {}
 
-		System.out.println("############################");
 		BoardDAO bdao = new BoardDAO();
 		int cnt = bdao.removeReply(rno);
 		
-		if(cnt == 1) {
-			System.out.println("정상 삭제");
-		}else {
-			System.out.println("삭제 못함");
-		}
 		
 		try {
 			resp.sendRedirect("/YummyMap/board/boardDetail.mmy?txtno="+stxtno);

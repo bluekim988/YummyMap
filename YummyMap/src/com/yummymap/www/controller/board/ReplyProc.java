@@ -31,11 +31,6 @@ public class ReplyProc implements MmyController {
 		bvo.setTxtno(txtno);
 		BoardDAO bdao = new BoardDAO();
 		int cnt = bdao.addReply(bvo);
-		if(cnt ==1) {
-			System.out.println("정상 업로드");
-		}else {
-			System.out.println("업로드 안됨");
-		}
 		try {
 			
 		resp.sendRedirect("/YummyMap/board/boardDetail.mmy?txtno="+txtno);
