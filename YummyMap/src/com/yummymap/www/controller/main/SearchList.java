@@ -22,6 +22,23 @@ public class SearchList implements MmyController {
 		}
 		MainDAO dao = new MainDAO();
 		List<ResVO> list = dao.getList(str, userID);
+		List<ResVO> listUseResName = dao.getListUseName(str, userID);
+		
+		for(int i = 0; i<listUseResName.size(); i++) {
+			list.add(listUseResName.get(i));
+		}
+		
+		if(list.size() != 1) {
+			for(int i = 0; i<list.size(); i++) {
+				for(int j = 0; j<listUseResName.size(); j++) {
+					if(list.get(i).getResno() == listUseResName.get(j).getResno()) {
+						list.remove(i);
+						continue;
+					}
+				}
+			}
+		}
+		
 		for(int i=0; i<list.size(); i++) {
 			ResVO rvo = list.get(i);
 			int resno = rvo.getResno();

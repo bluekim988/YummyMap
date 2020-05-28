@@ -25,6 +25,7 @@ public class MainSQL {
 	public final int SEL_AVGTOP_RES_LIST = 2001;
 	public final int SEL_REVIEWTOP_RES_LIST = 2002;
 	public final int SEL_RESLIST_WITH_CATEGORY = 2003;
+	public final int SEL_RESLIST_USE_NAME = 3001;
 	
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
@@ -38,6 +39,19 @@ public class MainSQL {
 			buff.append("  r.resno = p.resno(+) ");
 			buff.append(" AND isshow = 'Y'  ");
 			buff.append("  AND INSTR(menu, ?) > 0  ");
+			buff.append("ORDER BY ");
+			buff.append("resname ");
+			break;
+		case SEL_RESLIST_USE_NAME:
+			buff.append("SELECT ");
+			buff.append("r.resno, resname, address, catno, restel, subno, menu , NVL(ispick, 'N') ispick ");
+			buff.append("FROM ");
+			buff.append("res  r,  ");
+			buff.append("(SELECT resno, ispick FROM myres WHERE  ispick = 'Y' and mid = ?  ) p ");
+			buff.append("WHERE ");
+			buff.append(" r.resno = p.resno(+) ");
+			buff.append("AND isshow = 'Y'  ");
+			buff.append("AND INSTR(resname, ?) > 0 ");
 			buff.append("ORDER BY ");
 			buff.append("resname ");
 			break;

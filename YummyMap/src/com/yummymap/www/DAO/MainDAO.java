@@ -71,6 +71,43 @@ public class MainDAO {
 		}
 		return list;
 	}
+	// 식당검색시 해당 식당 리스트를 가져오는 메소드입니다.
+	// 파라미터로 식당이름과, 유저아이디를 받습니다.
+	// 유저가 비로그인시 기본값(no)을 전달합니다.
+	// 반환값은 식당vo를 담은 List입니다.
+	public List<ResVO> getListUseName(String resname, String userID) {
+		List<ResVO> list = new ArrayList<ResVO>();
+		con = db.getConnection();
+		String sql = msql.getSQL(msql.SEL_RESLIST_USE_NAME);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			pstmt.setString(2, resname);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ResVO vo = new ResVO();
+				int resno = rs.getInt("resno");
+				vo.setResno(resno);
+				vo.setResname(rs.getString("resname"));
+				vo.setAddr(rs.getString("address"));
+				vo.setTel(rs.getString("restel"));
+				vo.setSubno(rs.getInt("subno"));
+				vo.setMenu(rs.getString("menu"));
+				vo.setMenuList();
+				double avg = getResAVG(resno);
+				vo.setAvg(avg);
+				vo.setIspick(rs.getString("ispick"));
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return list;
+	}
 	// 해당 식당의 상세정보를 가져오는 메소드입니다.
 	public ResVO getResInfo(int resno, String userID) {
 		ResVO vo = new ResVO();
