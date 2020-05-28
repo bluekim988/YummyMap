@@ -176,19 +176,18 @@ $(document).ready(function () {
 				},
 				success: function(data){
 					if(data.result == 'ok'){
-						
 						$('#mdbtn').addClass('d-none');
 						$('#sendbtn').addClass('d-none');
 						$('#cbtn').removeClass('d-none');
 						$('#srchint').addClass('d-none');
 						$('.modal-body').addClass('d-none');
-						$('#okbox').html('<h3>고객님의 개정은 </h3> <h2>' + data.id + '</h2> <h3>입니다</h3>');
+						$('#okbox').html('<h3>고객님의 계정은 </h3> <h2>' + data.id + '</h2> <h3>입니다</h3>');
 						$('#okbox').removeClass('d-none');
 					}else if(data.result == 'no'){
 						$('#srchint').removeClass('d-none');
 					}
 				},error : function(){
-					alert('통싱오류 ㅠㅜ ');
+					alert('서버와의 통신에 오류가 생겼습니다. ');
 				}
 				
 			});
@@ -210,7 +209,6 @@ $(document).ready(function () {
 				},
 				success: function(data){
 					if(data.result == 'ok'){
-						
 						$('#mdbtn').addClass('d-none');
 						$('#sendbtn').addClass('d-none');
 						$('#srchint').addClass('d-none');
