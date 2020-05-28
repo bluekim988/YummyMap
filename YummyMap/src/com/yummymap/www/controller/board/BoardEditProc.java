@@ -20,13 +20,8 @@ public class BoardEditProc implements MmyController {
 		String title = req.getParameter("title");
 		String mtxt = req.getParameter("mtxt");
 		String sno = req.getParameter("txtno");
-//		String scat = req.getParameter("catno");
-		System.out.println("proc.title : " + title);
-		System.out.println("proc.mtxt : " + mtxt);
-//		System.out.println("proc.scat : " + scat);
 		int txtno = Integer.parseInt(sno);
 //		int catno = Integer.parseInt(cat);
-		System.out.println("txtno : " + txtno);
 		BoardDAO bDAO = new BoardDAO();
 		BoardVO bvo = new BoardVO();
 		

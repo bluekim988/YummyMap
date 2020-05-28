@@ -30,11 +30,7 @@ public class BoardWriteProc implements MmyController {
 		
 		// 데이터 꺼내고
 		String title_param = req.getParameter("title");
-		System.out.println("proc.title : " + title_param);
 		String mtxt_param = req.getParameter("mtxt");
-		System.out.println("proc.mtxt : " + mtxt_param);
-		System.out.println("proc.catno : " + catno);
-		System.out.println("proc.mid : " + mid);
 		
 		BoardVO bvo = new BoardVO();
 		bvo.setMid(mid);
