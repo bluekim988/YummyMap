@@ -308,9 +308,13 @@ $(document).ready(function () {
 	
 	// 장소 검색 객체를 생성합니다
 	var ps = new kakao.maps.services.Places(); 
-	var keyword = document.getElementById('resName').innerText;
+	var keyword_tag = document.getElementById('resName').innerText;
+	var keyword = '구로디지털단지역 ' + keyword_tag;
+	if(keyword_tag.indexOf('구로디지털')>0){
+		keyword = keyword_tag;
+	}
 	// 키워드로 장소를 검색합니다
-	ps.keywordSearch('구로디지털단지역'+keyword, placesSearchCB); 
+	ps.keywordSearch(keyword, placesSearchCB); 
 
 	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	function placesSearchCB (data, status, pagination) {
@@ -320,7 +324,7 @@ $(document).ready(function () {
 	        // LatLngBounds 객체에 좌표를 추가합니다
 	        var bounds = new kakao.maps.LatLngBounds();
 
-	        for (var i=0; i<data.length; i++) {
+	        for (var i=0; i<1; i++) {
 	            displayMarker(data[i]);    
 	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 	        }       
@@ -338,12 +342,7 @@ $(document).ready(function () {
 	        position: new kakao.maps.LatLng(place.y, place.x) 
 	    });
 
-	    // 마커에 클릭이벤트를 등록합니다
-	    kakao.maps.event.addListener(marker, 'click', function() {
-	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-	        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-	        infowindow.open(map, marker);
-	    });
+
 	}
 
 
