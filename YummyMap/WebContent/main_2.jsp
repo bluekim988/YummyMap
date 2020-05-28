@@ -230,11 +230,15 @@ $(document).ready(function () {
 	//별 이벤트처리
 	var star_num;
 	 $('#star_grade a').click(function(){
-	        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-	        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-	        star_num = $(this).attr('id');
+			// 별점의 on 클래스 전부 제거 
+	        $(this).parent().children("a").removeClass("on");  
+	     	// 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가
+	        $(this).addClass("on").prevAll("a").addClass("on"); 
+	         // 해당별점 값 가져오기
+	        star_num = $(this).attr('id');	
 	        return false;
 	 });
+	 
 	 $('.r-btn').click(function(){
 		 if(!userid) {
 			 alert('로그인을 진행해주세요');
