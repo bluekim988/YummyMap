@@ -23,26 +23,23 @@ public class BoardEdit implements MmyController {
 		String view = "/board/boardEdit.jsp";
 //		String catno = req.getParameter("catno");
 		String txtno = req.getParameter("txtno");
-		System.out.println("edit.txtno : " + txtno);
 		int sno = 0;
 		int cat = 0;
 		try {
 			sno = Integer.parseInt(txtno);
 		} catch (Exception e) {
 		}
-		System.out.println("edit.sno : " + sno);
 
 		String title = req.getParameter("title");
 		String mtxt = req.getParameter("mtxt");
 //		System.out.println("edit.cat : " + cat);
-		System.out.println("edit.title : " + title);
-		System.out.println("edit.mtxt : " + mtxt);
 //		req.setAttribute("txtno", txtno);
 //		req.setAttribute("title", title);
 //		req.setAttribute("mtxt", mtxt);
 
 		BoardDAO bDAO = new BoardDAO();
 		BoardVO bVO = bDAO.getTextInfo(sno,userID);
+		bVO.setMtxt();
 		req.setAttribute("bVO", bVO);
 		return view;
 	}
