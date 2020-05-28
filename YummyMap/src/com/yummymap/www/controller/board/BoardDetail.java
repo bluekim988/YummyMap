@@ -59,9 +59,14 @@ public class BoardDetail implements MmyController {
 		
 		
 		List<BoardVO> list = bdao.getAllReplyList(tno);
+		int replyCount = 0;
+		if(list.size() > 0 ) {
+			replyCount = list.get(0).getCount();
+		}
 		
 		req.setAttribute("LIST", list);
 		req.setAttribute("DATA", bVO);
+		req.setAttribute("replyCount", replyCount);
 
 //		bVO.setBdate(req.getParameter("bdate"));
 //		bVO.setMid(req.getParameter("mid"));

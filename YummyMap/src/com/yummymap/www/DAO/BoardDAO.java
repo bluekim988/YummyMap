@@ -271,6 +271,7 @@ public class BoardDAO {
 				replyVo.setMid(rs.getString("mid"));
 				replyVo.setcDate(rs.getDate("cdate"));
 				replyVo.setTxtno(rs.getInt("txtno"));
+				replyVo.setCount(rs.getInt("count"));
 				replyList.add(replyVo);
 			}
 		} catch (SQLException e) {

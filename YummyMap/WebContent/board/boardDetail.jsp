@@ -140,7 +140,7 @@
 				<p class="re-title-1 pl-3  pr-3">댓글</p>
 				<div class="pt-1 d-flex reply-info">
 					<p class="pr-2 ">총</p>
-					<p class="tcolor" id="re-count">20</p>
+					<p class="tcolor" id="re-count">${replyCount}</p>
 					<p>개</p>
 				</div>
 				
@@ -175,7 +175,7 @@
 					<a href="/YummyMap/board/replyRemveProc.mmy?tno=${data.txtno}&rno=${data.rno}" class="badge badge-danger">댓글삭제</a>
 				</c:if>
 				</div>
-				<div class="b-w border-bottom ml-5 mt-4"></div>
+				<div class="b-w border-bottom ml-5 mt-4" style="height: 0px;"></div>
 			</div>
 			</c:forEach>
 			<!--댓글 내용 마지막 영역 입니다-->

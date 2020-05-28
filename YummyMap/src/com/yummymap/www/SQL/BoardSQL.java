@@ -147,11 +147,11 @@ public class BoardSQL {
 			break;
 		case SEL_LIST_REPLY:
 			buff.append("SELECT ");
-			buff.append("	rno, rtxt, mid, cdate, txtno ");
+			buff.append("	rno, rtxt , mid, cdate, r.txtno txtno, count ");
 			buff.append("FROM ");
-			buff.append("	reply ");
+			buff.append("	reply r, (SELECT txtno, count(*) count FROM reply WHERE isshow = 'Y' GROUP BY txtno) r2 ");
 			buff.append("WHERE ");
-			buff.append("	txtno = ? AND isshow = 'Y' ");
+			buff.append("	r.txtno = ? AND isshow = 'Y' AND r.txtno = r2.txtno ");
 			break;
 		case REMOVE_REPLY:
 			buff.append("UPDATE reply ");

@@ -85,6 +85,7 @@ public class BoardVO {
 	}
 	public void setMtxt(String mtxt) {
 		this.mtxt = mtxt;
+		this.mtxt = mtxt.replaceAll("\r\n", "<br>");
 	}
 	public String getBdate() {
 		return bdate;
