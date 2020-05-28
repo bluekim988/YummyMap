@@ -127,12 +127,12 @@
 			<div class="row">
 				<div class="col-2 bor-bottom-top bor-right padd-right">
 					<div class="padd-text mt-4">
-						<a href="./YummyMap/member/member.mmy">
+						<a href="/YummyMap/member/member.mmy">
 							<h6 style="color: black" class="font-weight-bold">회원정보 변경</h6>
 						</a>
 					</div>
 					<div class="padd-text">
-						<a href="./YummyMap/member/txtList.mmy">
+						<a href="/YummyMap/member/txtList.mmy">
 							<h6 style="color: black" class="font-weight-bold">내가 쓴글 보기</h6>
 						</a>
 					</div>
