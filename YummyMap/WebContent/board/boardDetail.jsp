@@ -36,7 +36,6 @@
 		});
 		$('#delete').click(function() {
 			var txtno = $('#txtno').val();
-			alert(txtno);
 			$('#frm').attr('action', '/YummyMap/board/boardDelete.mmy');
 			$('#frm').submit();
 		});
