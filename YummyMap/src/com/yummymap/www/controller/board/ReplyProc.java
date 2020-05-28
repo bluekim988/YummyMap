@@ -1,5 +1,11 @@
 package com.yummymap.www.controller.board;
-
+/**
+ * 게시판의 댓글작성기능을 컨트롤하기위해 제작되었다
+ * 
+ * @author	유태희
+ * @since	2020/05/28
+ * @see		com.yummymap.www.DAO.BoardDAO
+ */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
