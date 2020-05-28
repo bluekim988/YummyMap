@@ -222,7 +222,7 @@ $(document).ready(function () {
 						$('#srchint').removeClass('d-none');
 					}
 				},error : function(){
-					alert('통싱오류 ㅠㅜ ');
+					alert('서버와의 통신에 오류가 생겼습니다. ');
 				}
 				
 			});
