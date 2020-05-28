@@ -1,5 +1,10 @@
 package com.yummymap.www.controller.game;
-
+/**
+ * 이 클래스는 게임페이지에서 필요한 아이템들을 비동기로 전달하기위해 제작되었다.
+ * 
+ * @author	김종형
+ * @see		com.yummymap.www.DAO.GameDAO
+ */
 import java.io.IOException;
 import java.util.List;
 
