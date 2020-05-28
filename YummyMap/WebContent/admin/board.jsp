@@ -74,7 +74,7 @@
 							<div class="col-2 ckd" id="${data.txtno}">
 								<input type="checkbox" class="mr-2" name="no" value="${data.txtno }">${data.txtno}
 							</div>
-							<div class="col-4"><a class="title">${data.title }</a></div>
+							<div class="col-4 title-box"><a class="title">${data.title }</a></div>
 							<div class="col-2">${data.mid }</div>
 							<div class="col-3">${data.sdate }</div>
 							<div class="col-2">

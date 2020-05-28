@@ -134,7 +134,7 @@
 			<a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy"
 				id="game"> <i class="fas fa-gamepad"></i>
 			</a> <a class="navbar-brand nav-item-size"
-				href="http://localhost/YummyMap/board/boardMain.mmy"> <i
+				href="/YummyMap/board/boardMain.mmy"> <i
 				class="far fa-clipboard"></i>
 			</a>
 		</div>
