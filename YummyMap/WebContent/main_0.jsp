@@ -104,7 +104,7 @@
                 <div class="text-right pb-1">
                     <div class="imgdiv">
                         <img src="/YummyMap/resimg/${resList.imgList.get(0)}" >
-                        <div class="text-left tcolor res-item-title pl-2 pt-1">
+                        <div class="text-left tcolor res-item-title ml-2 pt-1">
                             ${resList.resname}[${resList.avg}]
                         </div>
                         <small class="text-muted pr-2">리뷰(${resList.reviewCount})</small>
