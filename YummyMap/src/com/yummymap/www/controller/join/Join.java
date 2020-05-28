@@ -1,5 +1,10 @@
 package com.yummymap.www.controller.join;
-
+/**
+ * 회원가입화면 요청기능을 컨트롤하기위해 제작되었다.
+ * 
+ * @author	김종형
+ * 
+ */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

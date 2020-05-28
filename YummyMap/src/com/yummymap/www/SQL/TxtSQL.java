@@ -1,5 +1,9 @@
 package com.yummymap.www.SQL;
-
+/**
+ * mypage에서 DB작업에 필요한 질의명령을 관리하는 클래스입니다.
+ * @author	최두용
+ *
+ */
 public class TxtSQL {
 	public final int SEL_TXTTOTAL = 1001;
 	public final int SEL_TXTLIST = 1002;

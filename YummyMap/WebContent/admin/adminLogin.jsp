@@ -30,7 +30,7 @@
 	<div class="container  mt80" style="width: 900px;">
 		<nav class="d-flex justify-content-between navbar navbar-light ">
 			<div>
-				<a class="navbar-brand tcolor logo mt-5" href="http://localhost/YummyMap/admin/main.mmy">
+				<a class="navbar-brand tcolor logo mt-5" href="./main.mmy">
 					YUMMY MAP
 				</a>
 			</div>

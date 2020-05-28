@@ -1,5 +1,11 @@
 package com.yummymap.www.controller.board;
-
+/**
+ * 이 클래스는 게시판 상세페이지로 포워딩하기위해 제작되었다.
+ * 
+ * @author	유태희
+ * @since	2020/05/28
+ * @see		com.yummymap.www.DAO.BoardDAO
+ */
 import java.util.List;
 
 import javax.servlet.http.Cookie;

@@ -1,5 +1,10 @@
 package com.yummymap.www.SQL;
-
+/**
+ * 회원관리시 필요한 sql질의명령을 관리하는 클래스입니다.
+ * 
+ * @author	김종형
+ * @see		com.yummymap.www.DAO.JoinDAO
+ */
 public class JoinSQL {
 	public final int CHECK_LOGIN = 1001;
 	public final int ADD_MEMB = 1002;

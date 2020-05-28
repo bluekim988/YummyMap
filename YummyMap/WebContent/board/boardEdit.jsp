@@ -87,7 +87,7 @@ $(document).ready(function() {
 						</div>
 					</div>
 					<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
-					<a href="http://localhost/YummyMap/join/login.mmy"
+					<a href="/YummyMap/join/login.mmy"
 						class="badge badge-light nav-item" id="login">LOGIN</a> <a
 						href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
 				</div>
@@ -101,7 +101,7 @@ $(document).ready(function() {
             <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" >
                 <i class="fas fa-gamepad" id="game"></i>
             </a>
-            <a class="navbar-brand nav-item-size" href="http://localhost/YummyMap/board/boardMain.mmy">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy">
                 <i class="far fa-clipboard"></i>
             </a>
         </div>

@@ -1,5 +1,9 @@
 package com.yummymap.www.SQL;
-
+/**
+ * 회원정보 변경 DB작업에 필요한 질의명령을 관리하는 클래스입니다.
+ * @author	최두용
+ *
+ */
 public class ChangeSQL {
 	public final int SEL_LIST = 1001;
 	public final int UPDATE_PW = 1002;

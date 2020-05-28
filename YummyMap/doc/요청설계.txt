@@ -139,30 +139,74 @@
 	뷰		 : /admin/boardDetail.jsp
 	------------------------------------------------------------------------------
 	
-12. 로그아웃 처리 요청
+13. 로그아웃 처리 요청
 	요청내용 : /admin/logoutProc.mmy
 	파라미터 : sid
 	컨트롤러 : /com.yummymap.www.controller.admin.LogoutProc
 	뷰		 : /admin/login.mmy
 
 	
-#########게시판##########################################
-1. 리플 작성 요청 컨트롤러
-	요청내용 : /board/replyPeoc.mmy
-	파라미터 : rtxt , txtno , id(session)
-	컨트롤러 : com.yummymap.www.controller.board.ReplyProc
-	뷰		 : /board/boardDetail.mmy (리다이렉트)
-
-2. 리플 삭제 요청 컨트롤러
-	요청내용 : /board/replyRemveProc.mmy
-	파라미터 : rno ,txtno
-	컨트롤러 : com.yummymap.www.controller.board.ReplyRemveProc
-	뷰		 : /board/boardDetail.mmy (리다이렉트)	
-3. 추천 컨트롤러 요청
+########게시판########
+--------------------------------------------------------
+1. 게시판 리스트 뷰
+	요청내용 : /board/boardMain.mmy
+	파라미터 : 
+	컨트롤러 : com.yummymap.www.controller.board.boardMain
+	뷰		 : /board/boardMain.jsp
+--------------------------------------------------------
+2. 게시판 글작성 뷰
+	요청내용 : /board/boardWrite.mmy
+	파라미터 : 
+	컨트롤러 : com.yummymap.www.controller.board.boardWrite
+	뷰		 : /board/boardWrite.jsp
+--------------------------------------------------------
+3. 게시판 글작성 요청
+	요청내용 : /board/boardWriteProc.mmy
+	파라미터 : 
+	컨트롤러 : com.yummymap.www.controller.board.boardWriteProc
+	뷰		 : /board/boardMain.jsp
+--------------------------------------------------------
+4. 게시판 글 상세보기 뷰
+	요청내용 : /board/boardDetail.mmy
+	파라미터 : 
+	컨트롤러 : com.yummymap.www.controller.board.boardDetail
+	뷰		 : /board/boardDetail.jsp
+--------------------------------------------------------
+5. 게시판 글쓰기 수정 뷰
+	요청내용 : /board/boardEdit.mmy
+	파라미터 : 
+	컨트롤러 : com.yummymap.www.controller.board.boardEdit
+	뷰		 : /board/boardEdit.jsp
+--------------------------------------------------------
+6. 게시판 글쓰기 수정 요청
+	요청내용 : /board/boardEditProc.mmy
+	파라미터 : 
+	컨트롤러 : com.yummymap.www.controller.board.boardEditProc
+	뷰		 : /board/boardMain.jsp
+--------------------------------------------------------
+7. 게시판 글쓰기 삭제 요청
+	요청내용 : /board/boardDelete.mmy
+	파라미터 : 
+	컨트롤러 : com.yummymap.www.controller.board.boardDelete
+	뷰		 : /board/boardMain.jsp
+--------------------------------------------------------
+8. 추천 컨트롤러 요청
 	요청내용 : /board/recommendProc.mmy
 	파라미터 : r ,txtno
 	컨트롤러 : com.yummymap.www.controller.board.RecommendProc
 	뷰		 : /board/boardDetail.mmy (리다이렉트)	
+--------------------------------------------------------
+9. 리플 작성 요청 컨트롤러
+	요청내용 : /board/replyProc.mmy
+	파라미터 : rtxt , txtno , id(session)
+	컨트롤러 : com.yummymap.www.controller.board.ReplyProc
+	뷰		 : /board/boardDetail.mmy (리다이렉트)
+--------------------------------------------------------
+10. 리플 삭제 요청 컨트롤러
+	요청내용 : /board/replyRemveProc.mmy
+	파라미터 : rno ,txtno
+	컨트롤러 : com.yummymap.www.controller.board.ReplyRemveProc
+	뷰		 : /board/boardDetail.mmy (리다이렉트)
 	
 #########게임##########################################
 1. 게임페이지 뷰 요청 

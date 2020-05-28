@@ -1,5 +1,11 @@
 package com.yummymap.www.controller.board;
-
+/**
+ * 게시글의 추천기능을 컨트롤하기위해 제작되었다
+ * 
+ * @author	김종형
+ * @since	2020/05/28
+ * @see		com.yummymap.www.DAO.BoardDAO
+ */
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;

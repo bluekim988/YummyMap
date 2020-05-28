@@ -28,14 +28,6 @@ function setItem(e) {
 	setSelectBox();
 	setStrInSelectedBox();
 }
-// 선택메뉴란에 출력을 설정해주는 함수입니다.
-function setSelectBox() {
-	$('#itemBox2').empty();
-	for(let i=0; i<menuList.length; i++) {
-		$('#itemBox2').append('<p class="pr-4 item3-h" onclick="setItem(\''+ menuList[i]+'\')">#'+menuList[i]+'</p>');
- 	}
-}
-
 // 선택, 취소된 아이템을 배열에 추가or삭제해주는 함수입니다.
 function setMenuList(item) {
 	if(menuList.length == 0){
@@ -50,7 +42,13 @@ function setMenuList(item) {
 		menuList.push(item);
 	}
 }
-
+// 선택메뉴란에 출력을 설정해주는 함수입니다.
+function setSelectBox() {
+	$('#itemBox2').empty();
+	for(let i=0; i<menuList.length; i++) {
+		$('#itemBox2').append('<p class="pr-4 item3-h" onclick="setItem(\''+ menuList[i]+'\')">#'+menuList[i]+'</p>');
+ 	}
+}
 //선택된 메뉴 수에 따라 선택된 메뉴란에 메시지을 출력합니다.
 function setStrInSelectedBox() {
 	if(menuList.length == 5){	
@@ -61,6 +59,8 @@ function setStrInSelectedBox() {
 		$('#selectedStr').text('5개의 메뉴를 선택해주세요');
 	}
 }
+
+
 
 //menuList배열 출력테스트용 함수입니다.
 function getPrint() {
