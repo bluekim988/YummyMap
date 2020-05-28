@@ -169,7 +169,7 @@
                         </div>
                     </div>
                     <div class="d-flex">
-	                    <div class="rv_tt "> RIVIEW</div>
+	                    <div class="rv_tt "> REVIEW</div>
 	                    <small class="text-muted pl-2 ">리뷰(${vo.reviewCount})</small>
                     </div>
                     <a class="pr-2">별점선택</a>
