@@ -182,7 +182,9 @@
                     </div>
                     <div class="d-flex">
                     	<input class="form-control form-control-sm r-input border-top-0 border-left-0 border-right-0" type="text" placeholder="한줄 리뷰 달기" id="r-txt">
+                    	<c:if test="${vo.isReview == 'N'}">
                     	<button type="button" class="btn btn-primary btn-sm ml-1 r-btn" id="${vo.resno}" style="width: 70px">작성</button>
+                    	</c:if>
                     </div>
                     <c:forEach var="rdata" items="${list}">
 				    <div class="d-flex mt-3">

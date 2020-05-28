@@ -43,12 +43,15 @@ public class MainSQL {
 			break;
 		case SEL_RES_INFO:
 			buff.append("SELECT ");
-			buff.append("  r.resno resno, resname, address, catno, restel, subno, menu, NVL(ispick, 'N') ispick ");
+			buff.append("  r.resno resno, resname, address, catno, restel, subno, menu, NVL(ispick, 'N') ispick ,  NVL(isReview, 'N') isReview ");
 			buff.append("FROM ");
-			buff.append("res  r, (SELECT resno, ispick FROM myres WHERE  ispick = 'Y' and mid = ?  ) p ");
+			buff.append("res  r,  ");
+			buff.append("(SELECT resno, ispick FROM myres WHERE  ispick = 'Y' and mid = ?  ) p,  ");
+			buff.append("(SELECT resno, isshow isReview FROM review WHERE mid = ? AND isshow = 'Y' ) v  ");
 			buff.append("WHERE ");
-			buff.append("   isshow = 'Y' ");
+			buff.append("  r.isshow = 'Y' ");
 			buff.append(" AND r.resno = p.resno(+) ");
+			buff.append(" AND r.resno = v.resno(+) ");
 			buff.append(" AND r.resno = ? ");
 			break;
 		case SEL_RES_IMG:

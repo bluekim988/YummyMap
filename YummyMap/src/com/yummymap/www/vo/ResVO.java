@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 public class ResVO {
 	private int resno, catno, subno, reviewCount;
 	private double avg;
-	private String resname, addr, tel, menu, ispick;
+	private String resname, addr, tel, menu, ispick, isReview;
 	private List<String> menuList;
 	private List<String> imgList;
 	public int getResno() {
@@ -91,5 +91,12 @@ public class ResVO {
 	public void setImgList(List<String> imgList) {
 		this.imgList = imgList;
 	}
+	public String getIsReview() {
+		return isReview;
+	}
+	public void setIsReview(String isReview) {
+		this.isReview = isReview;
+	}
+	
 	
 }
