@@ -28,21 +28,31 @@ $(document).ready(function() {
 	} else {
 		$('#login').hide();
 		$('#logout').show();
-		$('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
+		$('#mypage').attr('href', '/YummyMap/member/member.mmy');
 	}
 		$('#submitBtn').click(function() {
-			var txtno = $('#txtno').val();
-			alert(txtno);
-			var title = $('#title').val();
-			alert(title);
-			var mtxt = $('#mtxt').val();
-			alert(mtxt);
+			let txtno = $('#txtno').val();
+			let title = $('#title').val();
+			let mtxt = $('#mtxt').val();
+			let selet = $('#catno').val();
+			if(!selet){
+				alert('카테고리를 선택 하세요!');
+				return;
+			}
 			// 데이터 유효성 체크
 			$('#frm').submit();
 		});
 		$('#exitBtn').click(function() {
 			$(location).attr('href', '/YummyMap/board/boardMain.mmy');
 			
+		});
+		//마이리스트 이벤트 처리 입니다.
+		$('#myListIcon').click(function(){
+			if(!userid) {
+				alert('로그인을 진행해주세요');
+				return;
+			}
+			$(location).attr('href', '/YummyMap/main/myList.mmy');
 		});
 	});
 </script>
@@ -56,7 +66,7 @@ $(document).ready(function() {
 				<div class="ctQZg">
 					<div class="_47KiJ">
 						<div class="XrOey">
-							<a class="_0ZPOP kIKUG _4700r " href="#"><svg
+							<a class="_0ZPOP kIKUG _4700r" id="myListIcon" href="#"><svg
 									aria-label="활동 피드" class="_8-yf5 " fill="#262626" height="24"
 									viewBox="0 0 48 48" width="24">
                               <path
@@ -68,7 +78,7 @@ $(document).ready(function() {
 							</div>
 						</div>
 						<div class="XrOey">
-							<a href="#"><svg aria-label="프로필" class="_8-yf5 "
+							<a href="#" id="mypage"><svg aria-label="프로필" class="_8-yf5 "
 									fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                               <path
 										d="M24 26.7c7.4 0 13.4-6 13.4-13.4S31.4 0 24 0 10.6 6 10.6 13.4s6 13.3 13.4 13.3zM24 3c5.7 0 10.4 4.6 10.4 10.4S29.7 23.7 24 23.7s-10.4-4.6-10.4-10.4S18.3 3 24 3zm9.1 27.1H14.9c-7.4 0-13.4 6-13.4 13.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c0-5.7 4.6-10.4 10.4-10.4h18.3c5.7 0 10.4 4.6 10.4 10.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c-.1-7.4-6.1-13.4-13.5-13.4z">
@@ -83,7 +93,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 		</div>
-		<a class="navbar-brand tcolor logo" href="#" id=""> YUMMY MAP </a>
+		<a class="navbar-brand tcolor logo" href="/YummyMap/main.mmy" id=""> YUMMY MAP </a>
 		<div class="b-subtitle text-left">
 			<p class="pt-3">커뮤니티</p>
 		</div>

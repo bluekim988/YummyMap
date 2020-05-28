@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yummymap.www.DAO.GameDAO;
 import com.yummymap.www.DAO.MainDAO;
 import com.yummymap.www.controller.MmyController;
 import com.yummymap.www.vo.ResVO;
@@ -44,8 +45,14 @@ public class Detail implements MmyController {
 			int reviewCount = reviewList.get(0).getReviewCount();
 			req.setAttribute("reviewCount", reviewCount);
 		}
+		
+		//카테고리 리스트를 가져옵니다.
+		GameDAO gameDao = new GameDAO();
+		List<String> cateList = gameDao.getAllCateList();
+		
 		req.setAttribute("vo", vo);
 		req.setAttribute("list", reviewList);
+		req.setAttribute("cateList", cateList);
 
 		String view = "/main_2.jsp";
 		return view;

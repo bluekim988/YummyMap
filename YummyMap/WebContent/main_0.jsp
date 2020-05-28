@@ -57,7 +57,7 @@
             <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" >
                 <i class="fas fa-gamepad" id="game"></i>
             </a>
-            <a class="navbar-brand nav-item-size" href="#">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy">
                 <i class="far fa-clipboard"></i>
             </a>
         </div>
@@ -104,7 +104,7 @@
                 <div class="text-right pb-1">
                     <div class="imgdiv">
                         <img src="/YummyMap/resimg/${resList.imgList.get(0)}" >
-                        <div class="text-left tcolor res-item-title pl-2 pt-1">
+                        <div class="text-left tcolor res-item-title ml-2 pt-1">
                             ${resList.resname}[${resList.avg}]
                         </div>
                         <small class="text-muted pr-2">리뷰(${resList.reviewCount})</small>
@@ -129,23 +129,23 @@
        	</div>
         <div class="row ml-1 mt-4" id="line2">
         <!-- 이미지리스트 아이템 시작 -->
-        	<c:forEach var="resList" items="${topReviewResList}">
-            <div class="orange-line res-item" id="${resList.resno}">
+        	<c:forEach var="resList2" items="${topReviewResList}">
+            <div class="orange-line res-item" id="${resList2.resno}">
                 <div class="text-right pb-1">
                     <div class="imgdiv">
-                        <img src="/YummyMap/resimg/${resList.imgList.get(0)}" >
+                        <img src="/YummyMap/resimg/${resList2.imgList.get(0)}" >
                         <div class="text-left tcolor res-item-title ml-2 mt-1">
-                            ${resList.resname}[${resList.avg}]
+                            ${resList2.resname}[${resList2.avg}]
                         </div>
-                        <small class="text-muted pr-2">리뷰(${resList.reviewCount})</small>
+                        <small class="text-muted pr-2">리뷰(${resList2.reviewCount})</small>
                     </div>
                 </div>
                 <div class="text-left ml-2 pt-4">
                     <p id="star_grade">
-                    	<c:forEach var="star" begin="1" end="${resList.avg}">
+                    	<c:forEach var="star" begin="1" end="${resList2.avg}">
                         <a class="fas fa-star tcolor"></a>
                         </c:forEach>
-                        <c:if test="${resList.avg *10 % 10 != 0 }">
+                        <c:if test="${resList2.avg *10 % 10 != 0 }">
 	                        <a class="fas fa-star-half-alt tcolor"></a>
                         </c:if>
                     </p>

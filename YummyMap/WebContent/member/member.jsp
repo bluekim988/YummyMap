@@ -119,7 +119,7 @@
             <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" >
                 <i class="fas fa-gamepad" id="game"></i>
             </a>
-            <a class="navbar-brand nav-item-size" href="#">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy">
                 <i class="far fa-clipboard"></i>
             </a>
         </div>

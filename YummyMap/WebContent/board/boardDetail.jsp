@@ -12,7 +12,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="/YummyMap/css/board/boardDetail.css">
-<link rel="stylesheet" href="/YummyMap/css/board/boardWrite.css">
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript"
@@ -31,16 +30,11 @@
 			}
 		$('#update').click(function() {
 			// 데이터 유효성 체크
-			var title = $('#title').val();
-			alert(title);
-			var mtxt = $('#mtxt').val();
-			alert(mtxt);
 			$('#frm').attr('action', '/YummyMap/board/boardEdit.mmy');
 			$('#frm').submit();
 		});
 		$('#delete').click(function() {
 			var txtno = $('#txtno').val();
-			alert(txtno);
 			$('#frm').attr('action', '/YummyMap/board/boardDelete.mmy');
 			$('#frm').submit();
 		});
@@ -55,7 +49,7 @@
 				<div class="ctQZg">
 					<div class="_47KiJ">
 						<div class="XrOey">
-							<a class="_0ZPOP kIKUG _4700r " href="#"><svg
+							<a class="_0ZPOP kIKUG _4700r " id="myListIcon" href="#"><svg
 									aria-label="활동 피드" class="_8-yf5 " fill="#262626" height="24"
 									viewBox="0 0 48 48" width="24">
                                 <path
@@ -67,7 +61,7 @@
 							</div>
 						</div>
 						<div class="XrOey">
-							<a href="#"><svg aria-label="프로필" class="_8-yf5 "
+							<a href="#" id="mypage"><svg aria-label="프로필" class="_8-yf5 "
 									fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                                 <path
 										d="M24 26.7c7.4 0 13.4-6 13.4-13.4S31.4 0 24 0 10.6 6 10.6 13.4s6 13.3 13.4 13.3zM24 3c5.7 0 10.4 4.6 10.4 10.4S29.7 23.7 24 23.7s-10.4-4.6-10.4-10.4S18.3 3 24 3zm9.1 27.1H14.9c-7.4 0-13.4 6-13.4 13.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c0-5.7 4.6-10.4 10.4-10.4h18.3c5.7 0 10.4 4.6 10.4 10.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c-.1-7.4-6.1-13.4-13.5-13.4z">
@@ -83,7 +77,7 @@
 				</div>
 			</div>
 		</div>
-		<a class="navbar-brand tcolor logo" href=/YummyMap/main.mmy " id="">
+		<a class="navbar-brand tcolor logo" href="/YummyMap/main.mmy" id="">
 			YUMMY MAP </a>
 		<div class="b-subtitle text-left">
 			<p class="pt-3">커뮤니티</p>
@@ -100,35 +94,47 @@
 	<!-- nav 마지막 입니다-->
 
 	<!-- body 시작 입니다-->
-	<form method="post" action="" id="frm">
-	<%-- 	<input type="hidden" name="catno" id="catno" value="${DATA.catno}">  --%>
+	<form class="d-none" method="post" action="" id="frm">
 		<input type="hidden" name="txtno" id="txtno" value="${DATA.txtno}"> 
-<%-- 		<input type="hidden" name="title" id="title" value="${bVO.title}">  --%>
-<%-- 		<input type="hidden" name="mtxt" id="mtxt" value="${bVO.mtxt}">  --%>
+		<input type="hidden" name="title" id="title" value="${DATA.title}"> 
+		<input type="hidden" name="mtxt" id="mtxt" value="${DATA.mtxt}"> 
 		<input	type="hidden" name="nowPage" id="nowPage" value="${nowPage}">
-	
+	</form>
 	<div class="main-body">
 		<!--게시글 영역 입니다-->
 		<div class="txt-line shadow-sm border mb-4">
 			<div class="btns d-flex justify-content-end pr-4 mt-2">
-				<a class="badge badge-info mr-1" id="update">수정</a> <a
-					href="#" class="badge badge-danger" id="delete">삭제</a>
+			<c:if test="${sid == DATA.mid}">
+				<a class="badge badge-info mr-1 text-white" id="update">수정</a> 
+				<a class="badge badge-danger text-white" id="delete">삭제</a>
+			</c:if>
 			</div>
 			<div class="b-w border-bottom ml-5 mt-4"></div>
 			<div class="d-flex title">
-				<div class="txt-title pt-4" name="title"  id="title" value="${DATA.title}">${DATA.title}</div>
+				<div class="txt-title pt-4" id="title">${DATA.title}</div>
 				<div class="pt-4 d-flex">
+				    <c:if test="${sid == null}">
 					<div class="list-item-like like-size">
-						<span class="heart"><i class="far fa-heart "
-							aria-hidden="true"></i> </span>
+						<span class="heart"><i  class="far fa-heart " aria-hidden="true"></i> </span>
 					</div>
-					<div class="pl-3 pt-2" id="rnum">${DATA.rnum}</div>
+	                </c:if>
+	                <c:if test="${sid != null && DATA.isrec == 'N'}">
+					<div class="list-item-like like-size">
+						<span class="heart"><i id="recN" class="far fa-heart " aria-hidden="true"></i> </span>
+					</div>
+	                </c:if>
+	                <c:if test="${sid != null && DATA.isrec == 'Y'}">
+					<div class="list-item-like like-size">
+						<span class="heart"><i id="recY" class="fas fa-heart " aria-hidden="true"></i> </span>
+					</div>
+	                </c:if>
+					<div class="pl-3 pt-1" id="rnum">${DATA.rnum}</div>
 				</div>
 			</div>
 			<div class="b-w border-bottom ml-5 mt-4"></div>
-			<div class="txt-body pt-4 " name="mtxt" id="mtxt" value="${DATA.mtxt}">${DATA.mtxt}</div>
+			<div class="txt-body pt-4" id="mtxt" >${DATA.mtxt}</div>
 		</div>
-	</form>
+
 		<!--게시글 영역 마지막 입니다-->
 		<!--댓글 영역 시작 입니다-->
 		<div class="reply-line shadow-sm border mb-4">
@@ -136,63 +142,71 @@
 				<p class="re-title-1 pl-3  pr-3">댓글</p>
 				<div class="pt-1 d-flex reply-info">
 					<p class="pr-2 ">총</p>
-					<p class="tcolor" id="re-count">20</p>
+					<p class="tcolor" id="re-count">${replyCount}</p>
 					<p>개</p>
 				</div>
+				
 				<div class="d-flex justify-content-end reply-btn mt-1">
-					<button type="button" class="btn btn-sm btn-info myd-none"
-						id="reply-btn">작성</button>
+				<c:if test="${not empty sid}">
+					<button type="button" class="btn btn-sm btn-info myd-none" id="reply-btn">작성</button>
+				</c:if>
 				</div>
 			</div>
 			<!--댓글 input태그 시작 영역 입니다-->
 			<div class="re-input d-flex">
-				<p class="pt-3 pl-4" id="">블루</p>
+				<p class="pt-3 pl-4" id="">${sid}</p>
 				<form action="" method="POST" id="re-frm">
+					<input type="hidden" name="rno" >
+					<input type="hidden" name="tno" value="${DATA.txtno}">
 					<textarea class="form-control re-text-area ml-4" rows="2"
 						name="reply" id="reply-area"></textarea>
 				</form>
 			</div>
 			<!--댓글 input태그 마지막 영역 입니다-->
 			<!--댓글 내용 시작 영역 입니다-->
-			<div class="reply-body mt-4 " id="">
+			<c:forEach var="data" items="${LIST}">
+			<div class="reply-body mt-4 rply-box">
 				<div class="d-flex reply-txt-1 mt-3">
-					<p id="">블루</p>
-					<p id="" class="pl-2">2020/05/16</p>
+					<p id="">${data.mid }</p>
+					<p id="" class="pl-2">${data.cDate}</p>
 				</div>
 				<div class="reply-txt-2 ">
-					<p id="">내용</p>
+					<p id="" style=" display:inline-block; width: 680px;">${data.rtxt }
+					</p>
+				<c:if test="${data.mid eq sid}">
+					<a href="/YummyMap/board/replyRemveProc.mmy?tno=${data.txtno}&rno=${data.rno}" class="badge badge-danger">댓글삭제</a>
+				</c:if>
 				</div>
-				<div class="b-w border-bottom ml-5 mt-4"></div>
+				<div class="b-w border-bottom ml-5 mt-4" style="height: 0px;"></div>
 			</div>
-			<!--댓글 내용 마지막 영역 입니다-->
-			<!--댓글 내용 시작 영역 입니다-->
-			<div class="reply-body mt-4 " id="">
-				<div class="d-flex reply-txt-1 mt-3">
-					<p id="">블루</p>
-					<p id="" class="pl-2">2020/05/16</p>
-				</div>
-				<div class="reply-txt-2 ">
-					<p id="">내용</p>
-				</div>
-				<div class="b-w border-bottom ml-5 mt-4"></div>
-			</div>
+			</c:forEach>
 			<!--댓글 내용 마지막 영역 입니다-->
 		</div>
+	</div>
 		<!-- body 마지막 입니다-->
 </body>
 <script type="text/javascript">
 'use strict';
 $(document).ready(function(){
-  $(".heart").click(function(){
-    if($(this).hasClass("liked")){
-      $(this).html('<i class="far fa-heart" aria-hidden="true"></i>');
-      $(this).removeClass("liked");
-    }else{
-      $(this).html('<i class="fa fa-heart" aria-hidden="true"></i>');
-      $(this).addClass("liked");
-    }
-  });
-
+	
+	  //로그인 여부를 확인합니다.
+	  let userid = '${sid}';
+	  if(!userid) {
+		  $('#login').show();
+		  $('#logout').hide();
+		  $('#mypage').attr('href', '/YummyMap/join/join.mmy');
+	  } else {
+		  $('#login').hide();
+		  $('#logout').show();
+		  $('#mypage').attr('href', '/YummyMap/member/member.mmy');
+	  }
+	  
+	$('#recY').click(function(){
+		$(location).attr('href', '/YummyMap/board/recommendProc.mmy?r=Y&txtno=${DATA.txtno}');
+	});
+	$('#recN').click(function(){
+		$(location).attr('href', '/YummyMap/board/recommendProc.mmy?r=N&txtno=${DATA.txtno}');
+	});
 
   $('#reply-area').focusin(function(){
 	  $('#reply-btn').show();
@@ -200,8 +214,18 @@ $(document).ready(function(){
   
   $('#reply-btn').click(function () { 
     $('#reply-btn').hide();
-      
+    $('#re-frm').attr('action','/YummyMap/board/replyProc.mmy');
+   	$('#re-frm').submit();
   });
+  
+	//마이리스트 이벤트 처리 입니다.
+	$('#myListIcon').click(function(){
+		if(!userid) {
+			alert('로그인을 진행해주세요');
+			return;
+		}
+		$(location).attr('href', '/YummyMap/main/myList.mmy');
+	});
 
 });;
 </script>

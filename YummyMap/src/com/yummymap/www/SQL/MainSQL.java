@@ -43,12 +43,15 @@ public class MainSQL {
 			break;
 		case SEL_RES_INFO:
 			buff.append("SELECT ");
-			buff.append("  r.resno resno, resname, address, catno, restel, subno, menu, NVL(ispick, 'N') ispick ");
+			buff.append("  r.resno resno, resname, address, catno, restel, subno, menu, NVL(ispick, 'N') ispick ,  NVL(isReview, 'N') isReview ");
 			buff.append("FROM ");
-			buff.append("res  r, (SELECT resno, ispick FROM myres WHERE  ispick = 'Y' and mid = ?  ) p ");
+			buff.append("res  r,  ");
+			buff.append("(SELECT resno, ispick FROM myres WHERE  ispick = 'Y' and mid = ?  ) p,  ");
+			buff.append("(SELECT resno, isshow isReview FROM review WHERE mid = ? AND isshow = 'Y' ) v  ");
 			buff.append("WHERE ");
-			buff.append("   isshow = 'Y' ");
+			buff.append("  r.isshow = 'Y' ");
 			buff.append(" AND r.resno = p.resno(+) ");
+			buff.append(" AND r.resno = v.resno(+) ");
 			buff.append(" AND r.resno = ? ");
 			break;
 		case SEL_RES_IMG:
@@ -141,20 +144,21 @@ public class MainSQL {
 		case SEL_REVIEWTOP_RES_LIST:
 			buff.append("SELECT ");
 			buff.append("rw,  s.resno resno ,resname, address, catno, restel, subno, menu, count, TRUNC(avg, 1) avg, NVL(ispick, 'N') ispick ");
-			buff.append("FROM ( ");
-			buff.append("	SELECT ");
-			buff.append("	rownum rw,  resno,resname, address, catno, restel, subno, menu, count, avg ");
+			buff.append("	FROM ( ");
+			buff.append(" 	SELECT ");
+			buff.append(" 	 rownum rw,  resno,resname, address, catno, restel, subno, menu, count, avg ");
 			buff.append("	FROM( ");
-			buff.append("		SELECT ");
-			buff.append("		r.resno resno,resname, address, catno, restel, subno, menu, count, avg ");
-			buff.append("		FROM ");
+			buff.append(" 		SELECT ");
+			buff.append(" 		r.resno resno,resname, address, catno, restel, subno, menu, count, avg   ");
+			buff.append(" 		FROM ");
 			buff.append("		res r, ( SELECT resno, count(*) count, avg(starnum) avg FROM review WHERE    isshow = 'Y' GROUP BY    resno   ) d ");
 			buff.append("		WHERE ");
-			buff.append("		r.resno = d.resno ");
-			buff.append("		ORDER BY ");
-			buff.append("		  count desc  )   ) s, (SELECT resno, ispick FROM myres WHERE  ispick = 'Y' and mid = ?  ) p  ");
+			buff.append("		 r.resno = d.resno ");
+			buff.append("		 )   ) s, (SELECT resno, ispick FROM myres WHERE  ispick = 'Y' and mid = ?  ) p  ");
 			buff.append("WHERE ");
-			buff.append("  s.resno = p.resno(+) AND rw BETWEEN 1 and 3 ");    
+			buff.append("s.resno = p.resno(+) AND rw BETWEEN 1 and 3 ");
+			buff.append("ORDER BY ");
+			buff.append("count DESC ");
 			break;    
 		case SEL_RESLIST_WITH_CATEGORY:
 			buff.append("SELECT ");

@@ -57,7 +57,7 @@
             <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" >
                 <i class="fas fa-gamepad" id="game"></i>
             </a>
-            <a class="navbar-brand nav-item-size" href="#">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy">
                 <i class="far fa-clipboard"></i>
             </a>
         </div>
@@ -71,94 +71,16 @@
             <input id="searchTag" class="ml-1 border-top-0 border-left-0 border-right-0" placeholder="  SEARCH" type="text"
                 class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
-        <div class="p-rel search-btn">
-            <button type="button" id="sub_btn" class="btn btn-warning btn-sm" data-toggle="modal"
-                data-target="#staticBackdrop">
-                위치선택
-            </button>
-        </div>
+        <form class="p-rel search-btn" style="width: 150px;" action="/YummyMap/main/selectCateList.mmy" method="get" id="cateFrm">
+            <select class="form-control form-control-sm border-top-0 border-left-0 border-right-0" name="category" id="cateBox">
+			  	<option selected>CATEGORY</option>
+			  	<c:forEach var="cateList" items="${cateList}">
+			  	<option value="${cateList}">${cateList}</option>
+			  	</c:forEach>
+			</select>
+        </form>
     </div>
     <!--검색창 영역 마지막입니다-->
-    <!--모달 페이지 시작입니다-->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title ml-4 md_ft2" id="staticBackdropLabel">위치 선택 </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-3 ml-4 mr-4 md_cl">
-                                <table class="table table-hover md_ft">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">호선</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">6호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8호선</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9호선</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-6 md_cl1 ml-3">
-                                <table class="table table-hover md_ft1">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">역이름</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th class="sub-item" scope="row">신림역</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="sub-item" scope="row">구로디지털단지역</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary md_btn">선택</button>
-                    <button type="button" class="btn btn-secondary md_btn1" data-dismiss="modal">취소</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--모달 페이지 마지막입니다-->
     <!--side nav 시작입니다-->
     <div class="nav-side">
         <div class="tcolor list_title text-left">
@@ -221,56 +143,9 @@
     </div>
 </body>
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a733917a5582d612112f6484eed9628e&libraries=services"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-
-	// 장소 검색 객체를 생성합니다
-	var ps = new kakao.maps.services.Places(); 
-  	navigator.geolocation.getCurrentPosition(function(position) {
-		console.log(position);
-		var latitude = position.coords.latitude;
-		var longitude = position.coords.longitude;
-		
-		var latlng = new kakao.maps.LatLng(latitude, longitude);
-		var options = {
-			location : latlng,
-			radius : 1000,
-			page : 10
-		};
-		ps.keywordSearch('치킨', placesSearchCB, options); 
-    }, function(error) {
-         
-         // 위치를 가져오는데 실패한 경우
-         consol.log(error.message);
-    });
-	// 키워드로 장소를 검색합니다
 	
-	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-	function placesSearchCB (data, status, pagination) {
-	    if (status === kakao.maps.services.Status.OK) {
-			/* 
-				##넘어오는 데이터 샘플
-				address_name: "경기 안양시 동안구 비산동 1101-2"
-				category_group_code: "FD6"
-				category_group_name: "음식점"
-				category_name: "음식점 > 치킨 > 60계"
-				distance: "567"
-				id: "1360555804"
-				phone: "031-388-5959"
-				place_name: "60계 안양샛별한양점"
-				place_url: "http://place.map.kakao.com/1360555804"
-				road_address_name: "경기 안양시 동안구 동안로 194"
-				x: "126.949369837888"
-				y: "37.3959425465037" */
-			for(let i=0; i<data.length; i++){
-				let res_name = data[i].place_name;
-				let res_addr = data[i].address_name;
-			}
-	    } 
-	}
     
   //로그인 여부를 확인합니다.
   let userid = '${sid}';
@@ -318,15 +193,16 @@ $(document).ready(function () {
 		});
 
 	});
-	
-	//마이리스트 이벤트 처리 입니다.
-	$('#myListIcon').click(function(){
-		if(!userid) {
-			alert('로그인을 진행해주세요');
-			return;
-		}
-		$(location).attr('href', '/YummyMap/main/myList.mmy');
+	//카테고리 선택 이벤트입니다.
+	$('#cateBox').change(function(){
+		$('#cateFrm').submit();
 	});
+	
+	let cate_param = '${param.category}';
+	if(cate_param) {
+		$('#cateSet').val(cate_param);
+	}
+
 
 });
     

@@ -21,12 +21,11 @@ public class TxtList implements MmyController {
 				String strPage = req.getParameter("nowPage");
 				try {
 					nowPage = Integer.parseInt(strPage);
-					System.out.println("noPage" + strPage);
 				} catch(Exception e) {}
 				TxtDAO tDAO = new TxtDAO();
 				int totalCount = tDAO.getTotal(mid);
 				
-				PageUtil page = new PageUtil(nowPage, totalCount, 10,5);
+				PageUtil page = new PageUtil(nowPage, totalCount, 5,5);
 				
 				ArrayList<TxtVO> list = tDAO.getTXTLIST(page,mid);
 				

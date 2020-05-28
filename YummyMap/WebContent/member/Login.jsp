@@ -104,7 +104,7 @@
        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="mdbtn">취소</button>
-        <button type="button" class="btn btn-danger" id="sendbtn">발송</button>
+        <button type="button" class="btn btn-danger" id="sendbtn">찾기</button>
         <button type="button" class="btn btn-danger d-none" data-dismiss="modal" id="cbtn">닫기</button>
       </div>
     </div>
@@ -149,9 +149,12 @@ $(document).ready(function () {
 		if(sd == 'pass'){
 			$('#frm2').html('<div> 사용자 아이디 : <input type="txet" id="ids" name="ids"></div>'+
 			        		'<div class="mt-3"> 사용자 이메일 : <input type="txet"  id="mail" name="mail"></div>');		
+			$('#sendbtn').text('발송');
 		}else if(sd == 'id'){
 			$('#frm2').html('<div> 사용자 이름 : <input type="txet" id="name" name="name"></div>'+
     						'<div class="mt-3"> 사용자 메일 : <input type="txet"  id="mail" name="mail"></div>');	
+			$('#sendbtn').text('찾기');
+		
 		}
 	})
 	
@@ -176,19 +179,18 @@ $(document).ready(function () {
 				},
 				success: function(data){
 					if(data.result == 'ok'){
-						
 						$('#mdbtn').addClass('d-none');
 						$('#sendbtn').addClass('d-none');
 						$('#cbtn').removeClass('d-none');
 						$('#srchint').addClass('d-none');
 						$('.modal-body').addClass('d-none');
-						$('#okbox').html('<h3>고객님의 개정은 </h3> <h2>' + data.id + '</h2> <h3>입니다</h3>');
+						$('#okbox').html('<h3>고객님의 계정은 </h3> <h2>' + data.id + '</h2> <h3>입니다</h3>');
 						$('#okbox').removeClass('d-none');
 					}else if(data.result == 'no'){
 						$('#srchint').removeClass('d-none');
 					}
 				},error : function(){
-					alert('통싱오류 ㅠㅜ ');
+					alert('서버와의 통신에 오류가 생겼습니다. ');
 				}
 				
 			});
@@ -210,7 +212,6 @@ $(document).ready(function () {
 				},
 				success: function(data){
 					if(data.result == 'ok'){
-						
 						$('#mdbtn').addClass('d-none');
 						$('#sendbtn').addClass('d-none');
 						$('#srchint').addClass('d-none');
@@ -222,7 +223,7 @@ $(document).ready(function () {
 						$('#srchint').removeClass('d-none');
 					}
 				},error : function(){
-					alert('통싱오류 ㅠㅜ ');
+					alert('서버와의 통신에 오류가 생겼습니다. ');
 				}
 				
 			});

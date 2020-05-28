@@ -18,7 +18,6 @@ public class BoardDelete implements MmyController {
 		req.setAttribute("isRedirect", true);
 		String txtno = (String)req.getParameter("txtno");
 		int sno = Integer.parseInt(txtno);
-		System.out.println("delete.sno : " + sno);
 		BoardDAO bDAO = new BoardDAO();
 		bDAO.delBoard(sno);
 		return view;

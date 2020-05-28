@@ -14,8 +14,7 @@
 <link rel="stylesheet" href="/YummyMap/css/board/boardWrite.css">
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript"
-	src="/YummyMap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/YummyMap/js/bootstrap.bundle.min.js"></script>
 <style>
 </style>
 <script type="text/javascript">
@@ -33,14 +32,33 @@
 			} else {
 				$('#login').hide();
 				$('#logout').show();
-				$('#mypage').attr('href', '/YummyMap/member/mypage.mmy');
+				$('#mypage').attr('href', '/YummyMap/member/member.mmy');
 			}
 		$('#submitBtn').click(function() {
 			// 데이터 유효성 체크
+			let title_tag = $('#title').val();
+			if(title_tag.length >20) {
+				alert('제목의 길이를 초과했습니다.');
+				return;
+			}
+			
+			let selet = $('#catno').val();
+			if(!selet){
+				alert('카테고리를 선택 하세요!');
+				return;
+			}
 			$('#frm').submit();
 		});
 		$('#exitBtn').click(function() {
 			$(location).attr('href', '/YummyMap/board/boardMain.mmy');
+		});
+		//마이리스트 이벤트 처리 입니다.
+		$('#myListIcon').click(function(){
+			if(!userid) {
+				alert('로그인을 진행해주세요');
+				return;
+			}
+			$(location).attr('href', '/YummyMap/main/myList.mmy');
 		});
 	});
 </script>
@@ -53,7 +71,7 @@
 				<div class="ctQZg">
 					<div class="_47KiJ">
 						<div class="XrOey">
-							<a class="_0ZPOP kIKUG _4700r " href="#"><svg
+							<a class="_0ZPOP kIKUG _4700r " id="myListIcon"><svg
 									aria-label="활동 피드" class="_8-yf5 " fill="#262626" height="24"
 									viewBox="0 0 48 48" width="24">
                               <path
@@ -65,7 +83,7 @@
 							</div>
 						</div>
 						<div class="XrOey">
-							<a href="#"><svg aria-label="프로필" class="_8-yf5 "
+							<a id="mypage"><svg aria-label="프로필" class="_8-yf5 "
 									fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                               <path
 										d="M24 26.7c7.4 0 13.4-6 13.4-13.4S31.4 0 24 0 10.6 6 10.6 13.4s6 13.3 13.4 13.3zM24 3c5.7 0 10.4 4.6 10.4 10.4S29.7 23.7 24 23.7s-10.4-4.6-10.4-10.4S18.3 3 24 3zm9.1 27.1H14.9c-7.4 0-13.4 6-13.4 13.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c0-5.7 4.6-10.4 10.4-10.4h18.3c5.7 0 10.4 4.6 10.4 10.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c-.1-7.4-6.1-13.4-13.5-13.4z">
@@ -74,19 +92,19 @@
 						</div>
 					</div>
 					<!-- <a href="#" class="badge badge-light nav-item" id="join">Join</a>-->
-					<a href="http://localhost/YummyMap/join/login.mmy" class="badge badge-light nav-item" id="login">LOGIN</a>
-					<a href="#" class="badge badge-light nav-item" id="logout">LOGOUT</a>
+					<a href="/YummyMap/join/login.mmy" class="badge badge-light nav-item" id="login">LOGIN</a>
+					<a href="/YummyMap/join/logoutProc.mmy" class="badge badge-light nav-item" id="logout">LOGOUT</a>
 				</div>
 			</div>
 		</div>
-		<a class="navbar-brand tcolor logo" href="#" id=""> YUMMY MAP </a>
+		<a class="navbar-brand tcolor logo" href="/YummyMap/main.mmy" id=""> YUMMY MAP </a>
 		<div class="b-subtitle text-left">
 			<p class="pt-3">커뮤니티</p>
 		</div>
 		<div class=" nav-item-1 d-flex justify-content-end">
-			<a class="navbar-brand nav-item-size" href="#" id=""> <i
+			<a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" id=""> <i
 				class="fas fa-gamepad"></i>
-			</a> <a class="navbar-brand nav-item-size" href="#"> <i
+			</a> <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy"> <i
 				class="far fa-clipboard"></i>
 			</a>
 		</div>
@@ -102,18 +120,18 @@
 
 					<select name="catno" id="catno">
 						<option value="" selected=selected>카테고리</option>
-						<option value="1" id="w3-button cat-item" name="cat">한식</option>
-						<option value="2" id="w3-button cat-item" name="cat">중식</option>
-						<option value="3" id="w3-button cat-item" name="cat">일식</option>
-						<option value="4" id="w3-button cat-item" name="cat">경양식</option>
-						<option value="5" id="w3-button cat-item" name="cat">분식</option>
-						<option value="6" id="w3-button cat-item" name="cat">태국요리</option>
-						<option value="7" id="w3-button cat-item" name="cat">베트남요리</option>
-						<option value="8" id="w3-button cat-item" name="cat">인도요리</option>
-						<option value="9" id="w3-button cat-item" name="cat">야식</option>
+						<option value="1" id="w3-button cat-item">한식</option>
+						<option value="2" id="w3-button cat-item">중식</option>
+						<option value="3" id="w3-button cat-item">일식</option>
+						<option value="4" id="w3-button cat-item">경양식</option>
+						<option value="5" id="w3-button cat-item">분식</option>
+						<option value="6" id="w3-button cat-item">태국요리</option>
+						<option value="7" id="w3-button cat-item">베트남요리</option>
+						<option value="8" id="w3-button cat-item">인도요리</option>
+						<option value="9" id="w3-button cat-item">야식</option>
 					</select> 
 					<input type="text" class="form-control ml-1" id="title"
-						name="title" placeholder="제목">
+						name="title" placeholder="제목 (촤대 20글자)">
 				</div>
 				<div class="form-group mt-2">
 					<textarea class="form-control" id="mtxt"  rows="15" name="mtxt"
@@ -126,10 +144,4 @@
 	</div>
 	<!-- body 마지막 입니다-->
 </body>
-<!-- <script type="text/javascript">
-// 	$(document).ready(function() {
-// 		$("select[value=cat]").val();
-// 		alert(cat-item);
-// 	}); 
-</script>-->
 </html>

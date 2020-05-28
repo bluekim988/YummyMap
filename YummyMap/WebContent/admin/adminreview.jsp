@@ -68,6 +68,7 @@
 							<h5 class="in-bl text-left ml-2 col-3 mt-1">이름</h5>
 							<input class="col-6 form-control border-b margin-name text-center"  type="text" id="name" name="name" value="${MVO.mname }">
 						</div>
+						<div class="mt-3 text-left ml-4" style="font-size: 14px;" id="namehint"></div>
 						<div class="mt-4 row ml-1">
 							<h5 class="in-bl col-3  mt-1">비밀번호 </h5>
 							<input type="password" class="col-6 form-control border-b margin-pw text-center" id="pw" name="pw">

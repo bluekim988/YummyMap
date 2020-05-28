@@ -79,7 +79,8 @@ public class MainDAO {
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
 			pstmt.setString(1, userID);
-			pstmt.setInt(2, resno);
+			pstmt.setString(2, userID);
+			pstmt.setInt(3, resno);
 			rs = pstmt.executeQuery();
 			rs.next();
 			vo.setResno(resno);
@@ -92,6 +93,7 @@ public class MainDAO {
 			double avg = getResAVG(resno);
 			vo.setAvg(avg);
 			vo.setIspick(rs.getString("ispick"));
+			vo.setIsReview(rs.getString("isReview"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

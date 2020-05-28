@@ -33,6 +33,7 @@ public class SearchList implements MmyController {
 		GameDAO gameDao = new GameDAO();
 		List<String> cateList = gameDao.getAllCateList();
 		
+		
 		req.setAttribute("list", list);
 		req.setAttribute("cateList", cateList);
 		String view = "/main_1.jsp";

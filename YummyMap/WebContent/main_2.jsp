@@ -33,7 +33,7 @@
                                 <div class="poA5q" style="margin-left: -423px;"></div>
                             </div>
                         </div>
-                        <div class="XrOey"><a href="#" id="mypage"><svg aria-label="프로필" class="_8-yf5 " fill="#262626" height="24"
+                        <div class="XrOey"><a  id="mypage"><svg aria-label="프로필" class="_8-yf5 " fill="#262626" height="24"
                                     viewBox="0 0 48 48" width="24">
                                     <path
                                         d="M24 26.7c7.4 0 13.4-6 13.4-13.4S31.4 0 24 0 10.6 6 10.6 13.4s6 13.3 13.4 13.3zM24 3c5.7 0 10.4 4.6 10.4 10.4S29.7 23.7 24 23.7s-10.4-4.6-10.4-10.4S18.3 3 24 3zm9.1 27.1H14.9c-7.4 0-13.4 6-13.4 13.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c0-5.7 4.6-10.4 10.4-10.4h18.3c5.7 0 10.4 4.6 10.4 10.4v3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-3c-.1-7.4-6.1-13.4-13.5-13.4z">
@@ -53,7 +53,7 @@
             <a class="navbar-brand nav-item-size" href="/YummyMap/game/game.mmy" id="">
                 <i class="fas fa-gamepad"></i>
             </a>
-            <a class="navbar-brand nav-item-size" href="#">
+            <a class="navbar-brand nav-item-size" href="/YummyMap/board/boardMain.mmy">
                 <i class="far fa-clipboard"></i>
             </a>
         </div>
@@ -182,7 +182,9 @@
                     </div>
                     <div class="d-flex">
                     	<input class="form-control form-control-sm r-input border-top-0 border-left-0 border-right-0" type="text" placeholder="한줄 리뷰 달기" id="r-txt">
+                    	<c:if test="${vo.isReview == 'N'}">
                     	<button type="button" class="btn btn-primary btn-sm ml-1 r-btn" id="${vo.resno}" style="width: 70px">작성</button>
+                    	</c:if>
                     </div>
                     <c:forEach var="rdata" items="${list}">
 				    <div class="d-flex mt-3">
@@ -308,9 +310,13 @@ $(document).ready(function () {
 	
 	// 장소 검색 객체를 생성합니다
 	var ps = new kakao.maps.services.Places(); 
-	var keyword = document.getElementById('resName').innerText;
+	var keyword_tag = document.getElementById('resName').innerText;
+	var keyword = '구로디지털단지역 ' + keyword_tag;
+	if(keyword_tag.indexOf('구로디지털')>0){
+		keyword = keyword_tag;
+	}
 	// 키워드로 장소를 검색합니다
-	ps.keywordSearch('구로디지털단지역'+keyword, placesSearchCB); 
+	ps.keywordSearch(keyword, placesSearchCB); 
 
 	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	function placesSearchCB (data, status, pagination) {
@@ -320,7 +326,7 @@ $(document).ready(function () {
 	        // LatLngBounds 객체에 좌표를 추가합니다
 	        var bounds = new kakao.maps.LatLngBounds();
 
-	        for (var i=0; i<data.length; i++) {
+	        for (var i=0; i<1; i++) {
 	            displayMarker(data[i]);    
 	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 	        }       
@@ -338,12 +344,7 @@ $(document).ready(function () {
 	        position: new kakao.maps.LatLng(place.y, place.x) 
 	    });
 
-	    // 마커에 클릭이벤트를 등록합니다
-	    kakao.maps.event.addListener(marker, 'click', function() {
-	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-	        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-	        infowindow.open(map, marker);
-	    });
+
 	}
 
 

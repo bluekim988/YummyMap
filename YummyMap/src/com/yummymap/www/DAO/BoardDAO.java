@@ -1,6 +1,6 @@
 package com.yummymap.www.DAO;
 /**
- * @author	김소영
+ * @author	김소영, 김종형
  * @since	2020.05.27
  *  이 클래스는 게시판 데이터베이스 전달 (DAO) 입니다
  */
@@ -93,6 +93,7 @@ public class BoardDAO {
 
 	// 게시판 테이블 글 등록 데이터베이스 작업 전담 처리 함수
 	// 매개변수로 개시글 데이터를 담은 VO를 받습니다.
+	// VO객체는 제목, 작성자아이디, 카테고리번호, 본문을 필수로 포함해야합니다.
 	// 반환값으로 Insert에 성공시 1을 반환, 실패시 0을 반환합니다.
 	public int addBoard(BoardVO bvo) {
 		int cnt = 0;
@@ -139,20 +140,39 @@ public class BoardDAO {
 		// 6. 결과 내보내고
 		return cnt;
 	}
+	// 해당리플을 삭제해주는 메소드입니다.
+	// 매개변수로 리플의 키값을 받습니다.
+	// 반환값은 성공시1을 실패시 0을 반환합니다.
+	public int removeReply(int rno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.REMOVE_REPLY);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, rno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 
 	// 게시판 글 수정 전담 처리 함수
 	// 매개변수로 리플데이터를 담은 VO를 받습니다.
 	// VO객체는 제목, 본문, 키값을 필수로 포함해야합니다.
 	// 반환값으로 Insert성공시 1을 실패시 0을 반환합니다.
-	public int editBoard(BoardVO replyVo) {
+	public int editBoard(BoardVO txtVo) {
 		int cnt = 0;
 		con = db.getConnection();
 		String sql = bSQL.getSQL(bSQL.EDIT_CONT);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setString(1, replyVo.getTitle());
-			pstmt.setString(2, replyVo.getRtxt());
-			pstmt.setInt(3, replyVo.getRno());
+			pstmt.setString(1, txtVo.getTitle());
+			pstmt.setString(2, txtVo.getMtxt());
+			pstmt.setInt(3, txtVo.getTxtno());
 			cnt = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -202,13 +222,15 @@ public class BoardDAO {
 	// 게시글의 상세정보를 가져오는 메소드입니다.
 	// 매개변수로 게시글의 키값을 받습니다.
 	// 반환값은 게시글데이터를담은 VO를 반환합니다.
-	public BoardVO getTextInfo(int txtno) {
+	public BoardVO getTextInfo(int txtno, String userID) {
 		BoardVO boardVo = new BoardVO();
 		con = db.getConnection();
 		String sql = bSQL.getSQL(bSQL.SEL_CONT);
 		pstmt = db.getPreparedStatement(con, sql);
 		try {
-			pstmt.setInt(1, txtno);
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, txtno);
+			pstmt.setInt(3, txtno);
 			rs = pstmt.executeQuery();
 			rs.next();
 			boardVo.setTxtno(rs.getInt("txtno"));
@@ -221,6 +243,7 @@ public class BoardDAO {
 			boardVo.setCatno(rs.getInt("catno"));
 			boardVo.setMtxt(rs.getString("mtxt"));
 			boardVo.setLv(rs.getInt("lv"));
+			boardVo.setIsrec(rs.getString("isrec"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -244,10 +267,11 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardVO replyVo = new BoardVO();
 				replyVo.setRno(rs.getInt("rno"));
-				replyVo.setRtxt(rs.getString("stxt"));
+				replyVo.setRtxt(rs.getString("rtxt"));
 				replyVo.setMid(rs.getString("mid"));
 				replyVo.setcDate(rs.getDate("cdate"));
 				replyVo.setTxtno(rs.getInt("txtno"));
+				replyVo.setCount(rs.getInt("count"));
 				replyList.add(replyVo);
 			}
 		} catch (SQLException e) {
@@ -259,6 +283,83 @@ public class BoardDAO {
 		}
 		return replyList;
 	}
+	// 해당 게시글의 추천수를 +1 증가해주는 메소드입니다.
+	// 매개변수로 게시글의 키값을 받습니다.
+	// 반환값은 성공시 1, 실패시0을 반환합니다.
+	public int increaseTextRnum(int txtno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.EDIT_RNUM_BRD);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, txtno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	// 게시글추천여부 기록의 데이터를 추가해주는 메소드입니다.
+	// increaseTextRnum() 선행되어야합니다.
+	// 매개변수로 사용자 아이디와, 해당글의 키값을 입력받습니다.
+	public int addRecommendData(String userID, int txtno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.ADD_RECOMMEND);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setString(1, userID);
+			pstmt.setInt(2, txtno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 	
+	// 해당 게시글의 추천수를 -1 감소해주는 메소드입니다.
+	// 매개변수로 게시글의 키값을 받습니다.
+	// 반환값은 성공시 1, 실패시0을 반환합니다.
+	public int decreaseTextRnum(int txtno) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.REMOVE_RNUM_BRD);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, txtno);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	// 게시글의 추천여부 기록 데이터를 삭제해주는 메소드입니다.
+	// decreaseTextRnum() 선행되어야 합니다.
+	// 매개변수로 해당글의 키값과 사용자 아이디를 입력받습니다.
+	public int removeRecommendData(int txtno, String userID) {
+		int cnt = 0;
+		con = db.getConnection();
+		String sql = bSQL.getSQL(bSQL.REMOVE_RECOMMEND);
+		pstmt = db.getPreparedStatement(con, sql);
+		try {
+			pstmt.setInt(1, txtno);
+			pstmt.setString(2, userID);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
 }
-

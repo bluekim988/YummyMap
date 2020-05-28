@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yummymap.www.DAO.BoardDAO;
 import com.yummymap.www.controller.MmyController;
+import com.yummymap.www.vo.BoardVO;
+
 
 public class BoardEditProc implements MmyController {
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
@@ -18,16 +20,15 @@ public class BoardEditProc implements MmyController {
 		String title = req.getParameter("title");
 		String mtxt = req.getParameter("mtxt");
 		String sno = req.getParameter("txtno");
-//		String scat = req.getParameter("catno");
-		System.out.println("proc.title : " + title);
-		System.out.println("proc.mtxt : " + mtxt);
-//		System.out.println("proc.scat : " + scat);
 		int txtno = Integer.parseInt(sno);
 //		int catno = Integer.parseInt(cat);
-		
 		BoardDAO bDAO = new BoardDAO();
-//		int edit = bDAO.editBoard(title, mtxt, txtno);
+		BoardVO bvo = new BoardVO();
 		
+		bvo.setTitle(title);
+		bvo.setMtxt(mtxt);
+		bvo.setTxtno(txtno);
+		int edit = bDAO.editBoard(bvo);
 		return view;
 	}
 

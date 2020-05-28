@@ -1,20 +1,23 @@
 package com.yummymap.www.controller.board;
 
-/**
- * @author	김소영
- * @since	2020.05.27
- *  이 클래스는 게시판 글 상세보기 페이지 컨트롤러 입니다
- */
-import java.util.*;
-import javax.servlet.http.*;
+import java.util.List;
 
-import com.yummymap.www.controller.*;
-import com.yummymap.www.DAO.*;
-import com.yummymap.www.vo.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.yummymap.www.DAO.BoardDAO;
+import com.yummymap.www.controller.MmyController;
+import com.yummymap.www.vo.BoardVO;
 
 public class BoardDetail implements MmyController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
+		String userID = "no";
+		String userID_session = (String)req.getSession().getAttribute("sid");
+		if(userID_session != null) {
+			userID = userID_session;
+		}
 		String view = "/board/boardDetail.jsp";
 		// 할일
 		// 파라미터 받고
@@ -24,25 +27,22 @@ public class BoardDetail implements MmyController {
 			tno = Integer.parseInt(stno);
 		} catch (Exception e) {}
 		BoardDAO bdao = new BoardDAO();
-		BoardVO bVO = bdao.getTextInfo(tno);
+		
+		BoardVO bVO = bdao.getTextInfo(tno,userID);
 		
 		Cookie[] cookieFromReq = req.getCookies();
 		Cookie cookieVal = null;
 		if (cookieFromReq != null && cookieFromReq.length > 0) {
 			for (int i = 0; i < cookieFromReq.length; i++) {
 				if (cookieFromReq[i].getName().equals("cookie" + stno)) {
-					System.out.println("처음 쿠키가 없을 경우 null 생성");
 					cookieVal = cookieFromReq[i];
-					System.out.println();
 				}
 			}
 		}
 
 		if(bVO != null) {
-			System.out.println("bvo 있음");
 			
 			if(cookieVal == null) {
-				System.out.println("쿠키 없음");
 				
 				//쿠키 생성(이름,값)
 				Cookie newCookie = new Cookie("cookie"+stno, "|"+ stno + "|");
@@ -51,19 +51,22 @@ public class BoardDetail implements MmyController {
 				resp.addCookie(newCookie);
 				
 				int cnt = bdao.increaseTxtCount(tno);
-				if(cnt == 1) {
-					System.out.println("정상 증가");
-				}else {
-					System.out.println("조회수 증가 오류");
-				}
-			
 			}else {
 				String cookies = cookieVal.getValue();
-				System.out.println("쿠키 값 :   " + cookies);
 			
 			}
 		}
+		
+		
+		List<BoardVO> list = bdao.getAllReplyList(tno);
+		int replyCount = 0;
+		if(list.size() > 0 ) {
+			replyCount = list.get(0).getCount();
+		}
+		
+		req.setAttribute("LIST", list);
 		req.setAttribute("DATA", bVO);
+		req.setAttribute("replyCount", replyCount);
 
 //		bVO.setBdate(req.getParameter("bdate"));
 //		bVO.setMid(req.getParameter("mid"));
@@ -72,7 +75,7 @@ public class BoardDetail implements MmyController {
 //		bVO.setCatno(Integer.parseInt(req.getParameter("catno")));
 		req.setAttribute("nowPage", req.getParameter("nowPage"));
 //		
-
+		
 		return view;
 	}
 
