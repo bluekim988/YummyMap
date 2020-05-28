@@ -12,8 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/YummyMap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/YummyMap/css/admin/base.css">
 <link rel="stylesheet" href="/YummyMap/css/admin/board.css">
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
@@ -79,7 +78,7 @@
 							<div class="col-2">${data.mid }</div>
 							<div class="col-3">${data.sdate }</div>
 							<div class="col-2">
-								<button class="rbtn" data-toggle="modal" data-target="#staticBackdrop">삭제</button>
+								<button class="rbtn  btn-danger" data-toggle="modal" data-target="#staticBackdrop">삭제</button>
 							</div>
 						</div>
 					</c:forEach>

@@ -105,8 +105,8 @@
 		<div class="txt-line shadow-sm border mb-4">
 			<div class="btns d-flex justify-content-end pr-4 mt-2">
 			<c:if test="${sid == DATA.mid}">
-				<a class="badge badge-info mr-1" id="update">수정</a> 
-				<a class="badge badge-danger" id="delete">삭제</a>
+				<a class="badge badge-info mr-1 text-white" id="update">수정</a> 
+				<a class="badge badge-danger text-white" id="delete">삭제</a>
 			</c:if>
 			</div>
 			<div class="b-w border-bottom ml-5 mt-4"></div>

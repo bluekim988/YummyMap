@@ -30,6 +30,17 @@ $(function(){
 		}
 	});
 	
+	
+	$('#name').keyup(function(){
+		let name = $('#name').val();
+		let nameck = namechk(name);
+		if(!nameck){
+			$('#namehint').css('color' , 'red');
+			$('#namehint').text('*이름은 한글 2자이상 6자리 미만입니다');
+		}else{
+			$('#namehint').text('');
+		}
+	});
 	$('#mailSelect').change(function () {
 		let domain= $(this).val();
 
@@ -45,6 +56,12 @@ $(function(){
 	
 	//정규식 함수
 	
+	
+	   function namechk(num) {
+	     	var reg = /^[가-힣]{2,6}$/;
+	     	var ok = reg.test(num);
+	     	return ok;
+	  }
 	function pwchk(pw) {
 		let patt = /(?=.*\d{1})(?=.*[~`!@#$%\^&*()-+=]{1})(?=.*[a-zA-Z]{2}).{8,15}$/;
 		let pwok = patt.test(pw);
