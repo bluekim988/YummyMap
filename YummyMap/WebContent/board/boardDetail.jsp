@@ -116,6 +116,11 @@
 			<div class="d-flex title">
 				<div class="txt-title pt-4" id="title">${DATA.title}</div>
 				<div class="pt-4 d-flex">
+				    <c:if test="${sid == null}">
+					<div class="list-item-like like-size">
+						<span class="heart"><i  class="far fa-heart " aria-hidden="true"></i> </span>
+					</div>
+	                </c:if>
 	                <c:if test="${sid != null && DATA.isrec == 'N'}">
 					<div class="list-item-like like-size">
 						<span class="heart"><i id="recN" class="far fa-heart " aria-hidden="true"></i> </span>
@@ -126,7 +131,7 @@
 						<span class="heart"><i id="recY" class="fas fa-heart " aria-hidden="true"></i> </span>
 					</div>
 	                </c:if>
-					<div class="pl-3 pt-2" id="rnum">${DATA.rnum}</div>
+					<div class="pl-3 pt-1" id="rnum">${DATA.rnum}</div>
 				</div>
 			</div>
 			<div class="b-w border-bottom ml-5 mt-4"></div>
