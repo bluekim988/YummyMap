@@ -76,14 +76,7 @@
 			$('#frm').attr('action', '/YummyMap/board/boardDetail.mmy');
 			$('#frm').submit();
 		});
-		//마이리스트 이벤트 처리 입니다.
-		$('#myListIcon').click(function(){
-			if(!userid) {
-				alert('로그인을 진행해주세요');
-				return;
-			}
-			$(location).attr('href', '/YummyMap/main/myList.mmy');
-		});
+
 	});
 </script>
 

@@ -27,6 +27,7 @@ public class BoardDetail implements MmyController {
 			tno = Integer.parseInt(stno);
 		} catch (Exception e) {}
 		BoardDAO bdao = new BoardDAO();
+		
 		BoardVO bVO = bdao.getTextInfo(tno,userID);
 		
 		Cookie[] cookieFromReq = req.getCookies();
@@ -34,18 +35,14 @@ public class BoardDetail implements MmyController {
 		if (cookieFromReq != null && cookieFromReq.length > 0) {
 			for (int i = 0; i < cookieFromReq.length; i++) {
 				if (cookieFromReq[i].getName().equals("cookie" + stno)) {
-					System.out.println("처음 쿠키값");
 					cookieVal = cookieFromReq[i];
-					System.out.println("처음 쿠기 값 입니다 : " + cookieVal.getValue());
 				}
 			}
 		}
 
 		if(bVO != null) {
-			System.out.println("bvo 있음");
 			
 			if(cookieVal == null) {
-				System.out.println("쿠키 없음");
 				
 				//쿠키 생성(이름,값)
 				Cookie newCookie = new Cookie("cookie"+stno, "|"+ stno + "|");
@@ -54,15 +51,8 @@ public class BoardDetail implements MmyController {
 				resp.addCookie(newCookie);
 				
 				int cnt = bdao.increaseTxtCount(tno);
-				if(cnt == 1) {
-					System.out.println("정상 증가");
-				}else {
-					System.out.println("조회수 증가 오류");
-				}
-			
 			}else {
 				String cookies = cookieVal.getValue();
-				System.out.println("쿠키 값 :   " + cookies);
 			
 			}
 		}
