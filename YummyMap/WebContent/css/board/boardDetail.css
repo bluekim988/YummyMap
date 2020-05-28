@@ -1,6 +1,6 @@
 
-.txt-line{width: 850px; min-height: 480px; max-height: 2000px; margin-top: 25px;}
-.txt-body{width: 850px; height: 100px;}
+.txt-line{width: 850px; min-height: 480px;  margin-top: 25px;}
+.txt-body{width: 850px; min-height: 480px; }
 .b-w{width: 710px;}
 
 

@@ -12,7 +12,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="/YummyMap/css/board/boardDetail.css">
-<link rel="stylesheet" href="/YummyMap/css/board/boardWrite.css">
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript"
@@ -95,13 +94,12 @@
 	<!-- nav 마지막 입니다-->
 
 	<!-- body 시작 입니다-->
-	<form method="post" action="" id="frm">
-	<%-- 	<input type="hidden" name="catno" id="catno" value="${DATA.catno}">  --%>
+	<form class="d-none" method="post" action="" id="frm">
 		<input type="hidden" name="txtno" id="txtno" value="${DATA.txtno}"> 
 		<input type="hidden" name="title" id="title" value="${DATA.title}"> 
 		<input type="hidden" name="mtxt" id="mtxt" value="${DATA.mtxt}"> 
 		<input	type="hidden" name="nowPage" id="nowPage" value="${nowPage}">
-	
+	</form>
 	<div class="main-body">
 		<!--게시글 영역 입니다-->
 		<div class="txt-line shadow-sm border mb-4">
@@ -134,9 +132,9 @@
 				</div>
 			</div>
 			<div class="b-w border-bottom ml-5 mt-4"></div>
-			<div class="txt-body pt-4 " name="mtxt" id="mtxt" value="${DATA.mtxt}">${DATA.mtxt}</div>
+			<div class="txt-body pt-4" id="mtxt" >${DATA.mtxt}</div>
 		</div>
-	</form>
+
 		<!--게시글 영역 마지막 입니다-->
 		<!--댓글 영역 시작 입니다-->
 		<div class="reply-line shadow-sm border mb-4">
@@ -184,6 +182,7 @@
 			</c:forEach>
 			<!--댓글 내용 마지막 영역 입니다-->
 		</div>
+	</div>
 		<!-- body 마지막 입니다-->
 </body>
 <script type="text/javascript">

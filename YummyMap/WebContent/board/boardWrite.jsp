@@ -14,8 +14,7 @@
 <link rel="stylesheet" href="/YummyMap/css/board/boardWrite.css">
 <link rel="stylesheet" href="/YummyMap/css/nav.css">
 <script type="text/javascript" src="/YummyMap/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript"
-	src="/YummyMap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/YummyMap/js/bootstrap.bundle.min.js"></script>
 <style>
 </style>
 <script type="text/javascript">
@@ -37,6 +36,11 @@
 			}
 		$('#submitBtn').click(function() {
 			// 데이터 유효성 체크
+			let title_tag = $('#title').val();
+			if(title_tag.length >20) {
+				alert('제목의 길이를 초과했습니다.');
+				return;
+			}
 			
 			let selet = $('#catno').val();
 			if(!selet){
@@ -116,18 +120,18 @@
 
 					<select name="catno" id="catno">
 						<option value="" selected=selected>카테고리</option>
-						<option value="1" id="w3-button cat-item" name="cat">한식</option>
-						<option value="2" id="w3-button cat-item" name="cat">중식</option>
-						<option value="3" id="w3-button cat-item" name="cat">일식</option>
-						<option value="4" id="w3-button cat-item" name="cat">경양식</option>
-						<option value="5" id="w3-button cat-item" name="cat">분식</option>
-						<option value="6" id="w3-button cat-item" name="cat">태국요리</option>
-						<option value="7" id="w3-button cat-item" name="cat">베트남요리</option>
-						<option value="8" id="w3-button cat-item" name="cat">인도요리</option>
-						<option value="9" id="w3-button cat-item" name="cat">야식</option>
+						<option value="1" id="w3-button cat-item">한식</option>
+						<option value="2" id="w3-button cat-item">중식</option>
+						<option value="3" id="w3-button cat-item">일식</option>
+						<option value="4" id="w3-button cat-item">경양식</option>
+						<option value="5" id="w3-button cat-item">분식</option>
+						<option value="6" id="w3-button cat-item">태국요리</option>
+						<option value="7" id="w3-button cat-item">베트남요리</option>
+						<option value="8" id="w3-button cat-item">인도요리</option>
+						<option value="9" id="w3-button cat-item">야식</option>
 					</select> 
 					<input type="text" class="form-control ml-1" id="title"
-						name="title" placeholder="제목">
+						name="title" placeholder="제목 (촤대 20글자)">
 				</div>
 				<div class="form-group mt-2">
 					<textarea class="form-control" id="mtxt"  rows="15" name="mtxt"
@@ -140,10 +144,4 @@
 	</div>
 	<!-- body 마지막 입니다-->
 </body>
-<!-- <script type="text/javascript">
-// 	$(document).ready(function() {
-// 		$("select[value=cat]").val();
-// 		alert(cat-item);
-// 	}); 
-</script>-->
 </html>
