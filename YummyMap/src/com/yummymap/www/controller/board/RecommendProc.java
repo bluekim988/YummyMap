@@ -32,7 +32,7 @@ public class RecommendProc implements MmyController {
 		if(req_param.equals("Y")) {
 			boardDao.decreaseTextRnum(txtno);
 			boardDao.removeRecommendData(txtno, userID);
-		} else {
+		} else if (req_param.equals("N")){
 			boardDao.increaseTextRnum(txtno);
 			boardDao.addRecommendData(userID, txtno);
 		}
