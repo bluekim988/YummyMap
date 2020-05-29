@@ -1,5 +1,11 @@
 package com.yummymap.www.controller.main;
-
+/**
+ * 메인페이지 검색엔진에 검색을 요청했을때
+ * 컨트롤하기위해 제작된 클래스입니다.
+ * 
+ * @author	김종형
+ * @see		com.yummymap.www.DAO.MainDAO
+ */
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +21,16 @@ public class SearchList implements MmyController {
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
 		String str = req.getParameter("q");
+		// 유저가 해당식당을 픽했는지 여부를 찾기위해 사용될값입니다.
 		String userID = "no";
 		String userID_param = (String)req.getSession().getAttribute("sid");
 		if(userID_param != null) {
 			userID = userID_param;
 		}
 		MainDAO dao = new MainDAO();
+		// 검색어를 메뉴컬럼에서 조회한 리스트입니다
 		List<ResVO> list = dao.getList(str, userID);
+		// 검색어를 식당이름컬럼에서 조회한 리스트입니다
 		List<ResVO> listUseResName = dao.getListUseName(str, userID);
 		
 		if(list.size() == 0) {
